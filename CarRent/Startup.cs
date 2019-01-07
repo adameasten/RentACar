@@ -27,6 +27,7 @@ namespace CarRent
             }
 
             app.UseMvcWithDefaultRoute();
+            app.UseStaticFiles();
         }
     }
 }
