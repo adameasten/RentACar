@@ -8,6 +8,8 @@ namespace CarRent.Controllers
 {
     public class HomeController : Controller
     {
+        [HttpGet]
+        [Route("")]
         public IActionResult Home()
         {
             return View();
