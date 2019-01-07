@@ -53,6 +53,7 @@ namespace CarRent
             app.UseStaticFiles();
             app.UseAuthentication();
             app.UseMvcWithDefaultRoute();
+            app.UseStaticFiles();
 
         }
     }
