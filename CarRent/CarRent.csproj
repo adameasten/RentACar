@@ -2,7 +2,7 @@
 
   <PropertyGroup>
     <TargetFramework>netcoreapp2.1</TargetFramework>
-    <UserSecretsId>0ecc601a-1da3-4812-8d82-baf370864f83</UserSecretsId>
+    <UserSecretsId>e1cd058e-d12f-4dd3-b327-4e8e4d6cc653</UserSecretsId>
   </PropertyGroup>
 
   <ItemGroup>
@@ -20,6 +20,7 @@
   <ItemGroup>
     <PackageReference Include="Microsoft.AspNetCore.App" />
     <PackageReference Include="Microsoft.AspNetCore.Razor.Design" Version="2.1.2" PrivateAssets="All" />
+    <PackageReference Include="Microsoft.VisualStudio.Web.CodeGeneration.Design" Version="2.1.1" />
   </ItemGroup>
 
 </Project>
