@@ -46,3 +46,9 @@
 
 
 <partial name="_RentFormDetails" model="@Model.form" />
+
+@foreach (var item in Model.reviews)
+{
+<h6>@item.Rent.CustomerId.</h6>
+<p>@item.Review1</p> 
+}
