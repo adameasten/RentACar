@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using CarRent.Models;
+using CarRent.Models.Entities;
 using Microsoft.AspNetCore.Authentication.Cookies;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
@@ -32,6 +33,9 @@ namespace CarRent
 
             connString = configuration["DefaultConnection"];
             services.AddDbContext<MyIdentityContext>(o => o.UseSqlServer(connString));
+            services.AddTransient<CarServices>();
+            services.AddDbContext<CarRentContext>(options => options.UseSqlServer(connString));
+
             services.AddIdentity<MyIdentityUser, IdentityRole>(o => 
             {
                 o.Password.RequireNonAlphanumeric = false;
