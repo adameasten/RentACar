@@ -33,7 +33,7 @@ namespace CarRent
         {
 
             connString = configuration["DefaultConnection"];
-            services.AddDbContext<MyIdentityContext>(o => o.UseSqlServer(connString));
+            services.AddDbContext<MyIdentityContext>(o => o.UseSqlServer(connString, x => x.UseNetTopologySuite()));
             services.AddIdentity<MyIdentityUser, IdentityRole>(o => 
             {
                 o.Password.RequireNonAlphanumeric = false;
