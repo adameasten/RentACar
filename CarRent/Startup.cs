@@ -38,6 +38,7 @@ namespace CarRent
                 o.Password.RequiredLength = 8;
             })
             .AddEntityFrameworkStores<MyIdentityContext>().AddDefaultTokenProviders();
+            services.AddTransient<AccountsService>();
             services.AddMvc();
         }
 
