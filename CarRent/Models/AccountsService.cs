@@ -30,5 +30,10 @@ namespace CarRent.Models
             var result = await signInManager.PasswordSignInAsync(vm.UserName, vm.Password,false,false);
             return result.Succeeded;
         }
+
+        public async Task LogOutUser()
+        {
+            await signInManager.SignOutAsync();
+        }
     }
 }

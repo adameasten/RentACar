@@ -36,7 +36,7 @@ namespace CarRent.Controllers
             var succeded = await service.LoginUser(vm);
             if (!succeded)
                 return View(vm);
-            return RedirectToAction(nameof(MyAccount));
+            return Redirect("/");
         }
 
         [HttpGet]
@@ -54,6 +54,13 @@ namespace CarRent.Controllers
             if (!succeded)
                 return View(vm);
             return RedirectToAction(nameof(Login));
+        }
+
+        [HttpGet]
+        public async Task<IActionResult> Logout()
+        {
+            await service.LogOutUser();
+            return Redirect("/");
         }
     }
 }

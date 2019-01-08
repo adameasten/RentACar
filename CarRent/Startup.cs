@@ -39,6 +39,7 @@ namespace CarRent
             })
             .AddEntityFrameworkStores<MyIdentityContext>().AddDefaultTokenProviders();
             services.AddTransient<AccountsService>();
+            services.AddSession();
             services.AddMvc();
         }
 
@@ -51,6 +52,7 @@ namespace CarRent
                 app.UseDeveloperExceptionPage();
             }
 
+            app.UseSession();
             app.UseStaticFiles();
             app.UseAuthentication();
             app.UseMvcWithDefaultRoute();
