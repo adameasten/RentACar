@@ -1,8 +1,10 @@
 ﻿using CarRent.Models.ViewModels;
 using Microsoft.AspNetCore.Identity;
+using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Net.Http;
 using System.Threading.Tasks;
 
 namespace CarRent.Models
@@ -12,6 +14,7 @@ namespace CarRent.Models
         UserManager<MyIdentityUser> userManager;
         SignInManager<MyIdentityUser> signInManager;
         MyIdentityContext context;
+
         public AccountsService(MyIdentityContext context, UserManager<MyIdentityUser> userManager, SignInManager<MyIdentityUser> signInManager)
         {
             this.context = context;
@@ -35,5 +38,7 @@ namespace CarRent.Models
         {
             await signInManager.SignOutAsync();
         }
+
+       
     }
 }

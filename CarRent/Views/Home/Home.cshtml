@@ -1,6 +1,12 @@
-﻿
+﻿@model StartPageVM
 @{
-    ViewData["Title"] = "Home";
+    ViewBag.Title = "Home";
 }
+
+<form asp-controller="home" asp-action="search">
+    <label asp-for="City"></label>
+    <input asp-for="City"/>
+    <input type="submit" value="Sök"/>
+</form>
 
 

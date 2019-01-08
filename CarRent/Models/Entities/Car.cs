@@ -27,6 +27,7 @@ namespace CarRent.Models.Entities
         public bool? RoofRack { get; set; }
         public bool? Pets { get; set; }
         public decimal Price { get; set; }
+        public int? YearModel { get; set; }
 
         public ICollection<Rent> Rent { get; set; }
     }
