@@ -14,12 +14,7 @@ namespace CarRent.Controllers
         {
             this.services = services;
         }
-        [HttpGet]
-        [Route("")]
-        public IActionResult Home()
-        {
-            return View();
-        }
+    
         public IActionResult Details(int ID)
         {
             var model = services.FindCarByID(ID);
