@@ -31,7 +31,7 @@ namespace CarRent.Controllers
 
             var result = service.CompareCoords(cor);
 
-            return RedirectToAction(nameof(Home));
+            return RedirectToAction("CarSearch","CarController");
         }
     }
 }
