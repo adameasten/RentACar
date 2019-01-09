@@ -4,17 +4,26 @@ using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
 using System.Data.SqlClient;
+using System.IO;
 using System.Linq;
 using System.Threading.Tasks;
+using Microsoft.AspNetCore.Hosting;
+using Microsoft.AspNetCore.Identity;
+using Microsoft.AspNetCore.Http;
 
 namespace CarRent.Models
 {
     public class CarServices
     {
         CarRentContext context;
-        public CarServices(CarRentContext context)
+        IHostingEnvironment he;
+        UserManager<MyIdentityUser> userManager;
+
+        public CarServices(CarRentContext context, IHostingEnvironment he, UserManager<MyIdentityUser> userManager)
         {
             this.context = context;
+            this.he = he;
+            this.userManager = userManager;
         }
 
         public CarDetailsVM FindCarByID(int ID)
@@ -44,7 +53,8 @@ namespace CarRent.Models
                 reviews = context.Rent
                     .Where(o => o.Car.Id == ID)
                     .SelectMany(o => o.Review.Select(r => r))
-                    .Select(o => new ReviewCarDetailsVM() {
+                    .Select(o => new ReviewCarDetailsVM()
+                    {
                         DateCreated = o.DateCreated,
                         Rating = o.Rating,
                         Review = o.Review1,
@@ -58,6 +68,42 @@ namespace CarRent.Models
             }).FirstOrDefault();
 
             return carr;
+        }
+
+        public void AddCarToDatabase(CarRegistrationPostVM vm, string userId)
+        {
+            if (vm.Image != null)
+                UploadImages(vm);
+
+            context.Car.Add(new Car
+            {
+                OwnerId = userId,
+                Model = vm.Model,
+                Km = vm.Km,
+                Ac = vm.Ac,
+                ChildSeat = vm.ChildSeat,
+                Gear = vm.Gear,
+                Doors = vm.Doors,
+                Description = vm.Description,
+                Fuel = vm.Fuel,
+                Pets = vm.Pets,
+                Price = vm.Price,
+                RoofRack = vm.RoofRack,
+                YearModel = vm.YearModel,
+                Seats = vm.Seats,
+                TowBar = vm.TowBar,
+                Type = vm.Type,
+                ImgUrl = vm.Filelocation
+            });
+            
+        }
+
+        public void UploadImages(CarRegistrationPostVM viewModel)
+        {
+            var fileName = Path.Combine(he.WebRootPath, Path.GetFileName(viewModel.Image.FileName));
+            viewModel.Image.CopyTo(new FileStream(fileName, FileMode.Create));
+            viewModel.Filelocation = fileName;
+
         }
 
         public string GetContactByID(string ID)
@@ -79,7 +125,7 @@ namespace CarRent.Models
 
                         reader.Read();
 
-                        var name = reader.GetString(1);                      
+                        var name = reader.GetString(1);
 
 
                         reader.Close();

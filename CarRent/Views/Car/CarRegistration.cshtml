@@ -1,0 +1,90 @@
+﻿@model CarRegistrationPostVM
+
+
+<form enctype="multipart/form-data" asp-controller="Car" asp-action="CarRegistration">
+    <label asp-for="Model"></label>
+    <input asp-for="Model" />
+    <span asp-validation-for="Model"></span>
+
+
+    <label asp-for="Km"></label>
+    <input asp-for="Km" />
+    <span asp-validation-for="Km"></span>
+
+    <label asp-for="Description"></label>
+    <input asp-for="Description" />
+    <span asp-validation-for="Description"></span>
+
+
+    <label asp-for="Price"></label>
+    <input asp-for="Price" />
+    <span asp-validation-for="Price"></span>
+
+
+    <label asp-for="YearModel"></label>
+    <input asp-for="YearModel" />
+    <span asp-validation-for="YearModel"></span>
+
+
+    <label asp-for="City"></label>
+    <input asp-for="City" />
+    <span asp-validation-for="City"></span>
+
+
+    <label asp-for="Street"></label>
+    <input asp-for="Street" />
+    <span asp-validation-for="Street"></span>
+
+
+    <label asp-for="Type"></label>
+    <select asp-for="Type"
+            asp-items="Model.TypeItems"></select>
+    <span asp-validation-for="Type"></span>
+
+    <label asp-for="GearItems"></label>
+    <select asp-for="Gear"
+            asp-items="Model.GearItems"></select>
+    <span asp-validation-for="Gear"></span>
+
+    <label asp-for="FuelItems"></label>
+    <select asp-for="Fuel"
+            asp-items="Model.FuelItems"></select>
+    <span asp-validation-for="Fuel"></span>
+
+    <label asp-for="SeatsItem"></label>
+    <select asp-for="Seats"
+            asp-items="Model.SeatsItem"></select>
+    <span asp-validation-for="Seats"></span>
+
+    <label asp-for="DoorsItem"></label>
+    <select asp-for="Doors"
+            asp-items="Model.DoorsItem"></select>
+    <span asp-validation-for="Doors"></span>
+
+
+    <label asp-for="Ac"></label>
+    <input asp-for="Ac" type="checkbox" />
+
+
+    <label asp-for="ChildSeat"></label>
+    <input asp-for="ChildSeat" type="checkbox" />
+
+
+    <label asp-for="TowBar"></label>
+    <input asp-for="TowBar" type="checkbox" />
+
+    <label asp-for="RoofRack"></label>
+    <input asp-for="RoofRack" type="checkbox" />
+
+
+
+    <label asp-for="Pets"></label>
+    <input asp-for="Pets" type="checkbox" />
+
+    <label asp-for="Image"></label>
+    <input asp-for="Image" />
+
+    <input type="submit" value="Registrera" />
+
+
+</form>
