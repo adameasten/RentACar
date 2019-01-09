@@ -12,8 +12,8 @@ namespace CarRent.Models
         public string LastName { get; set; }
         public string Street { get; set; }
         public string City { get; set; }
-        public string ZipCode { get; set; }
+        public string Zip { get; set; }
         public string SSN { get; set; }
-        public DateTime Created { get; set; }
+        public DateTime DateJoined { get; set; } = DateTime.Now;
     }
 }

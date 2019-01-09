@@ -16,7 +16,7 @@ namespace CarRent.Models.Entities
         public DateTime Datestart { get; set; }
         public DateTime DateEnd { get; set; }
 
-        public Car Car { get; set; }
-        public ICollection<Review> Review { get; set; }
+        public virtual Car Car { get; set; }
+        public virtual ICollection<Review> Review { get; set; }
     }
 }

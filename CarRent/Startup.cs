@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using CarRent.Models;
+using CarRent.Models.Entities;
 using Microsoft.AspNetCore.Authentication.Cookies;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
@@ -11,6 +12,7 @@ using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
+
 
 namespace CarRent
 {
@@ -31,13 +33,16 @@ namespace CarRent
         {
 
             connString = configuration["DefaultConnection"];
-            services.AddDbContext<MyIdentityContext>(o => o.UseSqlServer(connString));
+            services.AddDbContext<MyIdentityContext>(o => o.UseSqlServer(connString, x => x.UseNetTopologySuite()));
             services.AddIdentity<MyIdentityUser, IdentityRole>(o => 
             {
                 o.Password.RequireNonAlphanumeric = false;
                 o.Password.RequiredLength = 8;
             })
             .AddEntityFrameworkStores<MyIdentityContext>().AddDefaultTokenProviders();
+            services.AddTransient<AccountsService>();
+            services.AddTransient<HomeService>();
+            services.AddSession();
             services.AddMvc();
         }
 
@@ -50,6 +55,7 @@ namespace CarRent
                 app.UseDeveloperExceptionPage();
             }
 
+            app.UseSession();
             app.UseStaticFiles();
             app.UseAuthentication();
             app.UseMvcWithDefaultRoute();
