@@ -1,0 +1,19 @@
+﻿@model CarSearchVM[]
+@{
+    ViewData["Title"] = "Search";
+}
+
+<h1>Search</h1>
+
+@foreach (var item in Model)
+{
+    <div>
+        <img src="@item.ImgUrl" />
+        <p>@item.Model</p>
+        <p>@item.YearModel</p>
+        <strong>@item.Price.ToString("c")</strong>
+        <p>@item.Rating</p>
+        <a asp-controller="car" asp-action="details" asp-route-id="@item.Id">Detaljer</a>
+        <hr />
+    </div>
+}

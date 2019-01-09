@@ -1,0 +1,7 @@
+<<<<<<< HEAD
+﻿@addTagHelper *, Microsoft.AspNetCore.Mvc.TagHelpers
+@using CarRent.Models.ViewModels
+=======
+﻿@using CarRent.Models.ViewModels
+@addTagHelper *, Microsoft.AspNetCore.Mvc.TagHelpers
+>>>>>>> detailsview

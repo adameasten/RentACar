@@ -1,0 +1,92 @@
+﻿@model CarRentFormVM
+
+
+<div class="card" style="width: 18rem;">
+    <div class="card-body">
+        <h5 class="card-title">@decimal.Round(Model.Price, 0, MidpointRounding.AwayFromZero) kr /dag</h5>
+        <form asp-action="tillfälligt" asp-controller="Car">
+            <label asp-for="StartTime"></label>
+            <input asp-for="StartTime" id="StartTime" />
+            <br />
+            <label asp-for="EndTime"></label>
+            <br />
+            <input asp-for="EndTime" id="EndTime" />
+            <h5 class="card-title" id="TotalPrice"></h5>
+            <input type="submit" value="Hyr bil" />
+        </form>
+
+    </div>
+</div>
+
+
+<script>
+    $("#TotalPrice").text("Total " + @Model.Price);
+    $("#TotalPrice").append(" kr");
+
+
+    $("#StartTime").change(function () {
+
+
+        var x = document.getElementById("StartTime").value;
+        var today = new Date(document.getElementById("EndTime").value);
+        if (x > document.getElementById("EndTime").value) {
+            document.getElementById("StartTime").value = document.getElementById("EndTime").value;
+            $("#TotalPrice").text("Total " + 0 + " kr");
+
+        }
+        else {
+        var pdate = new Date(x);
+        var one_day = 1000 * 60 * 60 * 24;    // Convert both dates to milliseconds
+        var date1_ms = pdate.getTime();
+        var date2_ms = today.getTime();    // Calculate the difference in milliseconds
+        var difference_ms = date2_ms - date1_ms;        // Convert back to days and return
+        var daysSinceP = (Math.round(difference_ms / one_day));
+            $("#TotalPrice").text("Total " + daysSinceP *@Model.Price );
+            $("#TotalPrice").append(" kr");
+
+        }
+
+    })
+    $("#EndTime").change(function () {
+        var s = document.getElementById("EndTime").value;
+        var today = new Date(document.getElementById("StartTime").value);
+
+        if (s < document.getElementById("StartTime").value) {
+            document.getElementById("EndTime").value = document.getElementById("StartTime").value;
+            $("#TotalPrice").text("Total " + 0+" kr");
+
+        }
+        else {
+
+
+        var pdate = new Date(s);
+        var one_day = 1000 * 60 * 60 * 24;    // Convert both dates to milliseconds
+        var date1_ms = pdate.getTime();
+        var date2_ms = today.getTime();    // Calculate the difference in milliseconds
+        var difference_ms = date1_ms - date2_ms;        // Convert back to days and return
+        var daysSinceP = (Math.round(difference_ms / one_day));
+
+            $("#TotalPrice").text("Total " + daysSinceP * @Model.Price );
+            $("#TotalPrice").append(" kr");
+        }
+    })
+
+    Date.prototype.addDays = function (days) {
+        var date = new Date(this.valueOf());
+        date.setDate(date.getDate() + days);
+        return date;
+    }
+</script>
+
+@*@section scripts {
+        <script>
+            $(document).ready(function () {
+
+
+                var x = document.getElementById("StartTime").dateTime;
+                console.log(x);
+                console.log("hello");
+
+            });
+        </script>
+    }*@

@@ -1,18 +1,12 @@
 ﻿using System;
 using System.Collections.Generic;
-using GeoAPI.Geometries;
+using System.Linq;
+using System.Threading.Tasks;
 
-namespace CarRent.Models.Entities
+namespace CarRent.Models.ViewModels
 {
-    public partial class Car
+    public class CarVM
     {
-        public Car()
-        {
-            Rent = new HashSet<Rent>();
-        }
-
-        public int Id { get; set; }
-        public string OwnerId { get; set; }
         public string Model { get; set; }
         public int Km { get; set; }
         public string Type { get; set; }
@@ -28,10 +22,5 @@ namespace CarRent.Models.Entities
         public bool? RoofRack { get; set; }
         public bool? Pets { get; set; }
         public decimal Price { get; set; }
-        public IGeometry GeoLocation { get; set; }
-        public int? YearModel { get; set; }
-
-
-        public virtual ICollection<Rent> Rent { get; set; }
     }
 }
