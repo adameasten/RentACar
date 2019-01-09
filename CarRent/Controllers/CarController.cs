@@ -4,6 +4,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using CarRent.Models;
 using CarRent.Models.ViewModels;
+using GeoAPI.Geometries;
 using Microsoft.AspNetCore.Mvc;
 
 namespace CarRent.Controllers
@@ -24,8 +25,6 @@ namespace CarRent.Controllers
             var model = services.FindCarByID(ID);
 
             return View(model);
-           
-
         }
 
         [HttpPost]

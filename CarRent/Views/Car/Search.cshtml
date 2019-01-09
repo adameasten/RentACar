@@ -1,4 +1,4 @@
-﻿@model List<CarSearchVM>
+﻿@model CarSearchVM[]
 @{
     ViewData["Title"] = "Search";
 }
@@ -7,5 +7,12 @@
 
 @foreach (var item in Model)
 {
-    <p>@item.Model</p>
+    <div>
+        <img src="@item.ImgUrl" />
+        <p>@item.Model</p>
+        <p>@item.YearModel</p>
+        <strong>@item.Price.ToString("c")</strong>
+        <p>@item.Rating</p>
+        <hr />
+    </div>
 }

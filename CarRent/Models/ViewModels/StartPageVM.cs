@@ -18,5 +18,8 @@ namespace CarRent.Models.ViewModels
         [Required]
         [Display(Name = "Lämnas")]
         public DateTime EndDate { get; set; } = DateTime.Today.AddDays(1);
+        //public double Latitude { get; set; } = 59.3477632;
+        //public double Longitude { get; set; } = 18.042060799999998;
+        //public CarSearchVM[] nearbyCards { get; set; } = new CarSearchVM[0];
     }
 }

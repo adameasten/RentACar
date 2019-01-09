@@ -35,15 +35,35 @@ namespace CarRent.Models
             };
         }
 
-        public List<CarSearchVM> CompareCoords(Coordinate coordinate)
+        public CarSearchVM[] CompareCoords(Coordinate coordinate)
         {
             var point = new Point(coordinate);
-            point.SRID = 4326; 
+            point.SRID = 4326;
 
             var cars =
              (from c in context.Car
               orderby c.GeoLocation.Distance(point) descending
-              select c).Select(c => new CarSearchVM { Model = c.Model}).ToList();
+              select c).Select(c => new CarSearchVM
+              {
+                  Model = c.Model,
+                  ImgUrl = c.ImgUrl,
+                  Price = c.Price,
+                  YearModel = c.YearModel,
+                  Ratings = context.Rent
+                  .DefaultIfEmpty()
+                  .Where(r => r.Id == c.Id)
+                  .SelectMany(q => q.Review)
+                  .Select(s => s.Rating).ToArray()
+
+              }).ToArray();
+
+            foreach (var item in cars)
+            {
+                if (item.Ratings.Length > 0)
+                    item.Rating = item.Ratings.Average();
+                else
+                    item.Rating = 0;
+            }
 
             return cars;
         }

@@ -23,15 +23,5 @@ namespace CarRent.Controllers
         {
             return View(new StartPageVM());
         }
-
-        [HttpPost]
-        public async Task<IActionResult> Search(StartPageVM vM)
-        {
-            var cor = await service.GetCoordinates(vM);
-
-            var result = service.CompareCoords(cor);
-
-            return RedirectToAction("CarSearch","CarController");
-        }
     }
 }
