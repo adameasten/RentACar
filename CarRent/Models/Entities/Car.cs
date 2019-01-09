@@ -31,6 +31,7 @@ namespace CarRent.Models.Entities
         public IGeometry GeoLocation { get; set; }
         public int? YearModel { get; set; }
 
+
         public virtual ICollection<Rent> Rent { get; set; }
     }
 }

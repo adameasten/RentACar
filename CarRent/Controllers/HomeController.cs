@@ -29,6 +29,8 @@ namespace CarRent.Controllers
         {
             var cor = await service.GetCoordinates(vM);
 
+            var result = service.CompareCoords(cor);
+
             return RedirectToAction(nameof(Home));
         }
     }
