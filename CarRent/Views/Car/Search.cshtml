@@ -13,6 +13,7 @@
         <p>@item.YearModel</p>
         <strong>@item.Price.ToString("c")</strong>
         <p>@item.Rating</p>
+        <a asp-controller="car" asp-action="details" asp-route-id="@item.Id">Detaljer</a>
         <hr />
     </div>
 }

@@ -45,6 +45,7 @@ namespace CarRent.Models
               orderby c.GeoLocation.Distance(point) descending
               select c).Select(c => new CarSearchVM
               {
+                  Id = c.Id,
                   Model = c.Model,
                   ImgUrl = c.ImgUrl,
                   Price = c.Price,
