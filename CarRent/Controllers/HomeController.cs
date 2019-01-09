@@ -21,7 +21,7 @@ namespace CarRent.Controllers
         [Route("")]
         public IActionResult Home()
         {
-            return View();
+            return View(new StartPageVM());
         }
 
         [HttpPost]
