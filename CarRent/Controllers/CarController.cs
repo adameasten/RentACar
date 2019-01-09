@@ -30,6 +30,7 @@ namespace CarRent.Controllers
         [HttpPost]
         public async Task<IActionResult> Search(StartPageVM vM)
         {
+
             var cor = await homeService.GetCoordinates(vM);
 
             var result = homeService.CompareCoords(cor);

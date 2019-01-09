@@ -68,5 +68,20 @@ namespace CarRent.Models
 
             return cars;
         }
+
+        public bool CheckAvailability(int id, DateTime start, DateTime end)
+        {
+            var rents = context.Rent.Where(r => r.CarId == id);
+
+            foreach (var item in rents)
+            {
+                if (Math.Max(start.Ticks, item.Datestart.Ticks) < Math.Min(end.Ticks, item.DateEnd.Ticks))
+                {
+                    return false;
+                }
+            }
+
+            return true;
+        }
     }
 }
