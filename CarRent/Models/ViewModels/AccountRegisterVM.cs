@@ -15,13 +15,13 @@ namespace CarRent.Models.ViewModels
 
         [Display(Name = "Lösenord")]
         [StringLength(maximumLength: 100, MinimumLength = 8, ErrorMessage = "Lösenordet måste vara 8-100 tecken långt")]
-        [RegularExpression(@"(?=.*\d)(?=.*[a-z])(?=.*[A-Z])",ErrorMessage = "Lösenordet måste innehålla minst en stor bokstav, en liten bokstav och en siffra")]
+        [RegularExpression(@"^(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,}$", ErrorMessage = "Lösenordet måste innehålla minst en stor bokstav, en liten bokstav och en siffra")]
         [Required(ErrorMessage = "Skriv in ditt önskade lösenord")]
         public string Password { get; set; }
 
         [Compare(nameof(Password), ErrorMessage = "Lösenorden måste överensstämma")]
         [StringLength(maximumLength: 100, MinimumLength = 8, ErrorMessage = "Lösenordet måste vara 8-100 tecken långt")]
-        [RegularExpression(@"(?=.*\d)(?=.*[a-z])(?=.*[A-Z])", ErrorMessage = "Lösenordet måste innehålla minst en stor bokstav, en liten bokstav och en siffra")]
+        [RegularExpression(@"^(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,}$", ErrorMessage = "Lösenordet måste innehålla minst en stor bokstav, en liten bokstav och en siffra")]
         [Required(ErrorMessage = "Upprepa ditt önskade lösenord")]
         [Display(Name = "Bekräfta lösenord")]
         public string ConfirmPassword { get; set; }
