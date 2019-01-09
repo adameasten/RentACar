@@ -46,9 +46,22 @@
 
 
 <partial name="_RentFormDetails" model="@Model.form" />
-
+@{int rateing = 0;}
 @foreach (var item in Model.reviews)
 {
-<h6>@item.Rent.CustomerId.</h6>
-<p>@item.Review1</p> 
+    rateing += item.Rating;
+}
+@{rateing = rateing/@Model.reviews.Count();}
+
+<h2>@Model.reviews.Count() omdömen @rateing/5</h2>
+@foreach (var item in Model.reviews)
+{
+    <div class="card" style="width: 18rem;">
+        <div class="card-body">
+            <h5 class="card-title">@item.UserName</h5>
+            <h6 class="card-subtitle mb-2 ">@item.Rating/5</h6>
+            <h6 class="card-subtitle mb-2 text-muted">@item.DateCreated</h6>
+            <p class="card-text">@item.Review</p>
+        </div>
+    </div>
 }

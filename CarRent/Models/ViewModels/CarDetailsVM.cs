@@ -11,7 +11,7 @@ namespace CarRent.Models.ViewModels
 
         public CarVM car { get; set; }
         public CarRentFormVM form { get; set; }
-        public List<Review> reviews;
+        public List<ReviewCarDetailsVM> reviews;
        
     }
 }
