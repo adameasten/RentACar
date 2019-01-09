@@ -46,12 +46,12 @@
 
 
 <partial name="_RentFormDetails" model="@Model.form" />
-@{int rateing = 0;}
-@foreach (var item in Model.reviews)
+@{double rateing = 0;}
+
+@if (Model.reviews.Count > 0)
 {
-    rateing += item.Rating;
+    rateing = Model.reviews.Average(p => p.Rating);
 }
-@{rateing = rateing/@Model.reviews.Count();}
 
 <h2>@Model.reviews.Count() omdömen @rateing/5</h2>
 @foreach (var item in Model.reviews)

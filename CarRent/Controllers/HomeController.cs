@@ -21,17 +21,7 @@ namespace CarRent.Controllers
         [Route("")]
         public IActionResult Home()
         {
-            return View();
-        }
-
-        [HttpPost]
-        public async Task<IActionResult> Search(StartPageVM vM)
-        {
-            var cor = await service.GetCoordinates(vM);
-
-            var result = service.CompareCoords(cor);
-
-            return RedirectToAction(nameof(Home));
+            return View(new StartPageVM());
         }
     }
 }
