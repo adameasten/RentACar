@@ -33,10 +33,14 @@ namespace CarRent
         {
 
             connString = configuration["DefaultConnection"];
+<<<<<<< HEAD
+            services.AddDbContext<CarRentContext>(o => o.UseSqlServer(connString, x => x.UseNetTopologySuite()));
+=======
             
             services.AddTransient<CarServices>();
+            services.AddDbContext<CarRentContext>(options => options.UseSqlServer(connString));
 
-            services.AddDbContext<CarRentContext>(o => o.UseSqlServer(connString, x => x.UseNetTopologySuite()));
+>>>>>>> 2cce6b4d4cdb4db21293d5c102831e1e0c581c01
             services.AddDbContext<MyIdentityContext>(o => o.UseSqlServer(connString, x => x.UseNetTopologySuite()));
             services.AddIdentity<MyIdentityUser, IdentityRole>(o => 
             {
