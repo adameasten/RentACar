@@ -54,6 +54,7 @@ namespace CarRent.Models
       {
           Id = c.Id,
           Model = c.Model,
+          Distance = c.GeoLocation.Distance(point),
           ImgUrl = c.ImgUrl,
           Price = c.Price,
           YearModel = c.YearModel,
