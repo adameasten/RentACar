@@ -33,7 +33,7 @@ namespace CarRent.Controllers
 
             var cor = await homeService.GetCoordinates(vM);
 
-            var result = homeService.CompareCoords(cor);
+            var result = homeService.CompareCoords(cor,vM);
 
             return View(result);
         }

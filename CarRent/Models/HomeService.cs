@@ -1,6 +1,7 @@
 ﻿using CarRent.Models.Entities;
 using CarRent.Models.ViewModels;
 using GeoAPI.Geometries;
+using Microsoft.EntityFrameworkCore;
 using NetTopologySuite.Geometries;
 using Newtonsoft.Json;
 using System;
@@ -35,28 +36,28 @@ namespace CarRent.Models
             };
         }
 
-        public CarSearchVM[] CompareCoords(Coordinate coordinate)
+        public CarSearchVM[] CompareCoords(Coordinate coordinate, StartPageVM vM)
         {
             var point = new Point(coordinate);
             point.SRID = 4326;
 
-            var cars = context.Car.OrderBy(o => o.GeoLocation.Distance(point)).Select
+                   var cars = context.Car.Include(x => x.Rent).Where(a => CheckAvailability(a.Rent.ToArray(), vM.StartDate, vM.EndDate))
+                .OrderBy(o => o.GeoLocation.Distance(point)).Select
              (c => new CarSearchVM
-              {
-                  Id = c.Id,
-                  Model = c.Model,
-                  ImgUrl = c.ImgUrl,
-                  Price = c.Price,
-                  YearModel = c.YearModel,
-                  Rating = c.Rent.SelectMany(r => r.Review).Count() > 0 ? c.Rent.SelectMany(r => r.Review).Average(s => s.Rating) : 0
-              }).ToArray();
+             {
+                 Id = c.Id,
+                 Model = c.Model,
+                 ImgUrl = c.ImgUrl,
+                 Price = c.Price,
+                 YearModel = c.YearModel,
+                 Rating = c.Rent.SelectMany(r => r.Review).Count() > 0 ? c.Rent.SelectMany(r => r.Review).Average(s => s.Rating) : 0
+             }).ToArray();
 
             return cars;
         }
 
-        public bool CheckAvailability(int id, DateTime start, DateTime end)
+        public bool CheckAvailability(Rent[] rents, DateTime start, DateTime end)
         {
-            var rents = context.Rent.Where(r => r.CarId == id);
 
             foreach (var item in rents)
             {
