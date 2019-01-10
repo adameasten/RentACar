@@ -1,9 +1,14 @@
 ﻿@model CarRegistrationPostVM
 
+<form id="FindCarByLicense">
+    <input type="text" id="LicenseValue"/>
+    <input type="submit" value="hitta"/>
+</form>
+
 
 <form enctype="multipart/form-data" asp-controller="Car" asp-action="CarRegistration">
     <label asp-for="Model"></label>
-    <input asp-for="Model" />
+    <input asp-for="Model" id="Model"/>
     <span asp-validation-for="Model"></span>
 
 
@@ -97,6 +102,64 @@
             var $appndobj = $('<input class="AddPicture" type="file" id="Image" multiple="multiple" name="Image">')
                 
             $("#MoreImages").append($appndobj);
+        });
+        $("#FindCarByLicense").submit(function (e) {
+            e.preventDefault();
+            console.log($("#LicenseValue").val());
+            var registration = $("#LicenseValue").val();
+            $.getJSON("https://api.biluppgifter.se/api/v1/vehicle/regno/" + registration, {
+                api_token: "3BATNwX7AoEExD7XWq5uQKUSlIbCrplD83EjIkKetb1hXSvnHnv1zwNLtYGE" })
+                
+                .done(function (data) {
+                    $("#Model").val(data.data.basic.data.make + " "+data.data.basic.data.model);
+                    $("#YearModel").val(data.data.basic.data.model_year);
+                    $("#Seats").val(data.data.technical.data.number_of_passengers+1);
+
+                    var hitch = data.data.technical.data.hitch;
+                    if (hitch != null) {
+                        $("#TowBar").prop('checked', true);
+                    }
+
+                    var fueltype = data.data.technical.data.fuel_1;
+
+                    switch (fueltype) {
+
+                        case 1:
+                            fueltype = "Bensin";
+                            break;
+                        case 2:
+                            fueltype = "Diesel";
+
+                            break;
+                        case 3:
+                            fueltype = "El";
+
+                            break;
+                        case 7:
+                            fueltype = "Etanol";
+
+                            break;
+                        default:
+                            fueltype = "Annat";
+
+                    }
+                    $("#Fuel").val(fueltype);
+
+                    var transmission = data.data.technical.data.transmission;
+
+                    if (transmission == 1 || transmission == 3) {
+                        transmission = "Manuell";
+                    }
+                    else {
+                        transmission = "Automat";
+                    }
+
+                    $("#Gear").val(transmission);
+
+                    
+                    
+
+                });
         });
     });
 </script>
