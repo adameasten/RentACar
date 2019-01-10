@@ -4,6 +4,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using CarRent.Models;
 using CarRent.Models.ViewModels;
+using GeoAPI.Geometries;
 using Microsoft.AspNetCore.Mvc;
 
 namespace CarRent.Controllers
@@ -22,6 +23,13 @@ namespace CarRent.Controllers
         public IActionResult Home()
         {
             return View(new StartPageVM());
+        }
+
+        [HttpPost]
+        [Route("")]
+        public IActionResult Home(StartPageVM vM)
+        {
+            return View();
         }
     }
 }

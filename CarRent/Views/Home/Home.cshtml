@@ -18,13 +18,15 @@
     <input type="submit" value="Sök" />
 </form>
 
-@*<form asp-controller="car" asp-action="userlocation" id="locationform">
+<form asp-controller="home" asp-action="home" id="locationform">
     <input id="latCord" type="hidden" asp-for="Latitude" />
     <input id="longCord" type="hidden" asp-for="Longitude" />
 </form>
-<button id="locationButton" type="button" class="btn btn-default" onclick="getLocation()">Use Actual Location</button>*@
+@*<button id="locationButton" type="button" class="btn btn-default" onclick="getLocation()">Use Actual Location</button>*@
 
-<script type="text/javascript">
+@section scripts{ 
+@*<script type="text/javascript">
+    getLocation();
     function getLocation() {
         if (navigator.geolocation) {
             navigator.geolocation.getCurrentPosition(addLocation);
@@ -36,5 +38,6 @@
         document.getElementById("latCord").value = position.coords.latitude;
         document.getElementById("longCord").value = position.coords.longitude;
         document.getElementById("locationform").submit();
-    };
+    };*@
 </script>
+}
