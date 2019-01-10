@@ -8,6 +8,7 @@ namespace CarRent.Models.Entities
     {
         public Car()
         {
+            CarImage = new HashSet<CarImage>();
             Rent = new HashSet<Rent>();
         }
 
@@ -31,7 +32,7 @@ namespace CarRent.Models.Entities
         public IGeometry GeoLocation { get; set; }
         public int? YearModel { get; set; }
 
-
+        public virtual ICollection<CarImage> CarImage { get; set; }
         public virtual ICollection<Rent> Rent { get; set; }
     }
 }

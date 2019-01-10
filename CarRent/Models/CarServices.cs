@@ -76,14 +76,15 @@ namespace CarRent.Models
 
         public async Task AddCarToDatabase(CarRegistrationPostVM vm, string userId)
         {
-            if (vm.Image != null)
-                UploadImages(vm);
+            //if (vm.Image != null)
+            //UploadImages(vm);
 
             var coordinate = await GetCoordinates(vm.City);
             var point = new Point(coordinate);
             point.SRID = 4326;
 
-            context.Car.Add(new Car
+
+            var car = new Car
             {
                 OwnerId = userId,
                 Model = vm.Model,
@@ -101,19 +102,34 @@ namespace CarRent.Models
                 Seats = vm.Seats,
                 TowBar = vm.TowBar,
                 Type = vm.Type,
-                ImgUrl = vm.Image.FileName,
-                GeoLocation = point 
-            });
+                ImgUrl = vm.Image[0].FileName,
+                GeoLocation = point
+            };
+
+            context.Car.Add(car);
 
             context.SaveChanges();
-            
+
+            foreach (var item in vm.Image)
+            {
+                context.CarImage.Add(new CarImage
+                {
+                    CarId = car.Id,
+                    ImgUrl = item.FileName,
+                    
+                });
+            }
+
+            context.SaveChanges();
         }
 
         public void UploadImages(CarRegistrationPostVM viewModel)
         {
-            var fileName = Path.Combine(he.WebRootPath, Path.GetFileName(viewModel.Image.FileName));
-            viewModel.Image.CopyTo(new FileStream(fileName, FileMode.Create));
-            viewModel.Filelocation = fileName;
+            foreach (var item in viewModel.Image)
+            {
+                var fileName = Path.Combine(he.WebRootPath, Path.GetFileName(item.FileName));
+                item.CopyTo(new FileStream(fileName, FileMode.Create));
+            }
 
         }
 
@@ -137,11 +153,11 @@ namespace CarRent.Models
                         reader.Read();
 
                         var name = reader.GetString(1);
-                        
+
                         reader.Close();
 
                         return name;
-}
+                    }
                 }
             }
             catch

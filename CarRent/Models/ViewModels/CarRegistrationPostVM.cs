@@ -65,7 +65,7 @@ namespace CarRent.Models.ViewModels
         [Display(Name = "Gata")]
         public string Street { get; set; }
         [Display(Name = "Bild")]
-        public IFormFile  Image { get; set; }
+        public List<IFormFile> Image { get; set; }
         public string Filelocation { get; set; }
 
 

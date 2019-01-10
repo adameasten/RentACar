@@ -81,10 +81,22 @@
     <label asp-for="Pets"></label>
     <input asp-for="Pets" type="checkbox" />
 
-    <label asp-for="Image"></label>
-    <input asp-for="Image" />
+    <div id="MoreImages">
+        <label asp-for="Image"></label>
+        <input asp-for="Image" />
+    </div>
+        <input type="button" id="AddPicture" value="Lägg till fler bilder"/>
 
     <input type="submit" value="Registrera" />
 
-
 </form>
+
+<script>
+    $(function () {
+        $("#AddPicture").click(function () {
+            var $appndobj = $('<input class="AddPicture" type="file" id="Image" multiple="multiple" name="Image">')
+                
+            $("#MoreImages").append($appndobj);
+        });
+    });
+</script>
