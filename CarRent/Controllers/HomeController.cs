@@ -25,11 +25,17 @@ namespace CarRent.Controllers
             return View(new StartPageVM());
         }
 
-        [HttpPost]
-        [Route("")]
-        public IActionResult Home(StartPageVM vM)
+        public IActionResult GetPartialView(double lat, double longi)
         {
-            return View();
+            var cord = new Coordinate
+            {
+                X = lat,
+                Y = longi,
+            };
+
+            var result = service.CompareCoords(cord).Take(5).ToArray();
+
+            return PartialView("_NearbyCar", result);
         }
     }
 }
