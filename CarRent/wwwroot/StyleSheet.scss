@@ -5,10 +5,13 @@ $color4: #D4DFE1;
 $color5: #E0ECE0;
 
 body {
-    background-color: #E0ECE0;
+    background-color: $color2;
 }
 header {
-    background-color: #B6C7CC;
+    background-color: $color4;
+}
+footer {
+    background-color: $color3;
 }
 .header-body{
     display:flex;
