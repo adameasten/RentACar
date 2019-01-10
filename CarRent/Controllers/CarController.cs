@@ -32,6 +32,7 @@ namespace CarRent.Controllers
         {
 
             var cor = await homeService.GetCoordinates(vM);
+            homeService.AddTimeToDates(vM);
 
             var result = homeService.CompareCoords(cor,vM);
 

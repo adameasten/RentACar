@@ -36,22 +36,29 @@ namespace CarRent.Models
             };
         }
 
+        internal StartPageVM AddTimeToDates(StartPageVM vM)
+        {
+            vM.StartDate = vM.StartDate.Add(DateTime.Parse(vM.StartingHour).TimeOfDay);
+            vM.EndDate = vM.EndDate.Add(DateTime.Parse(vM.EndingHour).TimeOfDay);
+            return vM;
+        }
+
         public CarSearchVM[] CompareCoords(Coordinate coordinate, StartPageVM vM)
         {
             var point = new Point(coordinate);
             point.SRID = 4326;
 
-                   var cars = context.Car.Include(x => x.Rent).Where(a => CheckAvailability(a.Rent.ToArray(), vM.StartDate, vM.EndDate))
-                .OrderBy(o => o.GeoLocation.Distance(point)).Select
-             (c => new CarSearchVM
-             {
-                 Id = c.Id,
-                 Model = c.Model,
-                 ImgUrl = c.ImgUrl,
-                 Price = c.Price,
-                 YearModel = c.YearModel,
-                 Rating = c.Rent.SelectMany(r => r.Review).Count() > 0 ? c.Rent.SelectMany(r => r.Review).Average(s => s.Rating) : 0
-             }).ToArray();
+            var cars = context.Car.Include(x => x.Rent).Where(a => CheckAvailability(a.Rent.ToArray(), vM.StartDate, vM.EndDate))
+         .OrderBy(o => o.GeoLocation.Distance(point)).Select
+      (c => new CarSearchVM
+      {
+          Id = c.Id,
+          Model = c.Model,
+          ImgUrl = c.ImgUrl,
+          Price = c.Price,
+          YearModel = c.YearModel,
+          Rating = c.Rent.SelectMany(r => r.Review).Count() > 0 ? c.Rent.SelectMany(r => r.Review).Average(s => s.Rating) : 0
+      }).ToArray();
 
             return cars;
         }
