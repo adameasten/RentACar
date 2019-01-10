@@ -1,16 +1,16 @@
 ﻿@model CarSearchVM[]
 
-<h2> Bilar nära dig! </h2>
 
 @foreach (var item in Model)
 {
-    <div class="col-md-2">
+    <div id="renderColumns">
         <img src="@item.ImgUrl" class="carImg"/>
         <p>@item.Model</p>
         <p>@item.YearModel</p>
         <strong>@item.Price.ToString("c")</strong>
         <p>@item.Rating</p>
         <a asp-controller="car" asp-action="details" asp-route-id="@item.Id">Detaljer</a>
-        <hr />
+      
     </div>
+    <br/>  
 }
