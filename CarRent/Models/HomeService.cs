@@ -40,31 +40,16 @@ namespace CarRent.Models
             var point = new Point(coordinate);
             point.SRID = 4326;
 
-            var cars =
-             (from c in context.Car
-              orderby c.GeoLocation.Distance(point) descending
-              select c).Select(c => new CarSearchVM
+            var cars = context.Car.OrderBy(o => o.GeoLocation.Distance(point)).Select
+             (c => new CarSearchVM
               {
                   Id = c.Id,
                   Model = c.Model,
                   ImgUrl = c.ImgUrl,
                   Price = c.Price,
                   YearModel = c.YearModel,
-                  Ratings = context.Rent
-                  .DefaultIfEmpty()
-                  .Where(r => r.Id == c.Id)
-                  .SelectMany(q => q.Review)
-                  .Select(s => s.Rating).ToArray()
-
+                  Rating = c.Rent.SelectMany(r => r.Review).Count() > 0 ? c.Rent.SelectMany(r => r.Review).Average(s => s.Rating) : 0
               }).ToArray();
-
-            foreach (var item in cars)
-            {
-                if (item.Ratings.Length > 0)
-                    item.Rating = item.Ratings.Average();
-                else
-                    item.Rating = 0;
-            }
 
             return cars;
         }

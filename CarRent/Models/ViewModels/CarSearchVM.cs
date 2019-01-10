@@ -11,9 +11,7 @@ namespace CarRent.Models.ViewModels
         public string ImgUrl { get; set; }
         public string Model { get; set; }
         public int? YearModel { get; set; }
-        public double? Rating { get; set; } = 0;
+        public double? Rating { get; set; }
         public decimal Price { get; set; }
-
-        public int[] Ratings { get; set; }
     }
 }

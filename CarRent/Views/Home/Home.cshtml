@@ -17,24 +17,51 @@
 
     <input type="submit" value="Sök" />
 </form>
+<div class="container container-nopadding">
+    <div class="row">
+        <div id="renderPartial">
 
-@*<form asp-controller="car" asp-action="userlocation" id="locationform">
-    <input id="latCord" type="hidden" asp-for="Latitude" />
-    <input id="longCord" type="hidden" asp-for="Longitude" />
-</form>
-<button id="locationButton" type="button" class="btn btn-default" onclick="getLocation()">Use Actual Location</button>*@
+        </div>
+    </div>
+</div>
 
-<script type="text/javascript">
-    function getLocation() {
-        if (navigator.geolocation) {
-            navigator.geolocation.getCurrentPosition(addLocation);
-        }
-    }
+@section scripts{
+    <script type="text/javascript">
+        $(function () {
+            if (navigator.geolocation) {
+                console.log("Location1")
+                navigator.geolocation.getCurrentPosition(addLocation, useDefaultPosition);
+            }
 
-    function addLocation(position) {
-        console.log(position)
-        document.getElementById("latCord").value = position.coords.latitude;
-        document.getElementById("longCord").value = position.coords.longitude;
-        document.getElementById("locationform").submit();
-    };
-</script>
+            function useDefaultPosition(error) {
+                console.log(error)
+                $.ajax({
+                    url: "Home/GetPartialView",
+                    type: "GET",
+                    data: {
+                        "lat": 59.32932349999999,
+                        "longi": 18.0685808,
+                    },
+                    success: function (result) {
+                        $("#renderPartial").html(result);
+                    }
+                });
+            }
+
+            function addLocation(position) {
+                console.log(position)
+                $.ajax({
+                    url: "/Home/GetPartialView",
+                    type: "GET",
+                    data: {
+                        "lat": position.coords.latitude,
+                        "longi": position.coords.longitude,
+                    },
+                    success: function (result) {
+                        $("#renderPartial").html(result);
+                    }
+                });
+            };
+        });
+    </script>
+}
