@@ -10,6 +10,10 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Http;
+using GeoAPI.Geometries;
+using System.Net.Http;
+using Newtonsoft.Json;
+using NetTopologySuite.Geometries;
 
 namespace CarRent.Models
 {
@@ -70,10 +74,14 @@ namespace CarRent.Models
             return carr;
         }
 
-        public void AddCarToDatabase(CarRegistrationPostVM vm, string userId)
+        public async Task AddCarToDatabase(CarRegistrationPostVM vm, string userId)
         {
             if (vm.Image != null)
                 UploadImages(vm);
+
+            var coordinate = await GetCoordinates(vm.City);
+            var point = new Point(coordinate);
+            point.SRID = 4326;
 
             context.Car.Add(new Car
             {
@@ -93,8 +101,11 @@ namespace CarRent.Models
                 Seats = vm.Seats,
                 TowBar = vm.TowBar,
                 Type = vm.Type,
-                ImgUrl = vm.Filelocation
+                ImgUrl = vm.Image.FileName,
+                GeoLocation = point 
             });
+
+            context.SaveChanges();
             
         }
 
@@ -126,14 +137,11 @@ namespace CarRent.Models
                         reader.Read();
 
                         var name = reader.GetString(1);
-
-
+                        
                         reader.Close();
 
                         return name;
-
-
-                    }
+}
                 }
             }
             catch
@@ -141,6 +149,22 @@ namespace CarRent.Models
                 throw new Exception();
             }
 
+        }
+
+        public async Task<Coordinate> GetCoordinates(string city)
+        {
+            var apiString = $"https://maps.googleapis.com/maps/api/geocode/json?address={city}&key=AIzaSyDqQCALQLs6NM9tMpHUWlC2uLNh5Eniz3I";
+            var Coordinates = new Coordinate();
+            using (var httpClient = new HttpClient())
+            {
+                var response = await httpClient.GetAsync(apiString);
+                var json = await response.Content.ReadAsStringAsync();
+                var result = JsonConvert.DeserializeObject<dynamic>(json);
+                Coordinates.X = (double)result.results[0].geometry.location.lat;
+                Coordinates.Y = (double)result.results[0].geometry.location.lng;
+
+                return Coordinates;
+            };
         }
     }
 }

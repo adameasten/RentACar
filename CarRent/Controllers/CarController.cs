@@ -37,16 +37,16 @@ namespace CarRent.Controllers
         }
 
         [HttpPost]
-        public IActionResult CarRegistration(CarRegistrationPostVM vm)
+        public async Task<IActionResult> CarRegistration(CarRegistrationPostVM vm)
         {
 
             if(!ModelState.IsValid)
                  return View(vm);
 
             string userId = userManager.GetUserId(HttpContext.User);
-            services.AddCarToDatabase(vm, userId);
+            await services.AddCarToDatabase(vm, userId);
 
-            return View();
+            return Content("Lyckad");
 
         }
 

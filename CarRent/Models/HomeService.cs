@@ -20,9 +20,9 @@ namespace CarRent.Models
             this.context = context;
         }
 
-        public async Task<Coordinate> GetCoordinates(StartPageVM vM)
+        public async Task<Coordinate> GetCoordinates(string city)
         {
-            var apiString = $"https://maps.googleapis.com/maps/api/geocode/json?address={vM.City}&key=AIzaSyDqQCALQLs6NM9tMpHUWlC2uLNh5Eniz3I";
+            var apiString = $"https://maps.googleapis.com/maps/api/geocode/json?address={city}&key=AIzaSyDqQCALQLs6NM9tMpHUWlC2uLNh5Eniz3I";
             var Coordinates = new Coordinate();
             using (var httpClient = new HttpClient())
             {
