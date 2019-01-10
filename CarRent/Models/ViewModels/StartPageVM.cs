@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Mvc.Rendering;
+﻿using GeoAPI.Geometries;
+using Microsoft.AspNetCore.Mvc.Rendering;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
@@ -29,7 +30,8 @@ namespace CarRent.Models.ViewModels
             new SelectListItem {Text = "13:00", Value = "13:00"}
         };
 
-
+        public string Latitude { get; set; }
+        public string Longitude { get; set; }
 
         //public double Latitude { get; set; } = 59.3477632;
         //public double Longitude { get; set; } = 18.042060799999998;
