@@ -1,0 +1,165 @@
+﻿@model CarRegistrationPostVM
+
+<form id="FindCarByLicense">
+    <input type="text" id="LicenseValue"/>
+    <input type="submit" value="hitta"/>
+</form>
+
+
+<form enctype="multipart/form-data" asp-controller="Car" asp-action="CarRegistration">
+    <label asp-for="Model"></label>
+    <input asp-for="Model" id="Model"/>
+    <span asp-validation-for="Model"></span>
+
+
+    <label asp-for="Km"></label>
+    <input asp-for="Km" />
+    <span asp-validation-for="Km"></span>
+
+    <label asp-for="Description"></label>
+    <input asp-for="Description" />
+    <span asp-validation-for="Description"></span>
+
+
+    <label asp-for="Price"></label>
+    <input asp-for="Price" />
+    <span asp-validation-for="Price"></span>
+
+
+    <label asp-for="YearModel"></label>
+    <input asp-for="YearModel" />
+    <span asp-validation-for="YearModel"></span>
+
+
+    <label asp-for="City"></label>
+    <input asp-for="City" />
+    <span asp-validation-for="City"></span>
+
+
+    <label asp-for="Street"></label>
+    <input asp-for="Street" />
+    <span asp-validation-for="Street"></span>
+
+
+    <label asp-for="Type"></label>
+    <select asp-for="Type"
+            asp-items="Model.TypeItems"></select>
+    <span asp-validation-for="Type"></span>
+
+    <label asp-for="GearItems"></label>
+    <select asp-for="Gear"
+            asp-items="Model.GearItems"></select>
+    <span asp-validation-for="Gear"></span>
+
+    <label asp-for="FuelItems"></label>
+    <select asp-for="Fuel"
+            asp-items="Model.FuelItems"></select>
+    <span asp-validation-for="Fuel"></span>
+
+    <label asp-for="SeatsItem"></label>
+    <select asp-for="Seats"
+            asp-items="Model.SeatsItem"></select>
+    <span asp-validation-for="Seats"></span>
+
+    <label asp-for="DoorsItem"></label>
+    <select asp-for="Doors"
+            asp-items="Model.DoorsItem"></select>
+    <span asp-validation-for="Doors"></span>
+
+
+    <label asp-for="Ac"></label>
+    <input asp-for="Ac" type="checkbox" />
+
+
+    <label asp-for="ChildSeat"></label>
+    <input asp-for="ChildSeat" type="checkbox" />
+
+
+    <label asp-for="TowBar"></label>
+    <input asp-for="TowBar" type="checkbox" />
+
+    <label asp-for="RoofRack"></label>
+    <input asp-for="RoofRack" type="checkbox" />
+
+
+
+    <label asp-for="Pets"></label>
+    <input asp-for="Pets" type="checkbox" />
+
+    <div id="MoreImages">
+        <label asp-for="Image"></label>
+        <input asp-for="Image" />
+    </div>
+        <input type="button" id="AddPicture" value="Lägg till fler bilder"/>
+
+    <input type="submit" value="Registrera" />
+
+</form>
+
+<script>
+    $(function () {
+        $("#AddPicture").click(function () {
+            var $appndobj = $('<input class="AddPicture" type="file" id="Image" multiple="multiple" name="Image">')
+                
+            $("#MoreImages").append($appndobj);
+        });
+        $("#FindCarByLicense").submit(function (e) {
+            e.preventDefault();
+            console.log($("#LicenseValue").val());
+            var registration = $("#LicenseValue").val();
+            $.getJSON("https://api.biluppgifter.se/api/v1/vehicle/regno/" + registration, {
+                api_token: "3BATNwX7AoEExD7XWq5uQKUSlIbCrplD83EjIkKetb1hXSvnHnv1zwNLtYGE" })
+                
+                .done(function (data) {
+                    $("#Model").val(data.data.basic.data.make + " "+data.data.basic.data.model);
+                    $("#YearModel").val(data.data.basic.data.model_year);
+                    $("#Seats").val(data.data.technical.data.number_of_passengers+1);
+
+                    var hitch = data.data.technical.data.hitch;
+                    if (hitch != null) {
+                        $("#TowBar").prop('checked', true);
+                    }
+
+                    var fueltype = data.data.technical.data.fuel_1;
+
+                    switch (fueltype) {
+
+                        case 1:
+                            fueltype = "Bensin";
+                            break;
+                        case 2:
+                            fueltype = "Diesel";
+
+                            break;
+                        case 3:
+                            fueltype = "El";
+
+                            break;
+                        case 7:
+                            fueltype = "Etanol";
+
+                            break;
+                        default:
+                            fueltype = "Annat";
+
+                    }
+                    $("#Fuel").val(fueltype);
+
+                    var transmission = data.data.technical.data.transmission;
+
+                    if (transmission == 1 || transmission == 3) {
+                        transmission = "Manuell";
+                    }
+                    else {
+                        transmission = "Automat";
+                    }
+
+                    $("#Gear").val(transmission);
+
+                    
+                    
+
+                });
+        });
+    });
+</script>
