@@ -1,8 +1,11 @@
 ﻿body {
   background-color: #E0ECE0; }
-
-header {
-  background-color: #B6C7CC; }
+  body main {
+    background-color: #D4DFE1 !important; }
+  body header {
+    background-color: #B6C7CC !important; }
+  body footer {
+    background-color: #88959D !important; }
 
 .header-body {
   display: flex; }

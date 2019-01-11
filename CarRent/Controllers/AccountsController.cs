@@ -44,20 +44,24 @@ namespace CarRent.Controllers
         }
 
         [HttpGet]
-        public IActionResult Login()
+        public IActionResult Login(string returnUrl)
         {
+            ViewData["returnUrl"] = returnUrl;
             return View();
         }
 
         [HttpPost]
-        public async Task<IActionResult> Login(AccountLoginVM vm)
+        public async Task<IActionResult> Login(AccountLoginVM vm, string returnUrl)
         {
             if (!ModelState.IsValid)
                 return View(vm);
             var succeded = await service.LoginUser(vm);
             if (!succeded)
                 return View(vm);
-            return Redirect("/");
+            if (!string.IsNullOrEmpty(returnUrl))
+                return Redirect(returnUrl);
+            else
+                return Redirect("/");
         }
 
         [HttpGet]

@@ -67,11 +67,19 @@ namespace CarRent.Models
                     }).ToList(),
                 form = new CarRentFormVM()
                 {
+                    CarId = ID,
                     Price = d.Price
                 }
             }).FirstOrDefault();
 
             return carr;
+        }
+
+        internal async Task AddRent(CarRentFormVM vM, string userId)
+        {
+            await context.Rent.AddAsync(new Rent { CarId = vM.CarId, Datestart = vM.StartTime, DateEnd = vM.EndTime, CustomerId = userId});
+
+            await context.SaveChangesAsync();
         }
 
         public async Task AddCarToDatabase(CarRegistrationPostVM vm, string userId)
