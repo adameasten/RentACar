@@ -1,0 +1,13 @@
+﻿@model MyBookingsVM
+<div class="card" style="max-width: 12rem;">
+    <img class="card-img-top" src="/@Model.ImgUrl" alt="Card image cap">
+    <div class="card-body">
+        <h5 class="card-title">@Model.Model</h5>
+       
+    </div>
+    @*<div class="card-body">
+    </div>*@
+    <div class="card-footer">
+        <small class="text-muted">@Model.StartTime.ToString("MM/dd/yyyy") - @Model.EndTime.ToString("MM/dd/yyyy") </small>
+    </div>
+</div>
