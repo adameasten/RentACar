@@ -40,7 +40,7 @@ namespace CarRent.Models
                     Coordinates.X = 59.32932349999999;
                     Coordinates.Y = 18.0685808;
                 }
-                    return Coordinates;
+                return Coordinates;
             };
         }
 
@@ -57,17 +57,17 @@ namespace CarRent.Models
             point.SRID = 4326;
 
             var cars = context.Car.Include(x => x.Rent).Where(a => CheckAvailability(a.Rent.ToArray(), vM.StartDate, vM.EndDate))
-         .OrderBy(o => o.GeoLocation.Distance(point)).Select
-      (c => new CarSearchVM
-      {
-          Id = c.Id,
-          Model = c.Model,
-          Distance = c.GeoLocation.Distance(point) / 1600,
-          ImgUrl = c.ImgUrl,
-          Price = c.Price,
-          YearModel = c.YearModel,
-          Rating = c.Rent.SelectMany(r => r.Review).Count() > 0 ? c.Rent.SelectMany(r => r.Review).Average(s => s.Rating) : 0
-      }).ToArray();
+            .OrderBy(o => o.GeoLocation.Distance(point))
+            .Select(c => new CarSearchVM
+            {
+                Id = c.Id,
+                Model = c.Model,
+                Distance = c.GeoLocation.Distance(point) / 1600,
+                ImgUrl = c.ImgUrl,
+                Price = c.Price,
+                YearModel = c.YearModel,
+                Rating = c.Rent.SelectMany(r => r.Review).Count() > 0 ? c.Rent.SelectMany(r => r.Review).Average(s => s.Rating) : 0
+            }).ToArray();
 
             return cars;
         }
@@ -84,10 +84,10 @@ namespace CarRent.Models
             return new CarReceiptVM
             {
                 CarName = context.Car.SingleOrDefault(c => c.Id == vM.CarId).Model,
-                Total = vM.Price,
                 StartDate = vM.StartTime,
                 EndDate = vM.EndTime,
-                Price = context.Car.SingleOrDefault(c => c.Id == vM.CarId).Price
+                Price = context.Car.SingleOrDefault(c => c.Id == vM.CarId).Price,
+                Total = ((vM.EndTime - vM.StartTime).Ticks / TimeSpan.TicksPerMinute) * (vM.Price / 60),
             };
         }
 

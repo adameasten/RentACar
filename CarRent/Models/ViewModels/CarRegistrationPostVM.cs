@@ -54,8 +54,8 @@ namespace CarRent.Models.ViewModels
         public bool RoofRack { get; set; }
         [Display(Name = "Husdjur")]
         public bool Pets { get; set; }
-        [Required(ErrorMessage = "Ange pris per dag")]
-        [Display(Name = "Pris per dag")]
+        [Required(ErrorMessage = "Ange pris per/h")]
+        [Display(Name = "Pris per/h")]
         public decimal Price { get; set; }
         [Required(ErrorMessage = "Ange årsmodell")]
         [Display(Name = "Årsmodell")]
