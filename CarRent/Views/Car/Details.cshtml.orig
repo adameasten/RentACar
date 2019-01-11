@@ -45,10 +45,16 @@
 </div>
 
 
+<<<<<<< HEAD
 <partial name="_RentFormDetails" model="@Model.form" />
 @{double rateing = 0;}
 
 @if (Model.reviews.Count > 0)
+=======
+@*<partial name="_RentFormDetails" model="@Model.form" />
+@{int rateing = 0;}
+@foreach (var item in Model.reviews)
+>>>>>>> registration
 {
     rateing = Model.reviews.Average(p => p.Rating);
 }
@@ -64,4 +70,4 @@
             <p class="card-text">@item.Review</p>
         </div>
     </div>
-}
+}*@

@@ -10,6 +10,7 @@ namespace CarRent.Models.Entities
         public int Rating { get; set; }
         public DateTime DateCreated { get; set; }
         public int RentId { get; set; }
-        public Rent Rent { get; set; }
+
+        public virtual Rent Rent { get; set; }
     }
 }

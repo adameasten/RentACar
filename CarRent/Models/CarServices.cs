@@ -4,17 +4,30 @@ using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
 using System.Data.SqlClient;
+using System.IO;
 using System.Linq;
 using System.Threading.Tasks;
+using Microsoft.AspNetCore.Hosting;
+using Microsoft.AspNetCore.Identity;
+using Microsoft.AspNetCore.Http;
+using GeoAPI.Geometries;
+using System.Net.Http;
+using Newtonsoft.Json;
+using NetTopologySuite.Geometries;
 
 namespace CarRent.Models
 {
     public class CarServices
     {
         CarRentContext context;
-        public CarServices(CarRentContext context)
+        IHostingEnvironment he;
+        UserManager<MyIdentityUser> userManager;
+
+        public CarServices(CarRentContext context, IHostingEnvironment he, UserManager<MyIdentityUser> userManager)
         {
             this.context = context;
+            this.he = he;
+            this.userManager = userManager;
         }
 
         public CarDetailsVM FindCarByID(int ID)
@@ -44,7 +57,8 @@ namespace CarRent.Models
                 reviews = context.Rent
                     .Where(o => o.Car.Id == ID)
                     .SelectMany(o => o.Review.Select(r => r))
-                    .Select(o => new ReviewCarDetailsVM() {
+                    .Select(o => new ReviewCarDetailsVM()
+                    {
                         DateCreated = o.DateCreated,
                         Rating = o.Rating,
                         Review = o.Review1,
@@ -58,6 +72,65 @@ namespace CarRent.Models
             }).FirstOrDefault();
 
             return carr;
+        }
+
+        public async Task AddCarToDatabase(CarRegistrationPostVM vm, string userId)
+        {
+            //if (vm.Image != null)
+            //UploadImages(vm);
+
+            var coordinate = await GetCoordinates(vm.City);
+            var point = new Point(coordinate);
+            point.SRID = 4326;
+
+
+            var car = new Car
+            {
+                OwnerId = userId,
+                Model = vm.Model,
+                Km = vm.Km,
+                Ac = vm.Ac,
+                ChildSeat = vm.ChildSeat,
+                Gear = vm.Gear,
+                Doors = vm.Doors,
+                Description = vm.Description,
+                Fuel = vm.Fuel,
+                Pets = vm.Pets,
+                Price = vm.Price,
+                RoofRack = vm.RoofRack,
+                YearModel = vm.YearModel,
+                Seats = vm.Seats,
+                TowBar = vm.TowBar,
+                Type = vm.Type,
+                ImgUrl = vm.Image[0].FileName,
+                GeoLocation = point
+            };
+
+            context.Car.Add(car);
+
+            context.SaveChanges();
+
+            foreach (var item in vm.Image)
+            {
+                context.CarImage.Add(new CarImage
+                {
+                    CarId = car.Id,
+                    ImgUrl = item.FileName,
+                    
+                });
+            }
+
+            context.SaveChanges();
+        }
+
+        public void UploadImages(CarRegistrationPostVM viewModel)
+        {
+            foreach (var item in viewModel.Image)
+            {
+                var fileName = Path.Combine(he.WebRootPath, Path.GetFileName(item.FileName));
+                item.CopyTo(new FileStream(fileName, FileMode.Create));
+            }
+
         }
 
         public string GetContactByID(string ID)
@@ -79,14 +152,11 @@ namespace CarRent.Models
 
                         reader.Read();
 
-                        var name = reader.GetString(1);                      
-
+                        var name = reader.GetString(1);
 
                         reader.Close();
 
                         return name;
-
-
                     }
                 }
             }
@@ -95,6 +165,22 @@ namespace CarRent.Models
                 throw new Exception();
             }
 
+        }
+
+        public async Task<Coordinate> GetCoordinates(string city)
+        {
+            var apiString = $"https://maps.googleapis.com/maps/api/geocode/json?address={city}&key=AIzaSyDqQCALQLs6NM9tMpHUWlC2uLNh5Eniz3I";
+            var Coordinates = new Coordinate();
+            using (var httpClient = new HttpClient())
+            {
+                var response = await httpClient.GetAsync(apiString);
+                var json = await response.Content.ReadAsStringAsync();
+                var result = JsonConvert.DeserializeObject<dynamic>(json);
+                Coordinates.X = (double)result.results[0].geometry.location.lat;
+                Coordinates.Y = (double)result.results[0].geometry.location.lng;
+
+                return Coordinates;
+            };
         }
     }
 }
