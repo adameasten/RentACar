@@ -13,5 +13,7 @@ namespace CarRent.Models.ViewModels
         public int? YearModel { get; set; }
         public double? Rating { get; set; }
         public decimal Price { get; set; }
+        public double Distance { get; set; }
+
     }
 }

@@ -4,6 +4,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using CarRent.Models;
 using CarRent.Models.ViewModels;
+using GeoAPI.Geometries;
 using Microsoft.AspNetCore.Mvc;
 
 namespace CarRent.Controllers
@@ -21,17 +22,24 @@ namespace CarRent.Controllers
         [Route("")]
         public IActionResult Home()
         {
-            return View();
+            return View(new StartPageVM());
         }
 
-        [HttpPost]
-        public async Task<IActionResult> Search(StartPageVM vM)
+        public IActionResult GetPartialView(double lat, double longi)
         {
-            var cor = await service.GetCoordinates(vM);
+<<<<<<< HEAD
+            var cord = new Coordinate
+            {
+                X = lat,
+                Y = longi,
+            };
+=======
+            var cor = await service.GetCoordinates(vM.City);
+>>>>>>> registration
 
-            var result = service.CompareCoords(cor);
+            var result = service.CompareCoords(cord,new StartPageVM()).Take(5).ToArray();
 
-            return RedirectToAction(nameof(Home));
+            return PartialView("_NearbyCar", result);
         }
     }
 }

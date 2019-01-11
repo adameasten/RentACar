@@ -16,6 +16,7 @@ namespace CarRent.Models.Entities
         }
 
         public virtual DbSet<Car> Car { get; set; }
+        public virtual DbSet<CarImage> CarImage { get; set; }
         public virtual DbSet<Rent> Rent { get; set; }
         public virtual DbSet<Review> Review { get; set; }
 
@@ -29,7 +30,7 @@ namespace CarRent.Models.Entities
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
-            modelBuilder.HasAnnotation("ProductVersion", "2.2.0-rtm-35687");
+            modelBuilder.HasAnnotation("ProductVersion", "2.2.1-servicing-10028");
 
             modelBuilder.Entity<Car>(entity =>
             {
@@ -63,6 +64,26 @@ namespace CarRent.Models.Entities
                 entity.Property(e => e.Type)
                     .IsRequired()
                     .HasMaxLength(100);
+            });
+
+            modelBuilder.Entity<CarImage>(entity =>
+            {
+                entity.ToTable("CarImage", "CarRent");
+
+                entity.Property(e => e.Id).HasColumnName("id");
+
+                entity.Property(e => e.CarId).HasColumnName("carId");
+
+                entity.Property(e => e.ImgUrl)
+                    .IsRequired()
+                    .HasColumnName("imgUrl")
+                    .HasMaxLength(100);
+
+                entity.HasOne(d => d.Car)
+                    .WithMany(p => p.CarImage)
+                    .HasForeignKey(d => d.CarId)
+                    .OnDelete(DeleteBehavior.ClientSetNull)
+                    .HasConstraintName("FK__CarImage__carId__75A278F5");
             });
 
             modelBuilder.Entity<Rent>(entity =>

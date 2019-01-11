@@ -14,15 +14,21 @@ header {
     display:flex;
 }
 .container-nopadding {
-    padding: 0 !important;
 }
 
 .carImg{
-    height: 50px;
-    width: 50px;
+    height: 100px;
+    width: 150px;
 }
 
-#renderPartial{
+#renderPartial {
     display: flex;
-    flex-flow: row;
+    flex-flow: nowrap;
+    justify-content: space-around;
+    align-items: stretch;
+    flex-direction: row;
+    width: 100vw;
+}
+#renderColumns {
+    width: 25%;
 }

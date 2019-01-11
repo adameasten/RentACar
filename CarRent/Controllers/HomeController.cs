@@ -33,7 +33,7 @@ namespace CarRent.Controllers
                 Y = longi,
             };
 
-            var result = service.CompareCoords(cord).Take(5).ToArray();
+            var result = service.CompareCoords(cord,new StartPageVM()).Take(5).ToArray();
 
             return PartialView("_NearbyCar", result);
         }
