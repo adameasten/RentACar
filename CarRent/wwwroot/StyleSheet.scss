@@ -5,18 +5,30 @@ $color4: #D4DFE1;
 $color5: #E0ECE0;
 
 body {
-    background-color: #E0ECE0;
+
+    background-color: $color5;
+
+    main {
+        background-color: $color4 !important;
+    }
+
+    header {
+        background-color: $color2 !important;
+    }
+
+    footer {
+        background-color: $color1 !important;
+    }
 }
-header {
-    background-color: #B6C7CC;
+
+.header-body {
+    display: flex;
 }
-.header-body{
-    display:flex;
-}
+
 .container-nopadding {
 }
 
-.carImg{
+.carImg {
     height: 100px;
     width: 150px;
 }
@@ -29,6 +41,7 @@ header {
     flex-direction: row;
     width: 100vw;
 }
+
 #renderColumns {
     width: 25%;
 }
