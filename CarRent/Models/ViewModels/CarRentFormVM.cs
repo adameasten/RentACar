@@ -8,6 +8,7 @@ namespace CarRent.Models.ViewModels
 {
     public class CarRentFormVM
     {
+        public int CarId { get; set; }
         [Display(Name = "Från")]
         public DateTime StartTime { get; set; } = DateTime.Now.Date;
         [Display(Name = "Till")]

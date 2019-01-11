@@ -4,7 +4,7 @@
 <div class="card" style="width: 18rem;">
     <div class="card-body">
         <h5 class="card-title">@decimal.Round(Model.Price, 0, MidpointRounding.AwayFromZero) kr /dag</h5>
-        <form asp-action="tillfälligt" asp-controller="Car">
+        <form asp-action="rentcar" asp-controller="car">
             <label asp-for="StartTime"></label>
             <input asp-for="StartTime" id="StartTime" />
             <br />
@@ -12,9 +12,9 @@
             <br />
             <input asp-for="EndTime" id="EndTime" />
             <h5 class="card-title" id="TotalPrice"></h5>
+            <input type="hidden" asp-for="CarId" />
             <input type="submit" value="Hyr bil" />
         </form>
-
     </div>
 </div>
 

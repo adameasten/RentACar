@@ -44,6 +44,7 @@ namespace CarRent
                 o.Password.RequiredLength = 8;
             })
             .AddEntityFrameworkStores<MyIdentityContext>().AddDefaultTokenProviders();
+            services.ConfigureApplicationCookie(o => o.LoginPath = "/accounts/login");
             services.AddTransient<AccountsService>();
             services.AddTransient<HomeService>();
             services.AddSession();

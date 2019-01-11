@@ -64,6 +64,13 @@ namespace CarRent.Models
             return cars;
         }
 
+        internal bool CarIsAvailable(CarRentFormVM vM)
+        {
+            return CheckAvailability(context.Car
+                .SingleOrDefault(c => c.Id == vM.CarId)
+                .Rent.ToArray(), vM.StartTime, vM.EndTime);
+        }
+
         public bool CheckAvailability(Rent[] rents, DateTime start, DateTime end)
         {
 
