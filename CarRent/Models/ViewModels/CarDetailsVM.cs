@@ -8,10 +8,8 @@ namespace CarRent.Models.ViewModels
 {
     public class CarDetailsVM
     {
-
         public CarVM car { get; set; }
         public CarRentFormVM form { get; set; }
         public List<ReviewCarDetailsVM> reviews;
-       
     }
 }

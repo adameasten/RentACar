@@ -1,0 +1,79 @@
+﻿@model MyBookingsVM
+
+<div class="card" style="max-width: 12rem;">
+    <img class="card-img-top" src="/@Model.ImgUrl" alt="Card image cap">
+    <div class="card-body">
+        <h5 class="card-title">@Model.Model</h5>
+      
+    </div>
+    <div class="card-body text-center">
+        <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#Bttn-@Model.RentId">
+            Recensera
+        </button>
+    </div>
+    <div class="card-footer">
+        <small class="text-muted">@Model.StartTime.ToString("MM/dd/yyyy") - @Model.EndTime.ToString("MM/dd/yyyy") </small>
+    </div>
+</div>
+
+<div class="modal fade" id="Bttn-@Model.RentId" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLongTitle">Lämna en recension</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                
+                <div class="form-group">
+                    <label for="sel1">Sätt betyg:</label>
+                    <select class="form-control" id="sel1-@Model.RentId">
+                        <option>1</option>
+                        <option>2</option>
+                        <option>3</option>
+                        <option>4</option>
+                        <option>5</option>
+                    </select>
+                </div>
+                    <div class="form-group">
+                        <label for="comment">Kommentar:</label>
+                        <textarea class="form-control" rows="5" id="comment-@Model.RentId"></textarea>
+                    </div>
+                </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                <button type="button" class="btn btn-primary" id="@Model.RentId.ToString()" data-dismiss="modal">Skicka</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script>
+    $(function () {
+        $("#@Model.RentId.ToString()").click(function (e) {
+
+            e.preventDefault();
+
+            var comment = $("#comment-@Model.RentId").val();
+            console.log($("#sel1-@Model.RentId").val());
+            console.log(@Model.RentId);
+
+				$.getJSON( '@Url.Action("SaveComment")',
+                    {
+                        comment: $("#comment-@Model.RentId").val(),
+                        rating: $("#sel1-@Model.RentId").val(),
+                        rentId: @Model.RentId
+
+                        })
+                    .done(function (data) {
+                        console.log(data);
+					});
+
+
+        })
+
+    })
+
+</script>

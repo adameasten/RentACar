@@ -6,13 +6,19 @@ using System.Threading.Tasks;
 
 namespace CarRent.Models.ViewModels
 {
-    public class CarRentFormVM
+    public class MyBookingsVM
     {
-        public int CarId { get; set; }
+        public string Model { get; set; }
+        public string ImgUrl { get; set; }
+
+        public int RentId { get; set; }
+
+
         [Display(Name = "Från")]
-        public DateTime StartTime { get; set; } = DateTime.Now.Date;
+        public DateTime StartTime { get; set; }
         [Display(Name = "Till")]
-        public DateTime EndTime { get; set; } = DateTime.Now.Date.AddDays(1);
-        public decimal Price { get; set; }
+        public DateTime EndTime { get; set; } 
+
+
     }
 }

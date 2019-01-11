@@ -5,7 +5,7 @@
 
 <h2>Login</h2>
 
-<form asp-controller="accounts" asp-action="login">
+<form asp-controller="accounts" asp-action="login" asp-route-returnUrl="@ViewData["returnUrl"]">
     <label asp-for="UserName"></label>
     <input asp-for="UserName" />
     <span asp-validation-for="UserName"></span>

@@ -30,9 +30,17 @@ namespace CarRent.Models
                 var response = await httpClient.GetAsync(apiString);
                 var json = await response.Content.ReadAsStringAsync();
                 var result = JsonConvert.DeserializeObject<dynamic>(json);
-                Coordinates.X = (double)result.results[0].geometry.location.lat;
-                Coordinates.Y = (double)result.results[0].geometry.location.lng;
-                return Coordinates;
+                if (result.status != "ZERO_RESULTS")
+                {
+                    Coordinates.X = (double)result.results[0].geometry.location.lat;
+                    Coordinates.Y = (double)result.results[0].geometry.location.lng;
+                }
+                else
+                {
+                    Coordinates.X = 59.32932349999999;
+                    Coordinates.Y = 18.0685808;
+                }
+                    return Coordinates;
             };
         }
 
@@ -54,7 +62,7 @@ namespace CarRent.Models
       {
           Id = c.Id,
           Model = c.Model,
-          Distance = c.GeoLocation.Distance(point),
+          Distance = c.GeoLocation.Distance(point) / 1600,
           ImgUrl = c.ImgUrl,
           Price = c.Price,
           YearModel = c.YearModel,
@@ -62,6 +70,25 @@ namespace CarRent.Models
       }).ToArray();
 
             return cars;
+        }
+
+        internal bool CarIsAvailable(CarRentFormVM vM)
+        {
+            return CheckAvailability(context.Car.Include(x => x.Rent)
+                .SingleOrDefault(c => c.Id == vM.CarId)
+                .Rent.ToArray(), vM.StartTime, vM.EndTime);
+        }
+
+        internal CarReceiptVM MakeRecipt(CarRentFormVM vM)
+        {
+            return new CarReceiptVM
+            {
+                CarName = context.Car.SingleOrDefault(c => c.Id == vM.CarId).Model,
+                Total = vM.Price,
+                StartDate = vM.StartTime,
+                EndDate = vM.EndTime,
+                Price = context.Car.SingleOrDefault(c => c.Id == vM.CarId).Price
+            };
         }
 
         public bool CheckAvailability(Rent[] rents, DateTime start, DateTime end)
