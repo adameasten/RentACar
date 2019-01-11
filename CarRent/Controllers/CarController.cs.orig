@@ -3,10 +3,12 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using CarRent.Models;
-
-using GeoAPI.Geometries;
 using CarRent.Models.ViewModels;
+<<<<<<< HEAD
+using GeoAPI.Geometries;
+=======
 using Microsoft.AspNetCore.Identity;
+>>>>>>> registration
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 
@@ -15,22 +17,43 @@ namespace CarRent.Controllers
     public class CarController : Controller
     {
         CarServices services;
+<<<<<<< HEAD
         HomeService homeService;
-        UserManager<MyIdentityUser> userManager;
-        public CarController(CarServices services, UserManager<MyIdentityUser> userManager, HomeService homeService)
+        public CarController(CarServices services, HomeService homeService)
         {
             this.services = services;
             this.homeService = homeService;
             
+=======
+        UserManager<MyIdentityUser> userManager;
+        public CarController(CarServices services, UserManager<MyIdentityUser> userManager)
+        {
+            this.services = services;
             this.userManager = userManager;
+>>>>>>> registration
         }
     
         public IActionResult Details(int ID)
         {
             var model = services.FindCarByID(ID);
 
-            return View(model);          
+<<<<<<< HEAD
+            return View(model);
+        }
 
+        [HttpPost]
+        public async Task<IActionResult> Search(StartPageVM vM)
+        {
+
+            var cor = await homeService.GetCoordinates(vM);
+            homeService.AddTimeToDates(vM);
+
+            var result = homeService.CompareCoords(cor,vM);
+=======
+            return View(model);          
+>>>>>>> registration
+
+            return View(result);
         }
 
         [HttpGet]
@@ -53,17 +76,6 @@ namespace CarRent.Controllers
 
             return Content("Lyckad");
 
-        }
-        [HttpPost]
-        public async Task<IActionResult> Search(StartPageVM vM)
-        {
-
-            var cor = await homeService.GetCoordinates(vM.City);
-            homeService.AddTimeToDates(vM);
-
-            var result = homeService.CompareCoords(cor, vM);
-
-            return View(result);
         }
 
 
