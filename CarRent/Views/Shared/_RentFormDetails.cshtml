@@ -1,6 +1,6 @@
 ﻿@model CarRentFormVM
 
-
+<div id="test"></div>
 <div class="card" style="width: 18rem;">
     <div class="card-body">
         <h5 class="card-title">@decimal.Round(Model.Price, 0, MidpointRounding.AwayFromZero) kr /dag</h5>
@@ -20,9 +20,14 @@
 
 
 <script>
+
     $("#TotalPrice").text("Total " + @Model.Price);
     $("#TotalPrice").append(" kr");
 
+    if (Cookies.get("startDate") && Cookies.get("endDate")) {
+        $("#StartTime").val(Cookies.get("startDate").replace(" ", "T"));
+        $("#EndTime").val(Cookies.get("endDate").replace(" ", "T"));
+    }
 
     $("#StartTime").change(function () {
 

@@ -58,9 +58,10 @@ namespace CarRent.Controllers
         [HttpPost]
         public async Task<IActionResult> Search(StartPageVM vM)
         {
-
             var cor = await homeService.GetCoordinates(vM.City);
             homeService.AddTimeToDates(vM);
+            Response.Cookies.Append("startDate", vM.StartDate.ToString());
+            Response.Cookies.Append("endDate", vM.EndDate.ToString());
 
             var result = homeService.CompareCoords(cor, vM);
 
@@ -70,7 +71,7 @@ namespace CarRent.Controllers
         [HttpGet]
         public IActionResult RentCar()
         {
-            return Redirect("/car/details/"+Request.Cookies["DetailsId"]);
+            return Redirect($"/car/details/{Request.Cookies["DetailsId"]}");
         }
 
         [Authorize]
