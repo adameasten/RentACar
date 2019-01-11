@@ -3,11 +3,23 @@
     ViewData["Title"] = "Search";
 }
 
-<h1>Search</h1>
-
+<div class="card-deck">
 @foreach (var item in Model)
 {
-    <div>
+    <div class="card">
+        <img class="card-img-top" src="@item.ImgUrl">
+        <div class="card-body">
+            <h5 class="card-title">@item.Rating</h5>
+            <strong>@item.Price.ToString("c")</strong>
+            <h6>@item.YearModel</h6>
+            <p class="card-text">@item.Model</p>
+            <a class="btn btn-primary" asp-controller="car" asp-action="details" asp-route-id="@item.Id">Detaljer</a>
+        </div>
+        <div class="card-footer">
+            <small class="text-muted">@item.Distance.ToString("0.0") km bort</small>
+        </div>
+    </div>
+    @*<div>
         <img src="@item.ImgUrl" />
         <p>@item.Model</p>
         <p>@item.YearModel</p>
@@ -15,5 +27,6 @@
         <p>@item.Rating</p>
         <a asp-controller="car" asp-action="details" asp-route-id="@item.Id">Detaljer</a>
         <hr />
-    </div>
+    </div>*@
 }
+</div>
