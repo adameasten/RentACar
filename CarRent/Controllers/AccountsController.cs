@@ -70,6 +70,12 @@ namespace CarRent.Controllers
             return View();
         }
 
+        public IActionResult SaveComment(string comment, int rating, int rentId)
+        {
+            service.AddReview(comment, rating, rentId);
+            return Json(new { status = "Sucess" });
+        }
+
         [HttpPost]
         public async Task<IActionResult> Register(AccountRegisterVM vm)
         {

@@ -47,6 +47,7 @@ namespace CarRent.Models
                 SSN = user.SSN,
                 Street = user.Street,
                 Zip = user.Zip,
+               
                 UserInfo = new AccountRegisterVM()
                 {
                     Email = user.Email,
@@ -66,9 +67,25 @@ namespace CarRent.Models
                     ImgUrl = p.Car.ImgUrl,
                     Model = p.Car.Model,
                     StartTime = p.Datestart,
-                    EndTime = p.DateEnd
+                    EndTime = p.DateEnd,
+                    RentId = p.Id
+                   
                 }).ToList()
             };
+        }
+
+        public void AddReview(string comment, int rating, int rentId)
+        {
+            carContext.Review.Add(
+                new Review()
+                {
+                    DateCreated = DateTime.Now,
+                    Rating = rating,
+                    RentId = rentId,
+                    Review1 = comment
+
+                });
+            carContext.SaveChanges();
         }
 
         public async Task UpdateUser(MyIdentityUser user, MyAccountVM vm)
