@@ -3,3 +3,17 @@
 
 header {
   background-color: #B6C7CC; }
+
+.header-body {
+  display: flex; }
+
+.container-nopadding {
+  padding: 0 !important; }
+
+.carImg {
+  height: 50px;
+  width: 50px; }
+
+#renderPartial {
+  display: flex;
+  flex-flow: row; }
