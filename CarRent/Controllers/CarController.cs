@@ -86,12 +86,35 @@ namespace CarRent.Controllers
 
                 await services.AddRent(vM, userId);
 
-                return Content("Success");
+                return RedirectToAction(nameof(Confirmation),vM);
             }
             else
                 return Content("Failure");
         }
 
+        [HttpGet]
+        public IActionResult Confirmation(CarRentFormVM vM)
+        {
+            var recipt = homeService.MakeRecipt(vM);
+
+            return View(recipt);
+        }
+
+        //[HttpGet]
+        //public IActionResult Confirmation()
+        //{
+        //    var vM = new CarRentFormVM
+        //    {
+        //        CarId = 1,
+        //        Price = 2200,
+        //        StartTime = DateTime.Now,
+        //        EndTime = DateTime.Now.AddDays(2),
+
+        //    };
+        //    var recipt = homeService.MakeRecipt(vM);
+
+        //    return View(recipt);
+        //}
 
     }
 }

@@ -1,0 +1,70 @@
+﻿@model CarReceiptVM
+@{
+    ViewData["Title"] = "Confirmation";
+}
+
+<div id="invoice-POS">
+
+    <center id="top">
+        <div class="logo"></div>
+        <div class="info">
+            <h2>Bokningsbekräftelse</h2>
+        </div><!--End Info-->
+    </center><!--End InvoiceTop-->
+
+    <div id="mid">
+        <div class="info">
+            <h2>Kontakt</h2>
+            <p>
+                Adress : Borgarfjordsgatan 4, 164 55 Kista</br>
+                E-mail   : rentacar@gmail.com</br>
+                Telefon   : 08-123 456 789</br>
+            </p>
+        </div>
+    </div><!--End Invoice Mid-->
+
+    <div id="bot">
+
+        <div id="table">
+            <table>
+                <tr class="tabletitle">
+                    <td class="item"><h2>Bil</h2></td>
+                    <td class="Hours"><h2>Startdatum</h2></td>
+                    <td class="Rate"><h2>Slutdatum</h2></td>
+                </tr>
+
+                <tr class="service">
+                    <td class="tableitem"><p class="itemtext">@Model.CarName</p></td>
+                    <td class="tableitem"><p class="itemtext">@Model.StartDate</p></td>
+                    <td class="tableitem"><p class="itemtext">@Model.EndDate</p></td>
+                </tr>
+
+                <tr class="tabletitle">
+                    <td></td>
+                    <td class="Rate"><h2>Tid</h2></td>
+                    <td class="payment"><h2>@((Model.EndDate - Model.StartDate).ToString("d'd 'h'h'")) </h2> </td>
+                </tr>
+
+                <tr class="tabletitle">
+                    <td></td>
+                    <td class="Rate"><h2>Pris/dygn</h2></td>
+                    <td class="payment"><h2>@Model.Price.ToString("c")</h2></td>
+                </tr>
+
+                <tr class="tabletitle">
+                    <td></td>
+                    <td class="Rate"><h2>Total</h2></td>
+                    <td class="payment"><h2>@Model.Total.ToString("c")</h2></td>
+                </tr>
+
+            </table>
+        </div>
+
+        <div id="legalcopy">
+            <p class="legal">
+                <strong>Tack för att du använder dig av Rent A Car!</strong>
+            </p>
+        </div>
+
+    </div>
+</div>

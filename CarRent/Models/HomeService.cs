@@ -74,9 +74,21 @@ namespace CarRent.Models
 
         internal bool CarIsAvailable(CarRentFormVM vM)
         {
-            return CheckAvailability(context.Car
+            return CheckAvailability(context.Car.Include(x => x.Rent)
                 .SingleOrDefault(c => c.Id == vM.CarId)
                 .Rent.ToArray(), vM.StartTime, vM.EndTime);
+        }
+
+        internal CarReceiptVM MakeRecipt(CarRentFormVM vM)
+        {
+            return new CarReceiptVM
+            {
+                CarName = context.Car.SingleOrDefault(c => c.Id == vM.CarId).Model,
+                Total = vM.Price,
+                StartDate = vM.StartTime,
+                EndDate = vM.EndTime,
+                Price = context.Car.SingleOrDefault(c => c.Id == vM.CarId).Price
+            };
         }
 
         public bool CheckAvailability(Rent[] rents, DateTime start, DateTime end)
