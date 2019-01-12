@@ -191,6 +191,27 @@ body {
     border: 1px solid #5f9e80;
     color: white;
     text-shadow: #40936b 0 -1px 0;
+    text-decoration: none;
+
+    &:link {
+        text-decoration: none;
+        color: white;
+    }
+
+    &:visited {
+        text-decoration: none;
+        color: white;
+    }
+
+    &:hover {
+        text-decoration: none;
+        color: white;
+    }
+
+    &:active {
+        text-decoration: none;
+        color: white;
+    }
 }
 
 .account-form {

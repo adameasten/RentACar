@@ -117,7 +117,20 @@
   box-shadow: #c1e4d4 0 1px 0 inset;
   border: 1px solid #5f9e80;
   color: white;
-  text-shadow: #40936b 0 -1px 0; }
+  text-shadow: #40936b 0 -1px 0;
+  text-decoration: none; }
+  .button-default:link {
+    text-decoration: none;
+    color: white; }
+  .button-default:visited {
+    text-decoration: none;
+    color: white; }
+  .button-default:hover {
+    text-decoration: none;
+    color: white; }
+  .button-default:active {
+    text-decoration: none;
+    color: white; }
 
 .account-form {
   margin: 0 auto;
