@@ -1,88 +1,162 @@
-﻿body {
-  background-color: #E0ECE0; }
-  body main {
-    background-color: #D4DFE1 !important; }
-  body header {
-    background-color: #B6C7CC !important; }
-  body footer {
-    background-color: #88959D !important; }
+﻿/*$color1: #88959D;
+$color2: #B6C7CC;
+$color3: #C5D4DB;
+$color4: #D4DFE1;
+$color5: #E0ECE0;
+
+body {
+
+    background-color: $color5;
+
+    main {
+        background-color: $color4 !important;
+    }
+
+    header {
+        background-color: $color2 !important;
+    }
+
+    footer {
+        background-color: $color1 !important;
+    }
+}
 
 .header-body {
-  display: flex; }
+    display: flex;
+}
+
+.container-nopadding {
+}
 
 .carImg {
-  height: 100px;
-  width: 150px; }
+    height: 100px;
+    width: 150px;
+}
 
 #renderPartial {
-  display: flex;
-  flex-flow: nowrap;
-  justify-content: space-around;
-  align-items: stretch;
-  flex-direction: row;
-  width: 100vw; }
+    display: flex;
+    flex-flow: nowrap;
+    justify-content: space-around;
+    align-items: stretch;
+    flex-direction: row;
+    width: 100vw;
+}
 
 #renderColumns {
-  width: 25%; }
+    width: 25%;
+}
 
 #invoice-POS {
-  box-shadow: 0 0 1in -0.25in rgba(0, 0, 0, 0.5);
-  padding: 2mm;
-  margin: 0 auto;
-  width: 100mm;
-  background: #FFF; }
-  #invoice-POS ::selection {
-    background: #f31544;
-    color: #FFF; }
-  #invoice-POS ::moz-selection {
-    background: #f31544;
-    color: #FFF; }
-  #invoice-POS h1 {
-    font-size: 1.5em;
-    color: #222; }
-  #invoice-POS h2 {
-    font-size: .9em; }
-  #invoice-POS h3 {
-    font-size: 1.2em;
-    font-weight: 300;
-    line-height: 2em; }
-  #invoice-POS p {
-    font-size: 1em;
-    color: #666;
-    line-height: 1.2em; }
-  #invoice-POS #top, #invoice-POS #mid, #invoice-POS #bot {
-    /* Targets all id with 'col-' */
-    border-bottom: 1px solid #EEE; }
-  #invoice-POS #top {
-    min-height: 100px; }
-  #invoice-POS #mid {
-    min-height: 80px; }
-  #invoice-POS #bot {
-    min-height: 50px; }
-  #invoice-POS #top .logo {
-    height: 60px;
-    width: 60px;
-    background: url(Logo.png) no-repeat;
-    background-size: 60px 60px; }
-  #invoice-POS .info {
-    display: block;
-    margin-left: 0;
-    font-size: 1em; }
-  #invoice-POS .title {
-    float: right; }
-  #invoice-POS .title p {
-    text-align: right; }
-  #invoice-POS table {
-    width: 100%;
-    border-collapse: collapse; }
-  #invoice-POS .tabletitle {
-    font-size: 1em;
-    background: #EEE; }
-  #invoice-POS .service {
-    border-bottom: 1px solid #EEE; }
-  #invoice-POS .item {
-    width: 24mm; }
-  #invoice-POS .itemtext {
-    font-size: 1em; }
-  #invoice-POS #legalcopy {
-    margin-top: 5mm; }
+    box-shadow: 0 0 1in -0.25in rgba(0, 0, 0, 0.5);
+    padding: 2mm;
+    margin: 0 auto;
+    width: 100mm;
+    background: #FFF;
+
+
+    ::selection {
+        background: #f31544;
+        color: #FFF;
+    }
+
+    ::moz-selection {
+        background: #f31544;
+        color: #FFF;
+    }
+
+    h1 {
+        font-size: 1.5em;
+        color: #222;
+    }
+
+    h2 {
+        font-size: .9em;
+    }
+
+    h3 {
+        font-size: 1.2em;
+        font-weight: 300;
+        line-height: 2em;
+    }
+
+    p {
+        font-size: 1em;
+        color: #666;
+        line-height: 1.2em;
+    }
+
+    #top, #mid, #bot {  
+        /*Targets all id with 'col-'*/
+/*
+        border-bottom: 1px solid #EEE;
+    }
+    
+
+    #top {
+        min-height: 100px;
+    }
+
+    #mid {
+        min-height: 80px;
+    }
+
+    #bot {
+        min-height: 50px;
+    }
+
+    #top .logo {
+        //float: left;
+        height: 60px;
+        width: 60px;
+        background: url(Logo.png) no-repeat;
+        background-size: 60px 60px;
+    }
+
+  
+    .info {
+        display: block;
+        //float:left;
+        margin-left: 0;
+        font-size: 1em;
+    }
+
+    .title {
+        float: right;
+    }
+
+    .title p {
+        text-align: right;
+    }
+
+    table {
+        width: 100%;
+        border-collapse: collapse;
+    }
+
+    td {
+        //padding: 5px 0 5px 15px;
+        //border: 1px solid #EEE
+    }
+
+    .tabletitle {
+        //padding: 5px;
+        font-size: 1em;
+        background: #EEE;
+    }
+
+    .service {
+        border-bottom: 1px solid #EEE;
+    }
+
+    .item {
+        width: 24mm;
+    }
+
+    .itemtext {
+        font-size: 1em;
+    }
+
+    #legalcopy {
+        margin-top: 5mm;
+    }
+}*/

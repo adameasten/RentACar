@@ -1,4 +1,4 @@
-﻿$color1: #88959D;
+﻿/*$color1: #88959D;
 $color2: #B6C7CC;
 $color3: #C5D4DB;
 $color4: #D4DFE1;
@@ -85,9 +85,12 @@ body {
         line-height: 1.2em;
     }
 
-    #top, #mid, #bot { /* Targets all id with 'col-' */
+    #top, #mid, #bot {  
+        /*Targets all id with 'col-'*/
+/*
         border-bottom: 1px solid #EEE;
     }
+    
 
     #top {
         min-height: 100px;
@@ -156,4 +159,4 @@ body {
     #legalcopy {
         margin-top: 5mm;
     }
-}
+}*/
