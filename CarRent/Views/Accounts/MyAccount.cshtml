@@ -81,26 +81,31 @@
     </div>
 
     <div class="container">
-        <h3>Mina bilar</h3>
+        <div class="flex-column mx-auto my-cars">
+            <h3>Mina bilar</h3>
 
-        <div class="card-deck">
+            <div class="card-deck">
 
-            @foreach (var carCard in Model.CarCards)
-            {
-                <partial name="_MyCars" model="carCard" />
-            }
+                @foreach (var carCard in Model.CarCards)
+                {
+                    <partial name="_MyCars" model="carCard" />
+                }
+
+            </div>
         </div>
     </div>
 
 
     <div class="container">
-        <h3>Mina Bokningar</h3>
+        <div class="flex-column mx-auto my-bookings">
+            <h3>Mina Bokningar</h3>
 
-        <div class="card-deck">
-            @foreach (var booking in Model.MyBookings)
-            {
-                <partial name="_MyBookings" model="booking" />
-            }
+            <div class="card-deck">
+                @foreach (var booking in Model.MyBookings)
+                {
+                    <partial name="_MyBookings" model="booking" />
+                }
+            </div>
         </div>
     </div>
 
