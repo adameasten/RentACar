@@ -138,7 +138,10 @@
 
 .account-form {
   margin: 0 auto;
-  padding: 2em 1em; }
+  padding: 2em 1em;
+  max-width: 320px; }
+  .account-form .account-button-container {
+    padding: 16px 0; }
 
 .footer-icon-text {
   margin-right: 1em; }
