@@ -21,12 +21,12 @@
 
                 <span asp-validation-for="UserInfo.Email"></span>
 
-                <div id="PassWordField" class="account-form">
+                <div id="PassWordField" class="change-password-form">
 
                     <label asp-for="OldPassword"></label>
-                    <div class="col">
-                        <input asp-for="OldPassword" type="password" class="form-control is-valid" />
-                    </div>
+
+                    <input asp-for="OldPassword" type="password" class="form-control is-valid" />
+
                     <span asp-validation-for="OldPassword"></span>
 
                     <label>Nytt lösenord</label>
@@ -68,10 +68,10 @@
             <label asp-for="City"></label>
             <input asp-for="City" />
             <span asp-validation-for="City"></span>
+        <input type="submit" value="Spara" class="button-default" />
 
         </form>
 
-        <input type="submit" value="Spara" class="button-default" />
     </div>
 </div>
 
