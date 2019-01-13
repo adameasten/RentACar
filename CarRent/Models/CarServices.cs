@@ -84,8 +84,8 @@ namespace CarRent.Models
 
         public async Task AddCarToDatabase(CarRegistrationPostVM vm, string userId)
         {
-            //if (vm.Image != null)
-            //UploadImages(vm);
+            if (vm.Image.Count > 0)
+                UploadImages(vm);
 
             var coordinate = await GetCoordinates(vm.City);
             var point = new Point(coordinate);
