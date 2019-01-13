@@ -30,8 +30,14 @@
         @{
             if (User?.Identity.IsAuthenticated == true)
             {
+<<<<<<< HEAD
                 <a asp-controller="accounts" asp-action="myaccount" class="mr-1 button-default">Mitt Konto </a>
                 <a asp-controller="accounts" asp-action="logout"class="button-default">Logga Ut</a>
+=======
+                
+                <a asp-controller="accounts" asp-action="myaccount">Mitt Konto </a>
+                <a asp-controller="accounts" asp-action="logout">Logga Ut</a>
+>>>>>>> axelsbranch
             }
             else
             {

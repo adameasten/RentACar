@@ -1,4 +1,66 @@
 ﻿@model MyAccountVM
+<<<<<<< HEAD
+
+<div class="container">
+
+    <div class="row">
+
+        <form asp-controller="Accounts" asp-action="MyAccount" class="account-form">
+<h2>Mitt konto</h2>
+<h3>Uppdatera uppgifter</h3>
+<div class="form-group">
+    <label asp-for="UserInfo.UserName"></label>
+    <input asp-for="UserInfo.UserName" />
+    <span asp-validation-for="UserInfo.UserName"></span>
+</div>
+            <label asp-for="UserInfo.Email"></label>
+            <input asp-for="UserInfo.Email" />
+            <span asp-validation-for="UserInfo.Email"></span>
+            <br />
+            <div id="PassWordField">
+
+                <label asp-for="OldPassword"></label>
+                <input asp-for="OldPassword" type="password" />
+                <span asp-validation-for="OldPassword"></span>
+
+                <br />
+                <label>Nytt lösenord</label>
+                <input asp-for="UserInfo.Password" type="password" />
+                <span asp-validation-for="UserInfo.Password"></span>
+            </div>
+
+            <button id="ChangePassword">Ändra Lösenord</button>
+            <hr />
+
+            <label asp-for="FirstName"></label>
+            <input asp-for="FirstName" />
+            <span asp-validation-for="FirstName"></span>
+
+
+            <label asp-for="LastName"></label>
+            <input asp-for="LastName" />
+            <span asp-validation-for="LastName"></span>
+
+            <label asp-for="PhoneNumber"></label>
+            <input asp-for="PhoneNumber" />
+            <span asp-validation-for="PhoneNumber"></span>
+
+            <label asp-for="Street"></label>
+            <input asp-for="Street" />
+            <span asp-validation-for="Street"></span>
+
+            <label asp-for="Zip"></label>
+            <input asp-for="Zip" />
+            <span asp-validation-for="Zip"></span>
+
+            <label asp-for="SSN"></label>
+            <input asp-for="SSN" />
+            <span asp-validation-for="SSN"></span>
+
+            <label asp-for="City"></label>
+            <input asp-for="City" />
+            <span asp-validation-for="City"></span>
+=======
 <div class="container p-3" >
 </div>
 <div class="container row">
@@ -100,11 +162,27 @@
         </div>
     </div>
 
+>>>>>>> axelsbranch
 
+        </form>
 
+<<<<<<< HEAD
+            <input type="submit" value="Spara" class="button-default" />
+            </div>
+    </div>
+=======
+>>>>>>> axelsbranch
 
     <div class="container mt-5 row" style="max-width:960px">
 
+<<<<<<< HEAD
+        <p>@Model.DateJoined</p>
+
+
+
+        <div class="container">
+            <h3>Mina bilar</h3>
+=======
         <h2 id="MinaBilar">Mina bilar</h2>
 
         <div class="card-deck">
@@ -115,8 +193,22 @@
             }
         </div>
     </div>
+>>>>>>> axelsbranch
+
+            <div class="card-deck">
+
+<<<<<<< HEAD
+                @foreach (var carCard in Model.CarCards)
+                {
+                    <partial name="_MyCars" model="carCard" />
+                }
+            </div>
+        </div>
 
 
+        <div class="container">
+            <h3>Mina Bokningar</h3>
+=======
     <div class="container mt-5 row" style="max-width:960px">
         <h2 id="MinaBokningar">Mina Bokningar</h2>
 
@@ -130,6 +222,18 @@
     </div>
     <script>
         $(function () {
+>>>>>>> axelsbranch
+
+            <div class="card-deck">
+                @foreach (var booking in Model.MyBookings)
+                {
+                    <partial name="_MyBookings" model="booking" />
+                }
+            </div>
+        </div>
+
+        <script>
+            $(function () {
 
 
 
@@ -138,11 +242,15 @@
                 $("#ChangePassword").click(function (e) {
                     e.preventDefault();
 
+<<<<<<< HEAD
                     $("#PassWordField").show();
                     $(this).hide();
 
-            })
+                })
 
+            })
+        </script>
+=======
             $("#FirstLink").click(function (e) {
                 e.preventDefault();
                 var elmnt = document.getElementById("MinaPersonuppgifter");
@@ -159,5 +267,6 @@
                 elmnt.scrollIntoView(true);
             })
 
-            })
-        </script>
+        })
+    </script>
+>>>>>>> axelsbranch
