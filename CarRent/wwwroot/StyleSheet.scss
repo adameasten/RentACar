@@ -9,16 +9,36 @@ body {
     background-color: $color5;
 
     main {
-        background-color: $color4 !important;
+        background-color: $color5 !important;
     }
 
     header {
-        background-color: $color2 !important;
+        background-color: #fff !important;
     }
 
     footer {
         background-color: $color1 !important;
     }
+}
+
+.nav-item a{
+    color: black;
+    text-decoration: none;
+    display: block;
+}
+
+.nav-item a:hover {
+    color: $color3;
+    text-decoration: none;
+}
+
+#userInteractionNav li {
+    margin: 4px;
+    padding: 4px;
+}
+
+#carRegistrationButton {
+    border: solid #009966;
 }
 
 .row {

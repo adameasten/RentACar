@@ -1,11 +1,27 @@
 ﻿body {
   background-color: #E0ECE0; }
   body main {
-    background-color: #D4DFE1 !important; }
+    background-color: #E0ECE0 !important; }
   body header {
-    background-color: #B6C7CC !important; }
+    background-color: #fff !important; }
   body footer {
     background-color: #88959D !important; }
+
+.nav-item a {
+  color: black;
+  text-decoration: none;
+  display: block; }
+
+.nav-item a:hover {
+  color: #C5D4DB;
+  text-decoration: none; }
+
+#userInteractionNav li {
+  margin: 4px;
+  padding: 4px; }
+
+#carRegistrationButton {
+  border: solid #009966; }
 
 .row {
   display: flex;

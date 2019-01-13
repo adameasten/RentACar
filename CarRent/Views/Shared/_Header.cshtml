@@ -1,4 +1,4 @@
-﻿<nav class="navbar navbar-expand-lg navbar-light bg-light">
+﻿<nav class="navbar navbar-expand-lg @*navbar-light bg-light*@">
     <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
         <span class="navbar-toggler-icon"></span>
     </button>
@@ -6,9 +6,9 @@
     <div class="collapse navbar-collapse" id="navbarSupportedContent">
         <ul class="navbar-nav mr-auto">
             <li class="nav-item">
-                <a href="#"><img src="~/Logo.png" style="width:60px" /> <span class="sr-only">(current)</span></a>
+                <a asp-controller="home" asp-action="home"><img src="~/Logo.png" style="width:60px; margin: 2px 8px 2px 2px" /> <span class="sr-only">(current)</span></a>
             </li>
-            <li class="nav-item">
+            @*<li class="nav-item">
                 <a class="nav-link" href="#">Link</a>
             </li>
             <li class="nav-item dropdown">
@@ -24,19 +24,24 @@
             </li>
             <li class="nav-item">
                 <a class="nav-link disabled" href="#">Disabled</a>
-            </li>
+            </li>*@
         </ul>
-        @{
-            if (User?.Identity.IsAuthenticated == true)
-            {
-                <a asp-controller="accounts" asp-action="myaccount">Mitt Konto </a>
-                <a asp-controller="accounts" asp-action="logout">Logga Ut</a>
+        <ul id="userInteractionNav" class="nav navbar-nav ml-auto">
+            @{
+                if (User?.Identity.IsAuthenticated == true)
+                {
+                    <li id="carRegistrationButton" class="nav-item"><a asp-controller="car" asp-action="carregistration" class="btn btn-default">Hyr ut din bil</a></li>
+                    <li class="nav-item"><a asp-controller="accounts" asp-action="myaccount" class="btn btn-default">
+                                             <span class="glyphicon glyphicon-user"></span>Mitt Konto</a></li>
+                    <li class="nav-item"><a asp-controller="accounts" asp-action="logout" class="btn btn-default">Logga ut</a></li>
+                }
+                else
+                {
+                    <li id="carRegistrationButton" class="nav-item"><a asp-controller="car" asp-action="carregistration" class="btn btn-default">Hyr ut din bil</a></li>
+                    <li class="nav-item"><a asp-controller="accounts" asp-action="register" class="btn btn-default">Registrering</a></li>
+                    <li class="nav-item"><a asp-controller="accounts" asp-action="login" class="btn btn-default">Logga in</a></li>
+                }
             }
-            else
-            {
-                <a asp-controller="accounts" asp-action="register">Registrering </a>
-                <a asp-controller="accounts" asp-action="login">Logga in</a>
-            }
-        }
+        </ul>
     </div>
 </nav>
