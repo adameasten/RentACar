@@ -21,6 +21,11 @@ body {
     }
 }
 
+.row {
+    display: flex;
+    flex-wrap: wrap;
+}
+
 .header-body {
     display: flex;
 }

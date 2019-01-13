@@ -7,6 +7,10 @@
   body footer {
     background-color: #88959D !important; }
 
+.row {
+  display: flex;
+  flex-wrap: wrap; }
+
 .header-body {
   display: flex; }
 
