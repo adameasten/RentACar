@@ -2,66 +2,79 @@
 
 <div class="container">
     <div class="row">
-        <div class="col">
+        <div class="col-12">
             <h2> @Model.car.Model</h2>
         </div>
-    </div>
-    <div class="row">
-        <div class="col">
-            <img src="/@Model.car.ImgUrl">
-        </div>
-    </div>
-    <div class="row">
-        <div class="col">
-            <p>@Model.car.Description</p>
-        </div>
-    </div>
-    <div class="row">
-        <div class="col">
-            <p>Info</p>
-            <ul>
-                <li>Bränsletyp: @Model.car.Fuel</li>
-                <li>Antal säten: @Model.car.Seats</li>
-                <li>Antal dörrar: @Model.car.Doors</li>
-                <li>Växellåda: @Model.car.Gear</li>
-                <li>Kilometerantal: @Model.car.Km</li>
-                <li>Biltyp: @Model.car.Type</li>
-            </ul>
-        </div>
-    </div>
+       
+            <div class="row">
+                <div id="carouselExampleControls " class="carousel slide shadow bg-white rounded" data-ride="carousel" style="max-width:680px;max-height:560px">
+                    <div class="carousel-inner">
+                        <div class="carousel-item active">
+                            <img class="d-block w-100" src="/@Model.car.ImgUrl" alt="First slide">
+                        </div>
 
-    <div class="row">
-        <div class="col">
-            <p>Tillbehör</p>
-            <ul>
-                <li>Husdjur: @Model.car.Pets</li>
-                <li>Takräcke: @Model.car.RoofRack</li>
-                <li>Dragkrok: @Model.car.TowBar</li>
-                <li>Barnstol: @Model.car.ChildSeat</li>
-                <li>Ac: @Model.car.Ac</li>
-            </ul>
-        </div>
-    </div>
-</div>
+                    </div>
+                    <a class="carousel-control-prev" href="#carouselExampleControls" role="button" data-slide="prev">
+                        <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                        <span class="sr-only">Previous</span>
+                    </a>
+                    <a class="carousel-control-next" href="#carouselExampleControls" role="button" data-slide="next">
+                        <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                        <span class="sr-only">Next</span>
+                    </a>
+                </div>
+
+            </div>
+
+            <div class="row">
+                <p>@Model.car.Description</p>
+
+                <partial class="col" name="_RentFormDetails" model="@Model.form" />
 
 
-<partial name="_RentFormDetails" model="@Model.form" />
-@{double rateing = 0;}
+                <p>Info</p>
+                <ul>
+                    <li>Bränsletyp: @Model.car.Fuel</li>
+                    <li>Antal säten: @Model.car.Seats</li>
+                    <li>Antal dörrar: @Model.car.Doors</li>
+                    <li>Växellåda: @Model.car.Gear</li>
+                    <li>Kilometerantal: @Model.car.Km</li>
+                    <li>Biltyp: @Model.car.Type</li>
+                </ul>
 
-@if (Model.reviews.Count > 0)
-{
-    rateing = Model.reviews.Average(p => p.Rating);
-}
 
-<h2>@Model.reviews.Count() omdömen @rateing/5</h2>
-@foreach (var item in Model.reviews)
-{
-    <div class="card" style="width: 18rem;">
-        <div class="card-body">
-            <h5 class="card-title">@item.UserName</h5>
-            <h6 class="card-subtitle mb-2 ">@item.Rating/5</h6>
-            <h6 class="card-subtitle mb-2 text-muted">@item.DateCreated</h6>
-            <p class="card-text">@item.Review</p>
+
+                <p>Tillbehör</p>
+                <ul>
+                    <li>Husdjur: @Model.car.Pets</li>
+                    <li>Takräcke: @Model.car.RoofRack</li>
+                    <li>Dragkrok: @Model.car.TowBar</li>
+                    <li>Barnstol: @Model.car.ChildSeat</li>
+                    <li>Ac: @Model.car.Ac</li>
+                </ul>
+
+
+
+                @{double rateing = 0;}
+
+                @if (Model.reviews.Count > 0)
+                {
+                    rateing = Model.reviews.Average(p => p.Rating);
+                }
+
+                <h2>@Model.reviews.Count() omdömen @rateing/5</h2>
+                @foreach (var item in Model.reviews)
+                {
+                    <div class="card" style="width: 18rem;">
+                        <div class="card-body">
+                            <h5 class="card-title">@item.UserName</h5>
+                            <h6 class="card-subtitle mb-2 ">@item.Rating/5</h6>
+                            <h6 class="card-subtitle mb-2 text-muted">@item.DateCreated</h6>
+                            <p class="card-text">@item.Review</p>
+                        </div>
+                    </div>
+                }
+            </div>
         </div>
+
     </div>
-}

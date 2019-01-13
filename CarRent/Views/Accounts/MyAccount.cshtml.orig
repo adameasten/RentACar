@@ -1,4 +1,64 @@
 ﻿@model MyAccountVM
+<<<<<<< HEAD
+
+<h2>MyAccount</h2>
+
+<h3>Uppdatera uppgifter</h3>
+
+    <form class="border m-3 p-3"asp-controller="Accounts" asp-action="MyAccount">
+        <div class="form-group">
+            <label asp-for="UserInfo.UserName"></label>
+            <input class="form-control" asp-for="UserInfo.UserName" />
+            <span asp-validation-for="UserInfo.UserName"></span>
+        </div>
+        <div class="form-group">
+            <label asp-for="UserInfo.Email"></label>
+            <input class="form-control" asp-for="UserInfo.Email" />
+            <span asp-validation-for="UserInfo.Email"></span>
+        </div>
+        <div id="PassWordField">
+            <div class="form-group">
+                <label asp-for="OldPassword"></label>
+                <input class="form-control" asp-for="OldPassword" type="password" />
+                <span asp-validation-for="OldPassword"></span>
+            </div>
+            <div class="form-group">
+                <label>Nytt lösenord</label>
+                <input class="form-control" asp-for="UserInfo.Password" type="password" />
+                <span asp-validation-for="UserInfo.Password"></span>
+            </div>
+        </div>
+
+        <button class="btn btn-primary" id="ChangePassword">Ändra Lösenord</button>
+
+
+
+        <div class="form-group">
+            <label asp-for="FirstName"></label>
+            <input class="form-control" asp-for="FirstName" />
+            <span asp-validation-for="FirstName"></span>
+        </div>
+        <div class="form-group">
+
+            <label asp-for="LastName"></label>
+            <input class="form-control" asp-for="LastName" />
+            <span asp-validation-for="LastName"></span>
+        </div>
+        <div class="form-group">
+            <label asp-for="PhoneNumber"></label>
+            <input class="form-control" asp-for="PhoneNumber" />
+            <span asp-validation-for="PhoneNumber"></span>
+        </div>
+        <div class="form-group">
+            <label asp-for="Street"></label>
+            <input class="form-control" asp-for="Street" />
+            <span asp-validation-for="Street"></span>
+        </div>
+        <div class="form-group">
+            <label asp-for="Zip"></label>
+            <input class="form-control" asp-for="Zip" />
+            <span asp-validation-for="Zip"></span>
+=======
 <div class="container p-3" >
 </div>
 <div class="container row">
@@ -10,6 +70,7 @@
             </a>
             <a href="#" id="SecoundLink" class="list-group-item list-group-item-action">Mina Bilar</a>
             <a href="#" id="ThirdLink" class="list-group-item list-group-item-action">Mina Bokningar</a>
+>>>>>>> efba4b150c93c09948004fc43075f09703e7969a
         </div>
         <div class="col">
             <div class="card shadow bg-white rounded" id="MinaPersonuppgifter" style="max-width:602px; min-width:330px">
@@ -100,7 +161,18 @@
         </div>
     </div>
 
+<<<<<<< HEAD
+        </div>
 
+        <input class="btn btn-primary" type="submit" value="Spara" />
+
+
+    </form>
+
+<p>@Model.DateJoined</p>
+=======
+
+>>>>>>> efba4b150c93c09948004fc43075f09703e7969a
 
 
     <div class="container mt-5 row" style="max-width:960px">
