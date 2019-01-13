@@ -1,20 +1,41 @@
-﻿
-/*$color1: #88959D;
+﻿$color1: #88959D;
 $color2: #B6C7CC;
 $color3: #C5D4DB;
 $color4: #D4DFE1;
 $color5: #E0ECE0;
+
+.nav-item a {
+    color: black;
+    text-decoration: none;
+    display: block;
+}
+
+.nav-item a:hover {
+    color: $color3;
+    text-decoration: none;
+}
+
+#userInteractionNav li {
+    margin: 4px;
+    padding: 4px;
+}
+
+#carRegistrationButton {
+    border: solid #009966;
+}
+
+/*
 
 body {
 
     background-color: $color5;
 
     main {
-        background-color: $color4 !important;
+        background-color: $color5 !important;
     }
 
     header {
-        background-color: $color2 !important;
+        background-color: #fff !important;
     }
 
     footer {

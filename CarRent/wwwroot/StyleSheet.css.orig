@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 ﻿/*$color1: #88959D;
 $color2: #B6C7CC;
 $color3: #C5D4DB;
@@ -20,6 +21,32 @@ body {
         background-color: $color1 !important;
     }
 }
+=======
+﻿body {
+  background-color: #E0ECE0; }
+  body main {
+    background-color: #E0ECE0 !important; }
+  body header {
+    background-color: #fff !important; }
+  body footer {
+    background-color: #88959D !important; }
+>>>>>>> 3d2b840406e3022cf8038da6479e17ecfa47b34e
+
+.nav-item a {
+  color: black;
+  text-decoration: none;
+  display: block; }
+
+.nav-item a:hover {
+  color: #C5D4DB;
+  text-decoration: none; }
+
+#userInteractionNav li {
+  margin: 4px;
+  padding: 4px; }
+
+#carRegistrationButton {
+  border: solid #009966; }
 
 .row {
     display: flex;
@@ -52,120 +79,6 @@ body {
 }
 
 #invoice-POS {
-<<<<<<< HEAD
-  box-shadow: 0 0 1in -0.25in rgba(0, 0, 0, 0.5);
-  padding: 2mm;
-  margin: 0 auto;
-  width: 100mm;
-  background: #FFF; }
-  #invoice-POS ::selection {
-    background: #f31544;
-    color: #FFF; }
-  #invoice-POS ::moz-selection {
-    background: #f31544;
-    color: #FFF; }
-  #invoice-POS h1 {
-    font-size: 1.5em;
-    color: #222; }
-  #invoice-POS h2 {
-    font-size: .9em; }
-  #invoice-POS h3 {
-    font-size: 1.2em;
-    font-weight: 300;
-    line-height: 2em; }
-  #invoice-POS p {
-    font-size: 1em;
-    color: #666;
-    line-height: 1.2em; }
-  #invoice-POS #top, #invoice-POS #mid, #invoice-POS #bot {
-    /* Targets all id with 'col-' */
-    border-bottom: 1px solid #EEE; }
-  #invoice-POS #top {
-    min-height: 100px; }
-  #invoice-POS #mid {
-    min-height: 80px; }
-  #invoice-POS #bot {
-    min-height: 50px; }
-  #invoice-POS #top .logo {
-    height: 60px;
-    width: 60px;
-    background: url(Logo.png) no-repeat;
-    background-size: 60px 60px; }
-  #invoice-POS .info {
-    display: block;
-    margin-left: 0;
-    font-size: 1em; }
-  #invoice-POS .title {
-    float: right; }
-  #invoice-POS .title p {
-    text-align: right; }
-  #invoice-POS table {
-    width: 100%;
-    border-collapse: collapse; }
-  #invoice-POS .tabletitle {
-    font-size: 1em;
-    background: #EEE; }
-  #invoice-POS .service {
-    border-bottom: 1px solid #EEE; }
-  #invoice-POS .item {
-    width: 24mm; }
-  #invoice-POS .itemtext {
-    font-size: 1em; }
-  #invoice-POS #legalcopy {
-    margin-top: 5mm; }
-
-.sign-in-form {
-  margin: 0 auto;
-  padding: 2em 1em; }
-
-.button-default {
-  font-size: 0.9em;
-  padding: 0.25em 0.5em;
-  display: inline-block;
-  width: auto;
-  height: auto;
-  cursor: pointer;
-  -moz-border-radius: 5px;
-  -webkit-border-radius: 5px;
-  -o-border-radius: 5px;
-  -ms-border-radius: 5px;
-  -khtml-border-radius: 5px;
-  border-radius: 5px;
-  background-color: #8ccdae;
-  background: -webkit-gradient(linear, 50% 0%, 50% 100%, color-stop(0%, #8ccdae), color-stop(100%, #6fa88d));
-  background: -webkit-linear-gradient(#8ccdae, #6fa88d);
-  background: -moz-linear-gradient(#8ccdae, #6fa88d);
-  background: -o-linear-gradient(#8ccdae, #6fa88d);
-  background: -ms-linear-gradient(#8ccdae, #6fa88d);
-  background: linear-gradient(#8ccdae, #6fa88d);
-  -moz-box-shadow: #c1e4d4 0 1px 0 inset;
-  -webkit-box-shadow: #c1e4d4 0 1px 0 inset;
-  -o-box-shadow: #c1e4d4 0 1px 0 inset;
-  box-shadow: #c1e4d4 0 1px 0 inset;
-  border: 1px solid #5f9e80;
-  color: white;
-  text-shadow: #40936b 0 -1px 0;
-  text-decoration: none; }
-  .button-default:link {
-    text-decoration: none;
-    color: white; }
-  .button-default:visited {
-    text-decoration: none;
-    color: white; }
-  .button-default:hover {
-    text-decoration: none;
-    color: white; }
-  .button-default:active {
-    text-decoration: none;
-    color: white; }
-
-.account-form {
-  margin: 0 auto;
-  padding: 2em 1em; }
-
-.footer-icon-text {
-  margin-right: 1em; }
-=======
     box-shadow: 0 0 1in -0.25in rgba(0, 0, 0, 0.5);
     padding: 2mm;
     margin: 0 auto;
@@ -279,4 +192,3 @@ body {
         margin-top: 5mm;
     }
 }*/
->>>>>>> axelsbranch
