@@ -221,8 +221,9 @@ body {
 
 .account-form {
     margin: 0 auto;
-    padding: 2em 1em;
+    padding: 0em;
     max-width: 320px;
+    width: 320px; 
     .account-button-container{
         padding: 16px 0;
     }
@@ -234,7 +235,23 @@ body {
 
 .change-password-form {
     margin: 0 auto;
-    padding: 2em 1em;
+    padding: 0em 0em 2em;
     max-width: 320px;
-    margin: 1em; 
+    margin: 1em 0em 1em;
+    width: 320px;
+}
+
+.form-update-account-info {
+    padding: 0em;
+    max-width: 320px;
+    margin: 0em;
+    width: 320px;
+}
+
+.membership-div {
+    margin:1em auto;
+    width:320px;
+    text-align: center;
+    border: solid black;
+    border-width: thin;
 }

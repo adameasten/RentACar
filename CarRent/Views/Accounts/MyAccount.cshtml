@@ -6,8 +6,8 @@
 
         <form asp-controller="Accounts" asp-action="MyAccount" class="account-form">
 
-            <h2>Mitt konto</h2>
-            <h3>Uppdatera uppgifter</h3>
+            <h1>Mitt konto</h1>
+            <h5>Uppdatera uppgifter</h5>
 
             <div class="form-group">
                 <label asp-for="UserInfo.UserName"></label>
@@ -40,84 +40,84 @@
                 </div>
 
             </div>
-            <label asp-for="FirstName"></label>
-            <input asp-for="FirstName" />
-            <span asp-validation-for="FirstName"></span>
+            <div class="form-update-account-info">
+                <label asp-for="FirstName"></label>
+                <input asp-for="FirstName" class="form-control is-valid" />
+                <span asp-validation-for="FirstName"></span>
 
 
-            <label asp-for="LastName"></label>
-            <input asp-for="LastName" />
-            <span asp-validation-for="LastName"></span>
+                <label asp-for="LastName"></label>
+                <input asp-for="LastName" class="form-control is-valid" />
+                <span asp-validation-for="LastName"></span>
 
-            <label asp-for="PhoneNumber"></label>
-            <input asp-for="PhoneNumber" />
-            <span asp-validation-for="PhoneNumber"></span>
+                <label asp-for="PhoneNumber"></label>
+                <input asp-for="PhoneNumber" class="form-control is-valid" />
+                <span asp-validation-for="PhoneNumber"></span>
 
-            <label asp-for="Street"></label>
-            <input asp-for="Street" />
-            <span asp-validation-for="Street"></span>
+                <label asp-for="Street"></label>
+                <input asp-for="Street" class="form-control is-valid" />
+                <span asp-validation-for="Street"></span>
 
-            <label asp-for="Zip"></label>
-            <input asp-for="Zip" />
-            <span asp-validation-for="Zip"></span>
+                <label asp-for="Zip"></label>
+                <input asp-for="Zip" class="form-control is-valid" />
+                <span asp-validation-for="Zip"></span>
 
-            <label asp-for="SSN"></label>
-            <input asp-for="SSN" />
-            <span asp-validation-for="SSN"></span>
+                <label asp-for="SSN"></label>
+                <input asp-for="SSN" class="form-control is-valid" />
+                <span asp-validation-for="SSN"></span>
 
-            <label asp-for="City"></label>
-            <input asp-for="City" />
-            <span asp-validation-for="City"></span>
-        <input type="submit" value="Spara" class="button-default" />
-
+                <label asp-for="City"></label>
+                <input asp-for="City" class="form-control is-valid" />
+                <span asp-validation-for="City"></span>
+                <div class="account-button-container">
+                    <input type="submit" value="Spara" class="button-default float-right" />
+                </div>
+            </div>
         </form>
-
     </div>
-</div>
-
-
-<p>@Model.DateJoined</p>
-
-
-
-<div class="container">
-    <h3>Mina bilar</h3>
-
-    <div class="card-deck">
-
-        @foreach (var carCard in Model.CarCards)
-        {
-            <partial name="_MyCars" model="carCard" />
-        }
+    <div class="membership-div">
+        <h5>Medlem sedan</h5>
+        <p>@Model.DateJoined</p>
     </div>
-</div>
 
+    <div class="container">
+        <h3>Mina bilar</h3>
 
-<div class="container">
-    <h3>Mina Bokningar</h3>
+        <div class="card-deck">
 
-    <div class="card-deck">
-        @foreach (var booking in Model.MyBookings)
-        {
-            <partial name="_MyBookings" model="booking" />
-        }
+            @foreach (var carCard in Model.CarCards)
+            {
+                <partial name="_MyCars" model="carCard" />
+            }
+        </div>
     </div>
-</div>
-
-<script>
-    $(function () {
 
 
+    <div class="container">
+        <h3>Mina Bokningar</h3>
 
-        $("#PassWordField").hide();
+        <div class="card-deck">
+            @foreach (var booking in Model.MyBookings)
+            {
+                <partial name="_MyBookings" model="booking" />
+            }
+        </div>
+    </div>
 
-        $("#ChangePassword").click(function (e) {
-            e.preventDefault();
+    <script>
+        $(function () {
 
-            $("#PassWordField").show();
-            $(this).hide();
+
+
+            $("#PassWordField").hide();
+
+            $("#ChangePassword").click(function (e) {
+                e.preventDefault();
+
+                $("#PassWordField").show();
+                $(this).hide();
+
+            })
 
         })
-
-    })
-</script>
+    </script>
