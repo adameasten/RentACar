@@ -5,7 +5,7 @@
 
 <form asp-controller="car" asp-action="search">
     <label asp-for="City"></label>
-    <input asp-for="City" />
+    <input asp-for="City" id="pac-input" value="Ex, Avesta"/>
 
     <label asp-for="StartDate"></label>
     <input asp-for="StartDate" type="date" />
@@ -63,6 +63,18 @@
                     }
                 });
             };
+
+            var defaultBounds = new google.maps.LatLngBounds(
+                new google.maps.LatLng(55.443622530763776, 13.557255595420315,
+                    new google.maps.LatLng(68.36397472828507, 20.813820077627042)
+                ))
+
+            var options = {
+                bounds: defaultBounds,
+            }
+
+            var input = document.getElementById("pac-input");
+            var autocomplete = new google.maps.places.Autocomplete(input, options);
         });
     </script>
 }
