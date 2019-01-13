@@ -2,15 +2,16 @@
 
 <div class="container">
 
-<h2>Mitt konto</h2>
     <div class="row">
 
-<h3>Uppdatera uppgifter</h3>
         <form asp-controller="Accounts" asp-action="MyAccount" class="account-form">
-            <label asp-for="UserInfo.UserName"></label>
-            <input asp-for="UserInfo.UserName" />
-            <span asp-validation-for="UserInfo.UserName"></span>
-            <br />
+<h2>Mitt konto</h2>
+<h3>Uppdatera uppgifter</h3>
+<div class="form-group">
+    <label asp-for="UserInfo.UserName"></label>
+    <input asp-for="UserInfo.UserName" />
+    <span asp-validation-for="UserInfo.UserName"></span>
+</div>
             <label asp-for="UserInfo.Email"></label>
             <input asp-for="UserInfo.Email" />
             <span asp-validation-for="UserInfo.Email"></span>
