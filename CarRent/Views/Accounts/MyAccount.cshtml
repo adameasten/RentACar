@@ -1,104 +1,133 @@
 ﻿@model MyAccountVM
-
-<h2>MyAccount</h2>
-
-<h3>Uppdatera uppgifter</h3>
-<form asp-controller="Accounts" asp-action="MyAccount">
-    <div class="form-group">
-        <label asp-for="UserInfo.UserName"></label>
-        <input class="form-control" asp-for="UserInfo.UserName" />
-        <span asp-validation-for="UserInfo.UserName"></span>
-    </div>
-    <div class="form-group">
-        <label asp-for="UserInfo.Email"></label>
-        <input class="form-control" asp-for="UserInfo.Email" />
-        <span asp-validation-for="UserInfo.Email"></span>
-    </div>
-        <div id="PassWordField">
-            <div class="form-group">
-                <label asp-for="OldPassword"></label>
-                <input class="form-control" asp-for="OldPassword" type="password" />
-                <span asp-validation-for="OldPassword"></span>
-            </div>
-            <div class="form-group">
-                <label>Nytt lösenord</label>
-                <input class="form-control" asp-for="UserInfo.Password" type="password" />
-                <span asp-validation-for="UserInfo.Password"></span>
-            </div>
-        </div>
-
-        <button class="btn btn-primary" id="ChangePassword">Ändra Lösenord</button>      
-
-        <div class="form-group">
-            <label asp-for="FirstName"></label>
-            <input class="form-control" asp-for="FirstName" />
-            <span asp-validation-for="FirstName"></span>
-        </div>
-        <div class="form-group">
-
-            <label asp-for="LastName"></label>
-            <input class="form-control" asp-for="LastName" />
-            <span asp-validation-for="LastName"></span>
-        </div>
-        <div class="form-group">
-            <label asp-for="PhoneNumber"></label>
-            <input class="form-control" asp-for="PhoneNumber" />
-            <span asp-validation-for="PhoneNumber"></span>
-        </div>
-        <div class="form-group">
-            <label asp-for="Street"></label>
-            <input class="form-control" asp-for="Street" />
-            <span asp-validation-for="Street"></span>
-        </div>
-        <div class="form-group">
-            <label asp-for="Zip"></label>
-            <input class="form-control" asp-for="Zip" />
-            <span asp-validation-for="Zip"></span>
-        </div>
-        <div class="form-group">
-            <label asp-for="SSN"></label>
-            <input class="form-control" asp-for="SSN" />
-            <span asp-validation-for="SSN"></span>
-        </div>
-        <div class="form-group">
-            <label asp-for="City"></label>
-            <input class="form-control" asp-for="City" />
-            <span asp-validation-for="City"></span>
-
-        </div>
-       
-            <input class="btn btn-primary" type="submit" value="Spara" />
-
-    
-</form>
-<p>@Model.DateJoined</p>
-
-
-
-<div class="container">
-    <h3>Mina bilar</h3>
-
-    <div class="card-deck">
-
-        @foreach (var carCard in Model.CarCards)
-        {
-            <partial name="_MyCars" model="carCard" />
-        }
-    </div>
+<div class="container p-3" >
 </div>
+<div class="container row">
+
+    <div class="container row">
+        <div class="list-group col" style="max-width:250px">
+            <a href='#' id="FirstLink" class="list-group-item list-group-item-action">
+                Mina Personuppgifter
+            </a>
+            <a href="#" id="SecoundLink" class="list-group-item list-group-item-action">Mina Bilar</a>
+            <a href="#" id="ThirdLink" class="list-group-item list-group-item-action">Mina Bokningar</a>
+        </div>
+        <div class="col">
+            <div class="card shadow bg-white rounded" id="MinaPersonuppgifter" style="max-width:602px; min-width:330px">
+                <div class="card-header">
+                    <h2>Personuppgifter</h2>
+                </div>
+                <form asp-controller="Accounts" asp-action="MyAccount">
+
+                    <div class="row m-3 " style="max-width:560px">
+                        <div class="container col" style="max-width:280px">
+
+                            <div class="form-group">
+                                <label asp-for="UserInfo.UserName"></label>
+                                <input class="form-control" asp-for="UserInfo.UserName" />
+                                <span asp-validation-for="UserInfo.UserName"></span>
+                            </div>
+                            <div class="form-group">
+                                <label asp-for="UserInfo.Email"></label>
+                                <input class="form-control" asp-for="UserInfo.Email" />
+                                <span asp-validation-for="UserInfo.Email"></span>
+                            </div>
+
+                            <div class="form-group">
+                                <label asp-for="FirstName"></label>
+                                <input class="form-control" asp-for="FirstName" />
+                                <span asp-validation-for="FirstName"></span>
+                            </div>
+                            <div class="form-group">
+
+                                <label asp-for="LastName"></label>
+                                <input class="form-control" asp-for="LastName" />
+                                <span asp-validation-for="LastName"></span>
+                            </div>
+                            <div id="PassWordField">
+                                <div class="form-group">
+                                    <label asp-for="OldPassword"></label>
+                                    <input class="form-control" asp-for="OldPassword" type="password" />
+                                    <span asp-validation-for="OldPassword"></span>
+                                </div>
+                                <div class="form-group">
+                                    <label>Nytt lösenord</label>
+                                    <input class="form-control" asp-for="UserInfo.Password" type="password" />
+                                    <span asp-validation-for="UserInfo.Password"></span>
+                                </div>
+                            </div>
+                            <button class="btn btn-primary mr-auto mt-3" id="ChangePassword">Ändra Lösenord</button>
 
 
-<div class="container">
-    <h3>Mina Bokningar</h3>
+                        </div>
 
-    <div class="card-deck">
-        @foreach (var booking in Model.MyBookings)
-        {
-            <partial name="_MyBookings" model="booking" />
-        }
+                        <div class="container col" style="max-width:250px">
+
+                            <div class="form-group">
+                                <label asp-for="PhoneNumber"></label>
+                                <input class="form-control" asp-for="PhoneNumber" />
+                                <span asp-validation-for="PhoneNumber"></span>
+                            </div>
+                            <div class="form-group">
+                                <label asp-for="Street"></label>
+                                <input class="form-control" asp-for="Street" />
+                                <span asp-validation-for="Street"></span>
+                            </div>
+                            <div class="form-group">
+                                <label asp-for="Zip"></label>
+                                <input class="form-control" asp-for="Zip" />
+                                <span asp-validation-for="Zip"></span>
+                            </div>
+                            <div class="form-group">
+                                <label asp-for="SSN"></label>
+                                <input class="form-control" asp-for="SSN" />
+                                <span asp-validation-for="SSN"></span>
+                            </div>
+                            <div class="form-group">
+                                <label asp-for="City"></label>
+                                <input class="form-control" asp-for="City" />
+                                <span asp-validation-for="City"></span>
+
+                            </div>
+
+                        </div>
+                    </div>
+                    <div class="card-footer d-flex justify-content-end">
+
+                        <input class="btn btn-primary" type="submit" value="Spara" />
+                    </div>
+                </form>
+            </div>
+        </div>
     </div>
-</div>
 
+
+
+
+    <div class="container mt-5 row" style="max-width:960px">
+
+        <h2 id="MinaBilar">Mina bilar</h2>
+
+        <div class="card-deck">
+
+            @foreach (var carCard in Model.CarCards)
+            {
+                <partial name="_MyCars" model="carCard" />
+            }
+        </div>
+    </div>
+
+
+    <div class="container mt-5 row" style="max-width:960px">
+        <h2 id="MinaBokningar">Mina Bokningar</h2>
+
+        <div class="card-deck">
+            @foreach (var booking in Model.MyBookings)
+            {
+                <partial name="_MyBookings" model="booking" />
+            }
+        </div>
+    </div>
+    </div>
     <script>
         $(function () {
 
@@ -112,6 +141,22 @@
                 $("#PassWordField").show();
                 $(this).hide();
 
+            })
+
+            $("#FirstLink").click(function (e) {
+                e.preventDefault();
+                var elmnt = document.getElementById("MinaPersonuppgifter");
+                elmnt.scrollIntoView(true);
+            })
+            $("#SecoundLink").click(function (e) {
+                e.preventDefault();
+                var elmnt = document.getElementById("MinaBilar");
+                elmnt.scrollIntoView(true);
+            })
+            $("#ThirdLink").click(function (e) {
+                e.preventDefault();
+                var elmnt = document.getElementById("MinaBokningar");
+                elmnt.scrollIntoView(true);
             })
 
         })
