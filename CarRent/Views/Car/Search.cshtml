@@ -80,57 +80,92 @@
 
 <script>
     $(function () {
-    var results = JSON.parse('@Html.Raw(Model.SearchResultJson)');
+        var results = JSON.parse('@Html.Raw(Model.SearchResultJson)');
+        var filterResults = results;
         console.log(results);
+        
+        renderSearchResult();
 
-    renderSearchResult();
+        function renderSearchResult() {
+            for (var i = 0; i < filterResults.length; i++) {
+            
+                var outerDiv = $('<div class="card mb-2 list">');
+                var cardDiv = $('<div class="row list">');
+                var imgdiv = $('<div class="col-md-4 list">');
+                var img = $(`<img class="w-100 list" src="/Logo.png">`);
+                var cardBody = $('<div class="col-md-8 px-3 list" style="padding: 15px;">');
+                var row = $('<div class="row h-100 list">');
+                var div = $('<div class="col-md-8 list">');
+                var div2 = $('<div class="h-100 list">');
+                var cardTitle = $(`<h3 class="card-title list">${filterResults[i].Model}</h3>`);
+                var rating = $(`<h6 class="h6 list">${filterResults[i].Rating}</h6>`);
+                var distance = $(`<small class="small list" style="Height: 10%; Position: Absolute; Bottom: 15px;">${filterResults[i].Distance} km bort</small>`);
+                var carFooter = $('<div class="col-md-4 list">');
+                var price = $(`<strong class="strong list" style="float: right; margin: 10px;">${filterResults[i].Price} kr/dag</strong>`);
 
-    function renderSearchResult(value, id) {
-        for (var i = 0; i < results.length; i++) {
-            console.log(value, id);
-            console.log(results[i]);
-            //if ( == value) {
-
-            //}
-
-            var outerDiv = $('<div class="card mb-2">');
-            var cardDiv = $('<div class="row">');
-            var imgdiv = $('<div class="col-md-4">');
-            var img = $(`<img class="w-100" src="/Logo.png">`);
-            var cardBody = $('<div class="col-md-8 px-3" style="padding: 15px;">');
-            var row = $('<div class="row h-100">');
-            var div = $('<div class="col-md-8">');
-            var div2 = $('<div class="h-100">');
-            var cardTitle = $(`<h3 class="card-title">${results[i].Model}</h3>`);
-            var rating = $(`<h6>${results[i].Rating}</h6>`);
-            var distance = $(`<small style="Height: 10%; Position: Absolute; Bottom: 15px;">${results[i].Distance} km bort</small>`);
-            var carFooter = $('<div class="col-md-4">');
-            var price = $(`<strong style="float: right; margin: 10px;">${results[i].Price} kr/dag</strong>`);
-
-            carFooter.append(price);
-            div2.append(cardTitle);
-            div2.append(rating);
-            div2.append(distance);
-            div.append(div2);
-            row.append(div);
-            row.append(carFooter);
-            cardBody.append(row);
-            imgdiv.append(img);
-            cardDiv.append(imgdiv);
-            cardDiv.append(cardBody);
-            outerDiv.append(cardDiv);
-            $("#hej").append(outerDiv);
+                carFooter.append(price);
+                div2.append(cardTitle);
+                div2.append(rating);
+                div2.append(distance);
+                div.append(div2);
+                row.append(div);
+                row.append(carFooter);
+                cardBody.append(row);
+                imgdiv.append(img);
+                cardDiv.append(imgdiv);
+                cardDiv.append(cardBody);
+                outerDiv.append(cardDiv);
+                $("#hej").append(outerDiv);
+            }
         }
-    }
-
 
         $("#Search").change(function (tmp) {
             var value = $("#" + tmp.target.id).val();
             var id = tmp.target.id;
             console.log(value, id)
 
-            renderSearchResult(value, id);
-
+            filterValues(value, id);
+            $("#hej").empty();
+            renderSearchResult();
         });
+
+        function filterValues(value, id) {
+
+            switch (id) {
+                case "Doors":
+                    filterResults = results.filter(result => result.Doors >= value);
+                    break;
+                case "Seats":
+                    filterResults = results.filter(result => result.Seats >= value);
+                    break;
+                case "Gear":
+                    filterResults = results.filter(result => result.Gear == value);
+                    break;
+                case "Type":
+                    filterResults = results.filter(result => result.Type == value);
+                    break;
+                case "Fuel":
+                    filterResults = results.filter(result => result.Fuel == value);
+                    break;
+                case "Ac":
+                    filterResults = results.filter(result => result.Ac == value);
+                    break;
+                case "ChildSeat":
+                    filterResults = results.filter(result => result.ChildSeat == value);
+                    break;
+                case "TowBar":
+                    filterResults = results.filter(result => result.TowBar == value);
+                    break;
+                case "RoofRack":
+                    filterResults = results.filter(result => result.RoofRack == value);
+                    break;
+                case "Pets":
+                    filterResults = results.filter(result => result.Pets == value);
+                    break;
+            }
+
+            console.log(filterResults);
+        }
+        
     });
 </script>
