@@ -13,16 +13,19 @@
             @{
                 if (User?.Identity.IsAuthenticated == true)
                 {
-                    <li id="carRegistrationButton" class="nav-item"><a asp-controller="car" asp-action="carregistration" class="btn btn-default">Hyr ut din bil</a></li>
-                    <li class="nav-item"><a asp-controller="accounts" asp-action="myaccount" class="btn btn-default">
-                                             <span class="glyphicon glyphicon-user"></span>Mitt Konto</a></li>
+                    <li class="nav-item"><a asp-controller="car" asp-action="carregistration" class="btn btn-default">Hyr ut din bil</a></li>
                     <li class="nav-item"><a asp-controller="accounts" asp-action="logout" class="btn btn-default">Logga ut</a></li>
+                    <li class="nav-item">
+                        <a asp-controller="accounts" asp-action="myaccount" class="btn btn-default">
+                            <span class="glyphicon glyphicon-user"></span><i class="fas fa-user fa-2x"></i>
+                        </a>
+                    </li>
                 }
                 else
                 {
-                    <li id="carRegistrationButton" class="nav-item"><a asp-controller="car" asp-action="carregistration" class="btn btn-default">Hyr ut din bil</a></li>
-                    <li class="nav-item"><a asp-controller="accounts" asp-action="register" class="btn btn-default">Registrering</a></li>
+                    <li  class="nav-item"><a asp-controller="car" asp-action="carregistration" class="btn btn-default">Hyr ut din bil</a></li>
                     <li class="nav-item"><a asp-controller="accounts" asp-action="login" class="btn btn-default">Logga in</a></li>
+                    <li class="nav-item"><a asp-controller="accounts" asp-action="register" class="btn btn-default">Registrering</a></li>
                 }
             }
         </ul>
