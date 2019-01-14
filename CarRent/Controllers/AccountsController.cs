@@ -4,6 +4,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using CarRent.Models;
 using CarRent.Models.ViewModels;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 
@@ -21,6 +22,7 @@ namespace CarRent.Controllers
             this.service = service;
         }
 
+        [Authorize]
         [HttpGet]
         public IActionResult MyAccount()
         {
@@ -70,6 +72,7 @@ namespace CarRent.Controllers
             return View();
         }
 
+        [Authorize]
         public IActionResult SaveComment(string comment, int rating, int rentId)
         {
             service.AddReview(comment, rating, rentId);
@@ -87,6 +90,7 @@ namespace CarRent.Controllers
             return RedirectToAction(nameof(Login));
         }
 
+        [Authorize]
         [HttpGet]
         public async Task<IActionResult> Logout()
         {

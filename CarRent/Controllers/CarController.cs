@@ -34,6 +34,7 @@ namespace CarRent.Controllers
 
         }
 
+        [Authorize]
         [HttpGet]
         public IActionResult CarRegistration()
         {
@@ -42,6 +43,7 @@ namespace CarRent.Controllers
 
         }
 
+        [Authorize]
         [HttpPost]
         public async Task<IActionResult> CarRegistration(CarRegistrationPostVM vm)
         {
@@ -52,9 +54,9 @@ namespace CarRent.Controllers
             string userId = userManager.GetUserId(HttpContext.User);
             await services.AddCarToDatabase(vm, userId);
 
-            return Content("Lyckad");
-
+            return RedirectToAction("myaccount","accounts");
         }
+
         [HttpPost]
         public async Task<IActionResult> Search(StartPageVM vM)
         {

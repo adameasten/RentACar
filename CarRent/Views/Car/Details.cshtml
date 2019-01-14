@@ -5,14 +5,8 @@
     <div class="row">
         <div class="col-12">
             <h2 class="mb-3">@Model.car.Model</h2>
-
-
-
         </div>
         <div class="col">
-
-
-
             <div class="row">
                 <div class="col">
                     <div id="carouselExampleControls " class="carousel slide shadow bg-white rounded mb-2" data-ride="carousel" style="max-width:680px;max-height:560px; min-width:650px">
@@ -20,7 +14,6 @@
                             <div class="carousel-item active">
                                 <img class="d-block w-100" src="/@Model.car.ImgUrl" alt="First slide">
                             </div>
-
                         </div>
                         <a class="carousel-control-prev" href="#carouselExampleControls" role="button" data-slide="prev">
                             <span class="carousel-control-prev-icon" aria-hidden="true"></span>
@@ -50,7 +43,6 @@
                                 <h5 class="card-title">Info</h5>
                                 <p class="card-text">
                                     <ul>
-
                                         <li>Bränsletyp: @Model.car.Fuel</li>
                                         <li>Antal säten: @Model.car.Seats</li>
                                         <li>Antal dörrar: @Model.car.Doors</li>
@@ -77,7 +69,6 @@
                                                 @{ if (@Model.car.Pets != null && Model.car.Pets == true)
                                                     {
                                                         <td>
-
                                                             <i class="fas fa-check-circle pl-5" style="color:green"></i>
                                                         </td>
                                                     }
@@ -93,20 +84,67 @@
                                                 <th scope="row">Tackräcke</th>
                                                 @{ if (@Model.car.RoofRack != null && Model.car.RoofRack == true)
                                                     {
-                                                <td>
+                                                        <td>
 
-                                                    <i class="fas fa-check-circle pl-5" style="color:green"></i>
-                                                </td>
+                                                            <i class="fas fa-check-circle pl-5" style="color:green"></i>
+                                                        </td>
                                                     }
                                                     else
                                                     {
-                                                <td>
-                                                    <i class="fas fa-times-circle pl-5" style="color:red"></i>
-                                                </td>
+                                                        <td>
+                                                            <i class="fas fa-times-circle pl-5" style="color:red"></i>
+                                                        </td>
                                                     }
                                                 }
                                             </tr>
-
+                                            <tr>
+                                                <th scope="row">Dragkrok</th>
+                                                @{ if (@Model.car.TowBar != null && Model.car.TowBar == true)
+                                                    {
+                                                        <td>
+                                                            <i class="fas fa-check-circle pl-5" style="color:green"></i>
+                                                        </td>
+                                                    }
+                                                    else
+                                                    {
+                                                        <td>
+                                                            <i class="fas fa-times-circle pl-5" style="color:red"></i>
+                                                        </td>
+                                                    }
+                                                }
+                                            </tr>
+                                            <tr>
+                                                <th scope="row">Barnstol</th>
+                                                @{ if (@Model.car.ChildSeat != null && Model.car.ChildSeat == true)
+                                                    {
+                                                        <td>
+                                                            <i class="fas fa-check-circle pl-5" style="color:green"></i>
+                                                        </td>
+                                                    }
+                                                    else
+                                                    {
+                                                        <td>
+                                                            <i class="fas fa-times-circle pl-5" style="color:red"></i>
+                                                        </td>
+                                                    }
+                                                }
+                                            </tr>
+                                            <tr>
+                                                <th scope="row">AC</th>
+                                                @{ if (@Model.car.Ac != null && Model.car.Ac == true)
+                                                    {
+                                                        <td>
+                                                            <i class="fas fa-check-circle pl-5" style="color:green"></i>
+                                                        </td>
+                                                    }
+                                                    else
+                                                    {
+                                                        <td>
+                                                            <i class="fas fa-times-circle pl-5" style="color:red"></i>
+                                                        </td>
+                                                    }
+                                                }
+                                            </tr>
                                             @*<li>Takräcke: @Model.car.RoofRack</li>
         <li>Dragkrok: @Model.car.TowBar</li>
         <li>Barnstol: @Model.car.ChildSeat</li>
