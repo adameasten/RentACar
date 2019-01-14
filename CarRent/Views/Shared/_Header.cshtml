@@ -29,13 +29,13 @@
         @{
             if (User?.Identity.IsAuthenticated == true)
             {
-                <a asp-controller="accounts" asp-action="myaccount">Mitt Konto </a>
-                <a asp-controller="accounts" asp-action="logout">Logga Ut</a>
+                <a asp-controller="accounts" asp-action="myaccount" class="mr-1 button-default">Mitt Konto </a>
+                <a asp-controller="accounts" asp-action="logout"class="button-default">Logga Ut</a>
             }
             else
             {
-                <a asp-controller="accounts" asp-action="register">Registrering </a>
-                <a asp-controller="accounts" asp-action="login">Logga in</a>
+                <a asp-controller="accounts" asp-action="register" class="mr-1 button-default">Registrering </a>
+                <a asp-controller="accounts" asp-action="login" class="button-default">Logga in</a>
             }
         }
     </div>
