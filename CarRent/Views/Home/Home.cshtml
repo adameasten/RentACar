@@ -3,22 +3,62 @@
     ViewBag.Title = "Home";
 }
 
-<form asp-controller="car" asp-action="search">
-    <label asp-for="City"></label>
-    <input asp-for="City" id="pac-input" value="Ex, Avesta"/>
+<div id="booking" class="section">
+    <div class="section-center">
+        <div class="container">
+            <div class="row">
+                <div class="booking-form">
+                    <form asp-controller="car" asp-action="search">
+                        <div class="row no-margin">
+                            <div class="col-md-2">
+                                <div class="form-group">
+                                    <label class="form-label" asp-for="City"></label>
+                                    <input class="form-control" asp-for="City" id="pac-input" />
+                                </div>
+                            </div>
+                            <div class="col-md-8" >
+                                <div class="row no-margin">
+                                    <div class="col-md-4">
+                                        <div class="form-group">
+                                            <label class="form-label" asp-for="StartDate"></label>
+                                            <input class="form-control" asp-for="StartDate" type="date" />
+                                        </div>
+                                    </div>
+                                    <div class="col-md-2">
+                                        <div class="form-group" id="overrideStartingHour">
+                                            <label class="form-label" asp-for="StartingHour"></label>
+                                            <select class="form-control" asp-for="StartingHour" asp-items="Model.TimeStamps"></select>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-4">
+                                        <div class="form-group">
+                                            <label class="form-label" asp-for="EndDate"></label>
+                                            <input class="form-control" asp-for="EndDate" type="date" />
+                                        </div>
+                                    </div>
+                                    <div class="col-md-2">
+                                        <div class="form-group"  id="overrideEndingHour">
+                                            <label class="form-label" asp-for="EndingHour"></label>
+                                            <select class="form-control" asp-for="EndingHour" asp-items="Model.TimeStamps"></select>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-md-2">
+                                <div class="form-btn">
+                                    <input class="submit-btn" type="submit" value="Hitta bil" />
+                                </div>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
 
-    <label asp-for="StartDate"></label>
-    <input asp-for="StartDate" type="date" />
-    <select asp-for="StartingHour" asp-items="Model.TimeStamps"></select>
-
-    <label asp-for="EndDate"></label>
-    <input asp-for="EndDate" type="date" />
-    <select asp-for="EndingHour" asp-items="Model.TimeStamps"></select>
-
-    <input type="submit" value="Sök" />
-</form>
 <div class="container container-nopadding">
-        <h2>Bilar i närheten</h2>
+    <h2>Bilar i närheten</h2>
     <div class="row">
         <div id="renderPartial">
 

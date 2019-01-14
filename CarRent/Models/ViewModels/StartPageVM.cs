@@ -14,16 +14,17 @@ namespace CarRent.Models.ViewModels
         [Display(Name ="Plats")]
         public string City { get; set; }
         [Required]
-        [Display(Name = "Hämtas")]
-        // [DisplayFormat(DataFormatString = "{0:yyyy/MM/dd}")]
+        [Display(Name = "Från")]
         public DateTime StartDate { get; set; } = DateTime.Today;
         [Required]
-        [Display(Name = "Lämnas")]
+        [Display(Name = "Till")]
         public DateTime EndDate { get; set; } = DateTime.Today.AddDays(1);
 
         [Required]
+        [Display(Name = "Timme")]
         public string StartingHour { get; set; }
         [Required]
+        [Display(Name = "Timme")]
         public string EndingHour { get; set; }
 
         public SelectListItem[] TimeStamps { get; set; } =
