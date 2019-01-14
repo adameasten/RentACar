@@ -34,6 +34,8 @@ namespace CarRent.Controllers
 
         }
 
+        
+
         [HttpGet]
         public IActionResult CarRegistration()
         {

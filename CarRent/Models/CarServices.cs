@@ -52,7 +52,9 @@ namespace CarRent.Models
                     RoofRack = d.RoofRack,
                     Seats = d.Seats,
                     TowBar = d.TowBar,
-                    Type = d.Type
+                    Type = d.Type,
+                    ImgUrlArr = d.CarImage
+                    .Select(i => i.ImgUrl).ToList()
                 },
                 reviews = context.Rent
                     .Where(o => o.Car.Id == ID)

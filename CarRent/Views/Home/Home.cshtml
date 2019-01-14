@@ -6,6 +6,9 @@
 <div id="booking" class="section">
     <div class="section-center">
         <div class="container">
+            <h1 class="text-center mb-3" style="font-size:80px">Hyr en bil med kniv</h1>
+            <h3 class="text-center text-muted mb-5">Billigt, smidigt, miljövänligt</h3>
+
             <div class="row">
                 <div class="booking-form">
                     <form asp-controller="car" asp-action="search">
@@ -16,7 +19,7 @@
                                     <input class="form-control" asp-for="City" id="pac-input" />
                                 </div>
                             </div>
-                            <div class="col-md-8" >
+                            <div class="col-md-8">
                                 <div class="row no-margin">
                                     <div class="col-md-4">
                                         <div class="form-group">
@@ -37,7 +40,7 @@
                                         </div>
                                     </div>
                                     <div class="col-md-2">
-                                        <div class="form-group"  id="overrideEndingHour">
+                                        <div class="form-group" id="overrideEndingHour">
                                             <label class="form-label" asp-for="EndingHour"></label>
                                             <select class="form-control" asp-for="EndingHour" asp-items="Model.TimeStamps"></select>
                                         </div>
@@ -57,8 +60,8 @@
     </div>
 </div>
 
-<div class="container container-nopadding">
-    <h2>Bilar i närheten</h2>
+<div class="container" style="max-width:1000px">
+    <h2 class="pb-2">Bilar i närheten</h2>
     <div class="row">
         <div id="renderPartial">
 
