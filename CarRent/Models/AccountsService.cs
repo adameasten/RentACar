@@ -34,9 +34,6 @@ namespace CarRent.Models
 
         public MyAccountVM GetUserByID(MyIdentityUser user)
         {
-
-
-
             return new MyAccountVM()
             {
                 City = user.City,
@@ -47,7 +44,7 @@ namespace CarRent.Models
                 SSN = user.SSN,
                 Street = user.Street,
                 Zip = user.Zip,
-               
+
                 UserInfo = new AccountRegisterVM()
                 {
                     Email = user.Email,
@@ -69,8 +66,23 @@ namespace CarRent.Models
                     StartTime = p.Datestart,
                     EndTime = p.DateEnd,
                     RentId = p.Id
-                   
-                }).ToList()
+
+                }).ToList(),
+                MyReviews = carContext.Car
+                .Where(r => r.OwnerId == user.Id)
+                .SelectMany(r => r.Rent)
+                .SelectMany(r => r.Review)
+                .Select(r => new ReviewCarDetailsVM
+                {
+                    Review = r.Review1,
+                    Rating = r.Rating,
+                    DateCreated = r.DateCreated,
+                    UserName = CarServices.GetContactByID(r.Rent.CustomerId),
+                    //UserName = context.Users.SingleOrDefault(u => u.Id == r.Rent.CustomerId).UserName,
+                    Car = r.Rent.Car.Model,
+
+                })
+                .ToList()
             };
         }
 
