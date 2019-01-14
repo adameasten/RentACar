@@ -1,4 +1,9 @@
-<nav class="navbar navbar-expand-lg">
+<<<<<<< HEAD
+﻿
+<nav class="navbar navbar-expand-lg navbar-light bg-light">
+=======
+﻿<nav class="navbar navbar-expand-lg @*navbar-light bg-light*@">
+>>>>>>> 3d2b840406e3022cf8038da6479e17ecfa47b34e
     <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
         <span class="navbar-toggler-icon"></span>
     </button>
@@ -8,6 +13,7 @@
             <li class="nav-item">
                 <a asp-controller="home" asp-action="home"><img src="~/Logo.png" style="width:60px; margin: 2px 8px 2px 2px" /> <span class="sr-only">(current)</span></a>
             </li>
+
         </ul>
         <ul id="userInteractionNav" class="nav navbar-nav ml-auto">
             @{

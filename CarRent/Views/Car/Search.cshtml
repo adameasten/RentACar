@@ -5,28 +5,6 @@
 
 
 <div class="row row-offcanvas row-offcanvas-right">
-    <div class="col-12 col-md-9">
-        <div class="row">
-@foreach (var item in Model)
-{
-    <div class="col-6 col-lg-4">
-        <div class="card">
-            <img class="card-img-top" src="@item.ImgUrl">
-            <div class="card-body">
-                <h5 class="card-title">@item.Rating</h5>
-                <strong>@item.Price.ToString("c")</strong>
-                <h6>@item.YearModel</h6>
-                <p class="card-text">@item.Model</p>
-                <a class="btn btn-primary" asp-controller="car" asp-action="details" asp-route-id="@item.Id">Detaljer</a>
-            </div>
-            <div class="card-footer">
-                <small class="text-muted">@item.Distance.ToString("0.0") km bort</small>
-            </div>
-        </div>
-    </div>
-}
-        </div>
-    </div>
     <div class="col-6 col-md-3 sidebar-offcanvas" id="filter">
         <div class="list-group">
             <a href="#" class="list-group-item">FiltreringsA</a>
@@ -35,4 +13,29 @@
             <a href="#" class="list-group-item">FiltreringsA</a>
         </div>
     </div>
+    <div class="col-12 col-md-9">
+
+        <div class="row">
+
+            @foreach (var item in Model)
+            {
+                <div class="col-6 col-lg-4">
+                    <div class="card">
+                        <img class="card-img-top" src="/@item.ImgUrl">
+                        <div class="card-body">
+                            <h5 class="card-title">@item.Rating</h5>
+                            <strong>@item.Price.ToString("c")</strong>
+                            <h6>@item.YearModel</h6>
+                            <p class="card-text">@item.Model</p>
+                            <a class="btn btn-primary" asp-controller="car" asp-action="details" asp-route-id="@item.Id">Detaljer</a>
+                        </div>
+                        <div class="card-footer">
+                            <small class="text-muted">@item.Distance.ToString("0.0") km bort</small>
+                        </div>
+                    </div>
+                </div>
+            }
+        </div>
+    </div>
+
 </div>

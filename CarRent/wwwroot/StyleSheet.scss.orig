@@ -3,7 +3,8 @@ $color2: #B6C7CC;
 $color3: #C5D4DB;
 $color4: #D4DFE1;
 $color5: #E0ECE0;
-$greenlogocolor: RGB(61, 168,134) ;
+
+<<<<<<< HEAD
 body {
 
     background-color: $color5;
@@ -21,6 +22,13 @@ body {
     }
 }
 
+=======
+.nav-item a {
+    color: black;
+    text-decoration: none;
+    display: block;
+}
+>>>>>>> axelsbranchmerge
 
 .section {
     position: relative;
@@ -35,8 +43,33 @@ body {
     padding: 2px;
 }
 
+<<<<<<< HEAD
 #booking .section-center .container .row{
     justify-content: center;
+=======
+
+
+body {
+
+    background-color: $color5;
+
+    main {
+        background-color: $color5 !important;
+    }
+
+    header {
+        background-color: #fff !important;
+    }
+
+    footer {
+        background-color: $color1 !important;
+    }
+}
+
+.row {
+    display: flex;
+    flex-wrap: wrap;
+>>>>>>> axelsbranchmerge
 }
 
 .section .section-center {
@@ -131,10 +164,18 @@ body {
         border: solid #009966;
     }
 
-.row {
-    display: flex;
-    flex-wrap: wrap;
-}
+<<<<<<< HEAD
+    .row {
+        display: flex;
+        flex-wrap: wrap;
+=======
+    #top, #mid, #bot {  
+        /*Targets all id with 'col-'*/
+
+        border-bottom: 1px solid #EEE;
+>>>>>>> axelsbranchmerge
+    }
+    
 
     .header-body {
         display: flex;
@@ -157,8 +198,17 @@ body {
         width: 100vw;
     }
 
+<<<<<<< HEAD
     #renderColumns {
         width: 25%;
+=======
+  
+    .info {
+        display: block;
+        //float:left;
+        margin-left: 0;
+        font-size: 1em;
+>>>>>>> axelsbranchmerge
     }
 
     #invoice-POS {
@@ -278,55 +328,55 @@ body {
         padding: 2em 1em;
     }
 
-.button-default {
-    font-size: 0.9em;
-    padding: 0.25em 0.5em;
-    display: inline-block;
-    width: auto;
-    height: auto;
-    cursor: pointer;
-    -moz-border-radius: 5px;
-    -webkit-border-radius: 5px;
-    -o-border-radius: 5px;
-    -ms-border-radius: 5px;
-    -khtml-border-radius: 5px;
-    border-radius: 5px;
-    background-color: $greenlogocolor;
-    background: -webkit-gradient(linear, 50% 0%, 50% 100%, color-stop(0%, $greenlogocolor), color-stop(100%, #6fa88d));
-    background: -webkit-linear-gradient($greenlogocolor, #6fa88d);
-    background: -moz-linear-gradient($greenlogocolor, #6fa88d);
-    background: -o-linear-gradient($greenlogocolor, #6fa88d);
-    background: -ms-linear-gradient($greenlogocolor, #6fa88d);
-    background: linear-gradient($greenlogocolor, #6fa88d);
-    -moz-box-shadow: #c1e4d4 0 1px 0 inset;
-    -webkit-box-shadow: #c1e4d4 0 1px 0 inset;
-    -o-box-shadow: #c1e4d4 0 1px 0 inset;
-    box-shadow: #c1e4d4 0 1px 0 inset;
-    border: 1px solid #5f9e80;
-    color: white;
-    text-shadow: #40936b 0 -1px 0;
-    text-decoration: none;
-
-    &:link {
-        text-decoration: none;
+    .button-default {
+        font-size: 0.9em;
+        padding: 0.25em 0.5em;
+        display: inline-block;
+        width: auto;
+        height: auto;
+        cursor: pointer;
+        -moz-border-radius: 5px;
+        -webkit-border-radius: 5px;
+        -o-border-radius: 5px;
+        -ms-border-radius: 5px;
+        -khtml-border-radius: 5px;
+        border-radius: 5px;
+        background-color: #8ccdae;
+        background: -webkit-gradient(linear, 50% 0%, 50% 100%, color-stop(0%, #8ccdae), color-stop(100%, #6fa88d));
+        background: -webkit-linear-gradient(#8ccdae, #6fa88d);
+        background: -moz-linear-gradient(#8ccdae, #6fa88d);
+        background: -o-linear-gradient(#8ccdae, #6fa88d);
+        background: -ms-linear-gradient(#8ccdae, #6fa88d);
+        background: linear-gradient(#8ccdae, #6fa88d);
+        -moz-box-shadow: #c1e4d4 0 1px 0 inset;
+        -webkit-box-shadow: #c1e4d4 0 1px 0 inset;
+        -o-box-shadow: #c1e4d4 0 1px 0 inset;
+        box-shadow: #c1e4d4 0 1px 0 inset;
+        border: 1px solid #5f9e80;
         color: white;
-    }
-
-    &:visited {
+        text-shadow: #40936b 0 -1px 0;
         text-decoration: none;
-        color: white;
-    }
 
-    &:hover {
-        text-decoration: none;
-        color: white;
-    }
+        &:link {
+            text-decoration: none;
+            color: white;
+        }
 
-    &:active {
-        text-decoration: none;
-        color: white;
+        &:visited {
+            text-decoration: none;
+            color: white;
+        }
+
+        &:hover {
+            text-decoration: none;
+            color: white;
+        }
+
+        &:active {
+            text-decoration: none;
+            color: white;
+        }
     }
-}
 
     .account-form {
         margin: 0 auto;
@@ -346,6 +396,7 @@ body {
     .account-button-container{
         padding: 16px 0;
     }
+<<<<<<< HEAD
 }
 
 .change-password-form {
@@ -364,9 +415,9 @@ body {
 }
 
 .membership-div {
-    margin:1em auto;   
+    margin:1em auto;
+    width:320px;
     text-align: center;
-    width:100%;
     border: solid black;
     border-width: thin;
 }
@@ -385,3 +436,6 @@ body {
     width: 320px;
 }
 
+=======
+}
+>>>>>>> axelsbranchmerge

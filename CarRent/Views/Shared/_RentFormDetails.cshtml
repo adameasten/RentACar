@@ -1,26 +1,33 @@
 ﻿@model CarRentFormVM
 
-<div id="test"></div>
-<div class="card" style="width: 18rem;">
-    <div class="card-body">
-        <h5 class="card-title">@decimal.Round(Model.Price, 0, MidpointRounding.AwayFromZero) kr /dag</h5>
-        <form asp-action="rentcar" asp-controller="car">
-            <label asp-for="StartTime"></label>
-            <input asp-for="StartTime" id="StartTime" />
-            <br />
-            <label asp-for="EndTime"></label>
-            <br />
-            <input asp-for="EndTime" id="EndTime" />
-            <h5 class="card-title" id="TotalPrice"></h5>
-            <input type="hidden" asp-for="CarId" />
-            <input type="hidden" asp-for="Price" />
-            <input type="submit" value="Hyr bil" />
-        </form>
+
+
+<div class="col">
+    <div class="card shadow bg-white rounded" style="width: 324px; min-height: 245px">
+        <div class="card-body">
+            <h5 class="card-title">@decimal.Round(Model.Price, 0, MidpointRounding.AwayFromZero) kr /dag</h5>
+            <p class="card-text">
+                <form asp-action="rentcar" asp-controller="car">
+                    <div class="form-group">
+                        <label asp-for="StartTime"></label>
+                        <input class="form-control" asp-for="StartTime" id="StartTime" />
+                    </div>
+                    <div class="form-group">
+                        <label asp-for="EndTime"></label>
+                        <input class="form-control" asp-for="EndTime" id="EndTime" />
+                    </div>
+                        <h5 class="card-title" id="TotalPrice"></h5>
+
+                        <input type="hidden" asp-for="CarId" />
+                        <input type="hidden" asp-for="Price" />
+                        <input class="button-default mt-3" type="submit" value="Hyr bil" style="width:100%" />
+                </form>
+            </p>
+        </div>
     </div>
 </div>
 
-
-<script>
+    <script>
 
     $("#TotalPrice").text("Total " + @Model.Price);
     $("#TotalPrice").append(" kr");
@@ -82,17 +89,17 @@
         date.setDate(date.getDate() + days);
         return date;
     }
-</script>
+    </script>
 
-@*@section scripts {
-        <script>
-            $(document).ready(function () {
+    @*@section scripts {
+            <script>
+                $(document).ready(function () {
 
 
-                var x = document.getElementById("StartTime").dateTime;
-                console.log(x);
-                console.log("hello");
+                    var x = document.getElementById("StartTime").dateTime;
+                    console.log(x);
+                    console.log("hello");
 
-            });
-        </script>
-    }*@
+                });
+            </script>
+        }*@
