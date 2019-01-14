@@ -4,7 +4,7 @@
 @foreach (var item in Model)
 {
 <div id="renderColumns">
-    <img src="@item.ImgUrl" class="carImg" />
+    <img src="/@item.ImgUrl" class="carImg" />
     <p>@item.Model</p>
     <p>Årsmodell: @item.YearModel</p>
     <strong>@item.Price.ToString("c")/dag</strong>

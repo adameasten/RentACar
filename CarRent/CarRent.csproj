@@ -6,6 +6,8 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <PackageReference Include="bootstrap" Version="4.2.1" />
+    <PackageReference Include="bootstrap.sass" Version="4.2.1" />
     <Content Remove="compilerconfig.json" />
   </ItemGroup>
 
