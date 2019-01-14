@@ -5,7 +5,7 @@
 
 
 <div class="row row-offcanvas row-offcanvas-right">
-    <div class="col-6 col-md-3 sidebar-offcanvas" id="filter">
+    <div class="col-6 col-md-4 sidebar-offcanvas py-3" id="filter">
         <div class="list-group">
             <a href="#" class="list-group-item">FiltreringsA</a>
             <a href="#" class="list-group-item">FiltreringsA</a>
@@ -13,29 +13,33 @@
             <a href="#" class="list-group-item">FiltreringsA</a>
         </div>
     </div>
-    <div class="col-12 col-md-9">
-
-        <div class="row">
-
+    <div class="col-12 col-md-8">
+        <div class="container py-3">
             @foreach (var item in Model)
             {
-                <div class="col-6 col-lg-4">
-                    <div class="card">
-                        <img class="card-img-top" src="/@item.ImgUrl">
-                        <div class="card-body">
-                            <h5 class="card-title">@item.Rating</h5>
-                            <strong>@item.Price.ToString("c")</strong>
-                            <h6>@item.YearModel</h6>
-                            <p class="card-text">@item.Model</p>
-                            <a class="btn btn-primary" asp-controller="car" asp-action="details" asp-route-id="@item.Id">Detaljer</a>
+                <div class="card mb-2">
+                    <div class="row">
+                        <div class="col-md-4">
+                            <img src="/@item.ImgUrl" class="w-100">
                         </div>
-                        <div class="card-footer">
-                            <small class="text-muted">@item.Distance.ToString("0.0") km bort</small>
+                        <div class="col-md-8 px-3" style="padding:15px;">
+                            <div class="row h-100">
+                                <div class="col-md-8">
+                                <div class="h-100">
+                                    <h3 class="card-title">@item.Model</h3>
+                                    <h6>@item.Rating</h6>
+                                    <small style="height:10%; position:absolute; bottom:15px;" >@item.Distance.ToString("0.0") km bort</small>
+                                </div>
+                                </div>
+                                <div class="col-md-4">
+                                    <strong style="float:right; margin:10px;">@item.Price.ToString("0")kr/dag</strong>
+                                </div>
+                            </div>
                         </div>
                     </div>
                 </div>
             }
         </div>
     </div>
-
+</div>
 </div>
