@@ -65,8 +65,15 @@ namespace CarRent.Controllers
             Response.Cookies.Append("startDate", vM.StartDate.ToString());
             Response.Cookies.Append("endDate", vM.EndDate.ToString());
             var result = homeService.CompareCoords(cor, vM);
+            var filterVm = services.CreateFilterVm(result);
 
-            return View(result);
+            return View(filterVm);
+        }
+
+        [HttpGet]
+        public IActionResult Filter(string value, string id, string[] result)
+        {
+            return Content("Hej");
         }
 
         [HttpGet]
