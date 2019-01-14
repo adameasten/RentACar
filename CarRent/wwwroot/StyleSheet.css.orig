@@ -1,4 +1,5 @@
-body {
+<<<<<<< HEAD
+﻿body {
   background-color: #E0ECE0; }
   body main {
     background-color: #E0ECE0 !important; }
@@ -84,6 +85,9 @@ body {
   color: #fff; }
 
 .nav-item a {
+=======
+﻿.nav-item a {
+>>>>>>> axelsbranchmerge
   color: black;
   text-decoration: none;
   display: block; }
@@ -98,6 +102,15 @@ body {
 
 #carRegistrationButton {
   border: solid #009966; }
+
+body {
+  background-color: #E0ECE0; }
+  body main {
+    background-color: #E0ECE0 !important; }
+  body header {
+    background-color: #fff !important; }
+  body footer {
+    background-color: #88959D !important; }
 
 .row {
   display: flex;
@@ -182,6 +195,7 @@ body {
     font-size: 1em; }
   #invoice-POS #legalcopy {
     margin-top: 5mm; }
+<<<<<<< HEAD
 
 .sign-in-form {
   margin: 0 auto;
@@ -274,3 +288,5 @@ body {
   max-width: 320px;
   margin: 0em;
   width: 320px; }
+=======
+>>>>>>> axelsbranchmerge

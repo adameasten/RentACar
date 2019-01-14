@@ -1,4 +1,37 @@
 ﻿@model MyAccountVM
+<<<<<<< HEAD
+
+<div class="container">
+
+    <div class="row">
+
+        <form asp-controller="Accounts" asp-action="MyAccount" class="account-form">
+
+            <h1>Mitt konto</h1>
+            <h5>Uppdatera uppgifter</h5>
+
+            <div class="form-group">
+                <label asp-for="UserInfo.UserName"></label>
+
+                <input asp-for="UserInfo.UserName" class="form-control is-valid" />
+
+                <span asp-validation-for="UserInfo.UserName"></span>
+                <label asp-for="UserInfo.Email"></label>
+
+                <input asp-for="UserInfo.Email" class="form-control is-valid" />
+
+                <span asp-validation-for="UserInfo.Email"></span>
+
+                <div id="PassWordField" class="change-password-form">
+
+                    <label asp-for="OldPassword"></label>
+
+                    <input asp-for="OldPassword" type="password" class="form-control is-valid" />
+
+                    <span asp-validation-for="OldPassword"></span>
+
+                    <label>Nytt lösenord</label>
+=======
 <div class="container pt-3" >
 </div>
 <div class="container row">
@@ -99,41 +132,114 @@
             </div>
         </div>
     </div>
+>>>>>>> axelsbranchmerge
 
+                    <input asp-for="UserInfo.Password" type="password" class="form-control is-valid" />
+
+<<<<<<< HEAD
+                    <span asp-validation-for="UserInfo.Password"></span>
+                </div>
+                <div class="account-button-container">
+                    <button id="ChangePassword" class="button-default float-right">Ändra Lösenord</button>
+                </div>
+
+            </div>
+            <div class="form-update-account-info">
+                <label asp-for="FirstName"></label>
+                <input asp-for="FirstName" class="form-control is-valid" />
+                <span asp-validation-for="FirstName"></span>
+
+
+                <label asp-for="LastName"></label>
+                <input asp-for="LastName" class="form-control is-valid" />
+                <span asp-validation-for="LastName"></span>
+
+                <label asp-for="PhoneNumber"></label>
+                <input asp-for="PhoneNumber" class="form-control is-valid" />
+                <span asp-validation-for="PhoneNumber"></span>
+
+                <label asp-for="Street"></label>
+                <input asp-for="Street" class="form-control is-valid" />
+                <span asp-validation-for="Street"></span>
+
+                <label asp-for="Zip"></label>
+                <input asp-for="Zip" class="form-control is-valid" />
+                <span asp-validation-for="Zip"></span>
+
+                <label asp-for="SSN"></label>
+                <input asp-for="SSN" class="form-control is-valid" />
+                <span asp-validation-for="SSN"></span>
+
+                <label asp-for="City"></label>
+                <input asp-for="City" class="form-control is-valid" />
+                <span asp-validation-for="City"></span>
+                <div class="account-button-container">
+                    <input type="submit" value="Spara" class="button-default float-right" />
+                </div>
+            </div>
+        </form>
+    </div>
     <div class="membership-div">
         <h5>Medlem sedan</h5>
         <p>@Model.DateJoined</p>
     </div>
 
+    <div class="container">
+        <div class="flex-column mx-auto my-cars">
+            <h3>Mina bilar</h3>
+=======
+
 
     <div class="container mt-5 row" style="max-width:960px">
 
-
         <h2 id="MinaBilar">Mina bilar</h2>
+>>>>>>> axelsbranchmerge
 
         <div class="card-deck">
 
+<<<<<<< HEAD
+                @foreach (var carCard in Model.CarCards)
+                {
+                    <partial name="_MyCars" model="carCard" />
+                }
+
+            </div>
+=======
             @foreach (var carCard in Model.CarCards)
             {
-            <partial name="_MyCars" model="carCard" />
+                <partial name="_MyCars" model="carCard" />
             }
+>>>>>>> axelsbranchmerge
         </div>
     </div>
 
 
+<<<<<<< HEAD
+    <div class="container">
+        <div class="flex-column mx-auto my-bookings">
+            <h3>Mina Bokningar</h3>
+=======
     <div class="container mt-5 row" style="max-width:960px">
         <h2 id="MinaBokningar">Mina Bokningar</h2>
+>>>>>>> axelsbranchmerge
 
         <div class="card-deck">
             @foreach (var booking in Model.MyBookings)
             {
-            <partial name="_MyBookings" model="booking" />
+                <partial name="_MyBookings" model="booking" />
             }
         </div>
     </div>
-</div>
+<<<<<<< HEAD
+
     <script>
         $(function () {
+=======
+    </div>
+    <script>
+        $(function () {
+
+>>>>>>> axelsbranchmerge
 
 
 
@@ -142,9 +248,10 @@
             $("#ChangePassword").click(function (e) {
                 e.preventDefault();
 
+<<<<<<< HEAD
                 $("#PassWordField").show();
                 $(this).hide();
-
+=======
             })
 
             $("#FirstLink").click(function (e) {
@@ -161,6 +268,9 @@
                 e.preventDefault();
                 var elmnt = document.getElementById("MinaBokningar");
                 elmnt.scrollIntoView(true);
+            })
+>>>>>>> axelsbranchmerge
+
             })
 
         })
