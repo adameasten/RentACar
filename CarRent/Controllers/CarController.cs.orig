@@ -3,59 +3,43 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using CarRent.Models;
-using CarRent.Models.ViewModels;
-<<<<<<< HEAD
 using GeoAPI.Geometries;
-=======
+using CarRent.Models.ViewModels;
 using Microsoft.AspNetCore.Identity;
->>>>>>> registration
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
+using Microsoft.AspNetCore.Authorization;
 
 namespace CarRent.Controllers
 {
     public class CarController : Controller
     {
         CarServices services;
-<<<<<<< HEAD
         HomeService homeService;
-        public CarController(CarServices services, HomeService homeService)
+        UserManager<MyIdentityUser> userManager;
+        public CarController(CarServices services, UserManager<MyIdentityUser> userManager, HomeService homeService)
         {
             this.services = services;
             this.homeService = homeService;
-            
-=======
-        UserManager<MyIdentityUser> userManager;
-        public CarController(CarServices services, UserManager<MyIdentityUser> userManager)
-        {
-            this.services = services;
+
             this.userManager = userManager;
->>>>>>> registration
         }
-    
+
         public IActionResult Details(int ID)
         {
+            Response.Cookies.Append("DetailsId", ID.ToString());
             var model = services.FindCarByID(ID);
 
-<<<<<<< HEAD
             return View(model);
+
         }
 
-        [HttpPost]
-        public async Task<IActionResult> Search(StartPageVM vM)
-        {
-
-            var cor = await homeService.GetCoordinates(vM);
-            homeService.AddTimeToDates(vM);
-
-            var result = homeService.CompareCoords(cor,vM);
+<<<<<<< HEAD
+        [Authorize]
 =======
-            return View(model);          
->>>>>>> registration
+        
 
-            return View(result);
-        }
-
+>>>>>>> axelss
         [HttpGet]
         public IActionResult CarRegistration()
         {
@@ -64,20 +48,83 @@ namespace CarRent.Controllers
 
         }
 
+        [Authorize]
         [HttpPost]
         public async Task<IActionResult> CarRegistration(CarRegistrationPostVM vm)
         {
 
-            if(!ModelState.IsValid)
-                 return View(vm);
+            if (!ModelState.IsValid)
+                return View(vm);
 
             string userId = userManager.GetUserId(HttpContext.User);
             await services.AddCarToDatabase(vm, userId);
 
-            return Content("Lyckad");
-
+            return RedirectToAction("myaccount","accounts");
         }
 
+        [HttpPost]
+        public async Task<IActionResult> Search(StartPageVM vM)
+        {
+            var cor = await homeService.GetCoordinates(vM.City);
+            homeService.AddTimeToDates(vM);
+            Response.Cookies.Append("startDate", vM.StartDate.ToString());
+            Response.Cookies.Append("endDate", vM.EndDate.ToString());
+            var result = homeService.CompareCoords(cor, vM);
+
+            return View(result);
+        }
+
+        [HttpGet]
+        public IActionResult RentCar()
+        {
+            if (string.IsNullOrEmpty(Request.Cookies["DetailsId"]))
+            {
+                return Redirect("/");
+            }
+            return Redirect($"/car/details/{Request.Cookies["DetailsId"]}");
+        }
+
+        [Authorize]
+        [HttpPost]
+        public async Task<IActionResult> RentCar(CarRentFormVM vM)
+        {
+            //if(!ModelState.IsValid)
+            //    return View(vM);
+            if (homeService.CarIsAvailable(vM))
+            {
+                string userId = userManager.GetUserId(HttpContext.User);
+
+                await services.AddRent(vM, userId);
+
+                return RedirectToAction(nameof(Confirmation),vM);
+            }
+            else
+                return Content("Failure");
+        }
+
+        [HttpGet]
+        public IActionResult Confirmation(CarRentFormVM vM)
+        {
+            var recipt = homeService.MakeRecipt(vM);
+
+            return View(recipt);
+        }
+
+        //[HttpGet]
+        //public IActionResult Confirmation()
+        //{
+        //    var vM = new CarRentFormVM
+        //    {
+        //        CarId = 1,
+        //        Price = 2200,
+        //        StartTime = DateTime.Now,
+        //        EndTime = DateTime.Now.AddDays(2),
+
+        //    };
+        //    var recipt = homeService.MakeRecipt(vM);
+
+        //    return View(recipt);
+        //}
 
     }
 }

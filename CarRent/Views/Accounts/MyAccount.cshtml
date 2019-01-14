@@ -108,7 +108,7 @@
     
   
 
-    <h2 id="MinaBilar">Mina bilar</h2>
+    <h2 id="MinaBilar" class="col-12 mt-5 pl-0">Mina bilar</h2>
 
     <div class="container mt-1 row" style="max-width:960px">
 
@@ -123,9 +123,9 @@
         </div>
     </div>
 
-    <h2 id="MinaBokningar">Mina Bokningar</h2>
+    <h2 class="mb-3 mt-5"id="MinaBokningar">Mina Bokningar</h2>
 
-    <div class="container mt-1 row" style="max-width:960px">
+    <div class="container mt-1 row mb-5" style="max-width:960px">
 
         <div class="card-deck">
             @foreach (var booking in Model.MyBookings)
@@ -133,7 +133,14 @@
                 <partial name="_MyBookings" model="booking" />
             }
         </div>
+    <div class="render-comments">
+        @foreach (var review in Model.MyReviews)
+        {
+            <partial name="_MyRatedCars" model="review"/>
+        }
     </div>
+    </div>
+
 </div>
     <script>
         $(function () {
