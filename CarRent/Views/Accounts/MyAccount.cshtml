@@ -10,12 +10,17 @@
             </a>
             <a href="#" id="SecoundLink" class="list-group-item list-group-item-action">Mina Bilar</a>
             <a href="#" id="ThirdLink" class="list-group-item list-group-item-action">Mina Bokningar</a>
+            <div class="membership-div">
+                <h5>Medlem sedan</h5>
+                <p>@Model.DateJoined</p>
+            </div>
         </div>
         <div class="col">
             <div class="card shadow bg-white rounded" id="MinaPersonuppgifter" style="max-width:602px; min-width:330px">
                 <div class="card-header">
                     <h2>Personuppgifter</h2>
                 </div>
+               
                 <form asp-controller="Accounts" asp-action="MyAccount">
 
                     <div class="row m-3 " style="max-width:560px">
@@ -98,36 +103,34 @@
                 </form>
             </div>
         </div>
+
     </div>
+    
+  
 
-    <div class="membership-div">
-        <h5>Medlem sedan</h5>
-        <p>@Model.DateJoined</p>
-    </div>
+    <h2 id="MinaBilar">Mina bilar</h2>
 
-
-    <div class="container mt-5 row" style="max-width:960px">
+    <div class="container mt-1 row" style="max-width:960px">
 
 
-        <h2 id="MinaBilar">Mina bilar</h2>
 
         <div class="card-deck">
 
             @foreach (var carCard in Model.CarCards)
             {
-            <partial name="_MyCars" model="carCard" />
+                <partial name="_MyCars" model="carCard" />
             }
         </div>
     </div>
 
+    <h2 id="MinaBokningar">Mina Bokningar</h2>
 
-    <div class="container mt-5 row" style="max-width:960px">
-        <h2 id="MinaBokningar">Mina Bokningar</h2>
+    <div class="container mt-1 row" style="max-width:960px">
 
         <div class="card-deck">
             @foreach (var booking in Model.MyBookings)
             {
-            <partial name="_MyBookings" model="booking" />
+                <partial name="_MyBookings" model="booking" />
             }
         </div>
     </div>

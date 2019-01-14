@@ -147,10 +147,12 @@
             })
 
                 .done(function (data) {
+                    console.log(data);
                     $("#Model").val(data.data.basic.data.make + " " + data.data.basic.data.model);
                     $("#YearModel").val(data.data.basic.data.model_year);
                     $("#Seats").val(data.data.technical.data.number_of_passengers + 1);
-
+                    $("#Doors").val(5);
+                    $("#Km").val(data.data.inspection.data.meter);
                     var hitch = data.data.technical.data.hitch;
                     if (hitch != null) {
                         $("#TowBar").prop('checked', true);
