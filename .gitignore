@@ -10,6 +10,10 @@
 # User-specific files (MonoDevelop/Xamarin Studio)
 *.userprefs
 
+# Styling
+StyleSheet.css
+StyleSheet.min.css
+
 # Build results
 [Dd]ebug/
 [Dd]ebugPublic/
