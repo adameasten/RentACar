@@ -1,73 +1,200 @@
 ﻿@model CarDetailsVM
+<span class="glyphicon glyphicon-tags"></span>
 
 <div class="container">
     <div class="row">
-        <div class="col">
-            <h2> @Model.car.Model</h2>
+        <div class="col-12">
+            <h2 class="mb-3">@Model.car.Model</h2>
         </div>
-    </div>
-    <div class="row">
         <div class="col">
-            <img src="/@Model.car.ImgUrl">
-        </div>
-    </div>
-    <div class="row">
-        <div class="col">
-            <p>@Model.car.Description</p>
-        </div>
-    </div>
-    <div class="row">
-        <div class="col">
-            <p>Info</p>
-            <ul>
-                <li>Bränsletyp: @Model.car.Fuel</li>
-                <li>Antal säten: @Model.car.Seats</li>
-                <li>Antal dörrar: @Model.car.Doors</li>
-                <li>Växellåda: @Model.car.Gear</li>
-                <li>Kilometerantal: @Model.car.Km</li>
-                <li>Biltyp: @Model.car.Type</li>
-            </ul>
-        </div>
-    </div>
+            <div class="row">
+                <div class="col">
+                    <div id="carouselExampleControls " class="carousel slide shadow bg-white rounded mb-2" data-ride="carousel" style="max-width:680px;max-height:560px; min-width:650px">
+                        <div class="carousel-inner">
+                            <div class="carousel-item active">
+                                <img class="d-block w-100" src="/@Model.car.ImgUrl" alt="First slide">
+                            </div>
+                        </div>
+                        <a class="carousel-control-prev" href="#carouselExampleControls" role="button" data-slide="prev">
+                            <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                            <span class="sr-only">Previous</span>
+                        </a>
+                        <a class="carousel-control-next" href="#carouselExampleControls" role="button" data-slide="next">
+                            <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                            <span class="sr-only">Next</span>
+                        </a>
+                    </div>
+                </div>
+            </div>
 
-    <div class="row">
+            <div class="row">
+                <div class="col-12">
+                    <div class="card shadow bg-white rounded" style="width:680px;">
+                        <div class="card-body">
+                            <h5 class="card-title">Beskrivning:</h5>
+                            <p class="card-text">@Model.car.Description</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col">
+                        <div class="card ml-3 mt-3 shadow bg-white rounded" style="width: 324px; min-height: 245px">
+                            <div class="card-body">
+                                <h5 class="card-title">Info</h5>
+                                <p class="card-text">
+                                    <ul>
+                                        <li>Bränsletyp: @Model.car.Fuel</li>
+                                        <li>Antal säten: @Model.car.Seats</li>
+                                        <li>Antal dörrar: @Model.car.Doors</li>
+                                        <li>Växellåda: @Model.car.Gear</li>
+                                        <li>Kilometerantal: @Model.car.Km</li>
+                                        <li>Biltyp: @Model.car.Type</li>
+                                    </ul>
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+
+
+
+                    <div class="col">
+                        <div class="card mt-3 mb-3 shadow bg-white rounded" style="width: 324px; min-height: 245px">
+                            <div class="card-body">
+                                @*<h5 class="card-title">Tillbehör</h5>*@
+                                <p class="card-text">
+                                    <table class="table">
+                                        <tbody>
+                                            <tr>
+                                                <th scope="row">Husdjur</th>
+                                                @{ if (@Model.car.Pets != null && Model.car.Pets == true)
+                                                    {
+                                                        <td>
+                                                            <i class="fas fa-check-circle pl-5" style="color:green"></i>
+                                                        </td>
+                                                    }
+                                                    else
+                                                    {
+                                                        <td>
+                                                            <i class="fas fa-times-circle pl-5" style="color:red"></i>
+                                                        </td>
+                                                    }
+                                                }
+                                            </tr>
+                                            <tr>
+                                                <th scope="row">Tackräcke</th>
+                                                @{ if (@Model.car.RoofRack != null && Model.car.RoofRack == true)
+                                                    {
+                                                        <td>
+
+                                                            <i class="fas fa-check-circle pl-5" style="color:green"></i>
+                                                        </td>
+                                                    }
+                                                    else
+                                                    {
+                                                        <td>
+                                                            <i class="fas fa-times-circle pl-5" style="color:red"></i>
+                                                        </td>
+<<<<<<< HEAD
+                                                    }
+                                                }
+                                            </tr>
+                                            <tr>
+                                                <th scope="row">Dragkrok</th>
+                                                @{ if (@Model.car.TowBar != null && Model.car.TowBar == true)
+                                                    {
+                                                        <td>
+                                                            <i class="fas fa-check-circle pl-5" style="color:green"></i>
+                                                        </td>
+                                                    }
+                                                    else
+                                                    {
+                                                        <td>
+                                                            <i class="fas fa-times-circle pl-5" style="color:red"></i>
+                                                        </td>
+                                                    }
+                                                }
+                                            </tr>
+                                            <tr>
+                                                <th scope="row">Barnstol</th>
+                                                @{ if (@Model.car.ChildSeat != null && Model.car.ChildSeat == true)
+                                                    {
+                                                        <td>
+                                                            <i class="fas fa-check-circle pl-5" style="color:green"></i>
+                                                        </td>
+                                                    }
+                                                    else
+                                                    {
+                                                        <td>
+                                                            <i class="fas fa-times-circle pl-5" style="color:red"></i>
+                                                        </td>
+                                                    }
+                                                }
+                                            </tr>
+                                            <tr>
+                                                <th scope="row">AC</th>
+                                                @{ if (@Model.car.Ac != null && Model.car.Ac == true)
+                                                    {
+                                                        <td>
+                                                            <i class="fas fa-check-circle pl-5" style="color:green"></i>
+                                                        </td>
+                                                    }
+                                                    else
+                                                    {
+                                                        <td>
+                                                            <i class="fas fa-times-circle pl-5" style="color:red"></i>
+                                                        </td>
+=======
+>>>>>>> master
+                                                    }
+                                                }
+                                            </tr>
+                                            @*<li>Takräcke: @Model.car.RoofRack</li>
+                                                <li>Dragkrok: @Model.car.TowBar</li>
+                                                <li>Barnstol: @Model.car.ChildSeat</li>
+                                                <li>Ac: @Model.car.Ac</li>*@
+                                        </tbody>
+                                    </table>
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+
+            </div>
+        </div>
+        <partial name="_RentFormDetails" model="@Model.form" />
+
+    </div>
+    @{double rateing = 0;}
+
+  
+        @if (Model.reviews.Count > 0)
+        {
+            rateing = Model.reviews.Average(p => p.Rating);
+        }
+   
+    <div class="row mt-3">
         <div class="col">
-            <p>Tillbehör</p>
-            <ul>
-                <li>Husdjur: @Model.car.Pets</li>
-                <li>Takräcke: @Model.car.RoofRack</li>
-                <li>Dragkrok: @Model.car.TowBar</li>
-                <li>Barnstol: @Model.car.ChildSeat</li>
-                <li>Ac: @Model.car.Ac</li>
-            </ul>
+            <h2 class="ml-2 mb-3">Omdömen</h2>
+            @foreach (var item in Model.reviews)
+            {
+                <div class="card m-1 shadow bg-white rounded" style="width: 680px;">
+                    <div class="card-body">
+
+                        <h5 class="card-title">@item.UserName</h5>
+                        @for (int i = 0; i < item.Rating; i++)
+                        {
+
+                        <i class=" fa fa-star"> </i>
+                        } 
+                        <h6 class="card-subtitle mb-2 text-muted">@item.DateCreated.ToShortDateString()</h6>
+                        <p class="card-text">@item.Review</p>
+                    </div>
+                </div>
+            }
         </div>
     </div>
 </div>
 
 
-<<<<<<< HEAD
-<partial name="_RentFormDetails" model="@Model.form" />
-@{double rateing = 0;}
-
-@if (Model.reviews.Count > 0)
-=======
-@*<partial name="_RentFormDetails" model="@Model.form" />
-@{int rateing = 0;}
-@foreach (var item in Model.reviews)
->>>>>>> registration
-{
-    rateing = Model.reviews.Average(p => p.Rating);
-}
-
-<h2>@Model.reviews.Count() omdömen @rateing/5</h2>
-@foreach (var item in Model.reviews)
-{
-    <div class="card" style="width: 18rem;">
-        <div class="card-body">
-            <h5 class="card-title">@item.UserName</h5>
-            <h6 class="card-subtitle mb-2 ">@item.Rating/5</h6>
-            <h6 class="card-subtitle mb-2 text-muted">@item.DateCreated</h6>
-            <p class="card-text">@item.Review</p>
-        </div>
-    </div>
-}*@
