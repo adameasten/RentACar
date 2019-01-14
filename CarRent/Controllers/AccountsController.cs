@@ -76,7 +76,7 @@ namespace CarRent.Controllers
         public IActionResult SaveComment(string comment, int rating, int rentId)
         {
             service.AddReview(comment, rating, rentId);
-            return Json(new { status = "Sucess" });
+            return Json(new { status = "Success" });
         }
 
         [HttpPost]
