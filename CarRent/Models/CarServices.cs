@@ -84,8 +84,14 @@ namespace CarRent.Models
 
         public async Task AddCarToDatabase(CarRegistrationPostVM vm, string userId)
         {
-            //if (vm.Image != null)
-            //UploadImages(vm);
+            string imgUrl = null;
+            if (vm.Image.Count > 0)
+            {
+                UploadImages(vm);
+                imgUrl = vm.Image[0].FileName;
+            }
+            else
+                imgUrl = "Logo.png";
 
             var coordinate = await GetCoordinates(vm.City);
             var point = new Point(coordinate);
@@ -110,8 +116,8 @@ namespace CarRent.Models
                 Seats = vm.Seats,
                 TowBar = vm.TowBar,
                 Type = vm.Type,
-                ImgUrl = vm.Image[0].FileName,
-                GeoLocation = point
+                GeoLocation = point,
+                ImgUrl = imgUrl,
             };
 
             context.Car.Add(car);

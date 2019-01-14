@@ -1,14 +1,14 @@
 ﻿@model CarRegistrationPostVM
 
 <form id="FindCarByLicense">
-    <input type="text" id="LicenseValue"/>
-    <input type="submit" value="hitta"/>
+    <input type="text" id="LicenseValue" />
+    <input type="submit" value="hitta" />
 </form>
 
 
 <form enctype="multipart/form-data" asp-controller="Car" asp-action="CarRegistration">
     <label asp-for="Model"></label>
-    <input asp-for="Model" id="Model"/>
+    <input asp-for="Model" id="Model" />
     <span asp-validation-for="Model"></span>
 
 
@@ -86,34 +86,70 @@
     <label asp-for="Pets"></label>
     <input asp-for="Pets" type="checkbox" />
 
-    <div id="MoreImages">
+    <div id="imageForm">
         <label asp-for="Image"></label>
-        <input asp-for="Image" />
+        <input asp-for="Image" onchange="readURL(this);" class="Files" id="knappid1" />
+        <div id="images"></div>
     </div>
-        <input type="button" id="AddPicture" value="Lägg till fler bilder"/>
-
     <input type="submit" value="Registrera" />
 
 </form>
 
 <script>
+    var count = 1;
+    function readURL(input) {
+        if (input.files && input.files[0]) {
+            var reader = new FileReader();
+            reader.onload = function (e) {
+                var id = "id" + count;
+                $(".Files").hide();
+                $("#images").append('<img id="' + id + '" src="#" style="width: 200px; height: 150px;" class="bild"/>');
+                $('#' + id).attr('src', e.target.result);
+                count = count + 1;
+            };
+            if (count < 2)
+                $("#imageForm").append('<input type="button" value="Lägg till fler bilder" id="moreImages"/>');
+
+            reader.readAsDataURL(input.files[0]);
+        }
+    }
     $(function () {
-        $("#AddPicture").click(function () {
-            var $appndobj = $('<input class="AddPicture" type="file" id="Image" multiple="multiple" name="Image">')
-                
-            $("#MoreImages").append($appndobj);
+
+        $("body").on('mouseover', '.bild', function () {
+            $("#" + this.id).css("filter", "blur(2px)");
+            $(".delete").show().offset($(this).offset());;
         });
+        $("body").on('mouseout', '.bild', function () {
+            $("#" + this.id).css("filter", "blur(0px)");
+
+        });
+        $("body").on('click', '#moreImages', function () {
+            $(".Files").hide();
+            $("#imageForm").append('<input onchange="readURL(this);" type="file" class="Files" name="Files" id="knappid' + count + '">')
+        });
+        $('body').on('click', '.bild', function () {
+            $("#" + this.id).remove();
+            $("#knapp" + this.id).remove();
+            count = count - 1;
+
+            if (count < 2) {
+                $("#moreImages").remove();
+                $("#imageForm").append('<input onchange="readURL(this);" type="file" class="Files" name="Files" id="knappid' + count + '">');
+            }
+        });
+
         $("#FindCarByLicense").submit(function (e) {
             e.preventDefault();
             console.log($("#LicenseValue").val());
             var registration = $("#LicenseValue").val();
             $.getJSON("https://api.biluppgifter.se/api/v1/vehicle/regno/" + registration, {
-                api_token: "3BATNwX7AoEExD7XWq5uQKUSlIbCrplD83EjIkKetb1hXSvnHnv1zwNLtYGE" })
-                
+                api_token: "3BATNwX7AoEExD7XWq5uQKUSlIbCrplD83EjIkKetb1hXSvnHnv1zwNLtYGE"
+            })
+
                 .done(function (data) {
-                    $("#Model").val(data.data.basic.data.make + " "+data.data.basic.data.model);
+                    $("#Model").val(data.data.basic.data.make + " " + data.data.basic.data.model);
                     $("#YearModel").val(data.data.basic.data.model_year);
-                    $("#Seats").val(data.data.technical.data.number_of_passengers+1);
+                    $("#Seats").val(data.data.technical.data.number_of_passengers + 1);
 
                     var hitch = data.data.technical.data.hitch;
                     if (hitch != null) {
@@ -156,8 +192,8 @@
 
                     $("#Gear").val(transmission);
 
-                    
-                    
+
+
 
                 });
         });
