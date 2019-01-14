@@ -14,6 +14,7 @@ using GeoAPI.Geometries;
 using System.Net.Http;
 using Newtonsoft.Json;
 using NetTopologySuite.Geometries;
+using Microsoft.AspNetCore.Mvc.Rendering;
 
 namespace CarRent.Models
 {
@@ -75,9 +76,65 @@ namespace CarRent.Models
             return carr;
         }
 
+        public CarSearchFilterVM CreateFilterVm(CarSearchVM[] result)
+        {
+            return new CarSearchFilterVM
+            {
+                SearchResult = result,
+                SearchResultJson = JsonConvert.SerializeObject(result),
+                TypeItems = new SelectListItem[]
+                {
+                       new SelectListItem{Value = "Sedan", Text = "Sedan"},
+                       new SelectListItem{Value = "Kombi", Text = "Kombi"},
+                       new SelectListItem{Value = "SUV", Text = "SUV"},
+                       new SelectListItem{Value = "Halvkombi", Text = "Halvkombi"},
+                       new SelectListItem{Value = "Sportkupé", Text = "Sportkupé"},
+                       new SelectListItem{Value = "Cab", Text = "Cab"},
+                       new SelectListItem{Value = "Pickup", Text = "Pickup"},
+                       new SelectListItem{Value = "Minibuss", Text = "Minibuss"},
+                       new SelectListItem{Value = "Husbil", Text = "Husbil"}
+                },
+
+                GearItems = new SelectListItem[]
+                {
+                    new SelectListItem{Value = "Automat", Text = "Automat"},
+                    new SelectListItem{Value = "Manuell", Text = "Manuell"},
+                },
+
+                FuelItems = new SelectListItem[]
+                {
+                    new SelectListItem{Value = "Bensin", Text = "Bensin"},
+                    new SelectListItem{Value = "Diesel", Text = "Diesel"},
+                    new SelectListItem{Value = "Etanol", Text = "Etanol"},
+                    new SelectListItem{Value = "El", Text = "El"},
+                },
+
+                SeatsItem = new SelectListItem[]
+                {
+                    new SelectListItem{Value = "1", Text = "1"},
+                    new SelectListItem{Value = "2", Text = "2"},
+                    new SelectListItem{Value = "3", Text = "3"},
+                    new SelectListItem{Value = "4", Text = "4"},
+                    new SelectListItem{Value = "5", Text = "5"},
+                    new SelectListItem{Value = "6", Text = "6"},
+                    new SelectListItem{Value = "7", Text = "7+"},
+                },
+
+                DoorsItem = new SelectListItem[]
+                {
+                    new SelectListItem{Value = "1", Text = "1"},
+                    new SelectListItem{Value = "2", Text = "2"},
+                    new SelectListItem{Value = "3", Text = "3"},
+                    new SelectListItem{Value = "4", Text = "4"},
+                    new SelectListItem{Value = "5", Text = "5"},
+                    new SelectListItem{Value = "6", Text = "6"}
+                },
+            };
+        }
+
         internal async Task AddRent(CarRentFormVM vM, string userId)
         {
-            await context.Rent.AddAsync(new Rent { CarId = vM.CarId, Datestart = vM.StartTime, DateEnd = vM.EndTime, CustomerId = userId});
+            await context.Rent.AddAsync(new Rent { CarId = vM.CarId, Datestart = vM.StartTime, DateEnd = vM.EndTime, CustomerId = userId });
 
             await context.SaveChangesAsync();
         }
@@ -130,7 +187,7 @@ namespace CarRent.Models
                 {
                     CarId = car.Id,
                     ImgUrl = item.FileName,
-                    
+
                 });
             }
 

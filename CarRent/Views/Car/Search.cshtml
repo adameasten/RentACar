@@ -1,41 +1,136 @@
-﻿@model CarSearchVM[]
+﻿@model CarSearchFilterVM
 @{
     ViewData["Title"] = "Search";
 }
 
-
 <div class="row row-offcanvas row-offcanvas-right">
     <div class="col-6 col-md-3 sidebar-offcanvas" id="filter">
-        <div class="list-group">
-            <a href="#" class="list-group-item">FiltreringsA</a>
-            <a href="#" class="list-group-item">FiltreringsA</a>
-            <a href="#" class="list-group-item">FiltreringsA</a>
-            <a href="#" class="list-group-item">FiltreringsA</a>
+        <div class="list-group" id="Search">
+            <label asp-for="Price"></label>
+            <input asp-for="Price" />
+
+            <label asp-for="Type"></label>
+            <select asp-for="Type"
+                    asp-items="Model.TypeItems"></select>
+            <span asp-validation-for="Type"></span>
+
+            <label asp-for="GearItems"></label>
+            <select asp-for="Gear"
+                    asp-items="Model.GearItems"></select>
+            <span asp-validation-for="Gear"></span>
+
+            <label asp-for="FuelItems"></label>
+            <select asp-for="Fuel"
+                    asp-items="Model.FuelItems"></select>
+            <span asp-validation-for="Fuel"></span>
+
+            <label asp-for="SeatsItem"></label>
+            <select asp-for="Seats"
+                    asp-items="Model.SeatsItem"></select>
+            <span asp-validation-for="Seats"></span>
+
+            <label asp-for="DoorsItem"></label>
+            <select asp-for="Doors"
+                    asp-items="Model.DoorsItem"></select>
+            <span asp-validation-for="Doors"></span>
+
+            <label asp-for="Ac"></label>
+            <input asp-for="Ac" type="checkbox" />
+
+            <label asp-for="ChildSeat"></label>
+            <input asp-for="ChildSeat" type="checkbox" />
+
+
+            <label asp-for="TowBar"></label>
+            <input asp-for="TowBar" type="checkbox" />
+
+            <label asp-for="RoofRack"></label>
+            <input asp-for="RoofRack" type="checkbox" />
+
+            <label asp-for="Pets"></label>
+            <input asp-for="Pets" type="checkbox" />
         </div>
     </div>
     <div class="col-12 col-md-9">
 
-        <div class="row">
+        <div class="container py-3" id="hej">
 
-            @foreach (var item in Model)
-            {
-                <div class="col-6 col-lg-4">
-                    <div class="card">
-                        <img class="card-img-top" src="/@item.ImgUrl">
-                        <div class="card-body">
-                            <h5 class="card-title">@item.Rating</h5>
-                            <strong>@item.Price.ToString("c")</strong>
-                            <h6>@item.YearModel</h6>
-                            <p class="card-text">@item.Model</p>
-                            <a class="btn btn-primary" asp-controller="car" asp-action="details" asp-route-id="@item.Id">Detaljer</a>
-                        </div>
-                        <div class="card-footer">
-                            <small class="text-muted">@item.Distance.ToString("0.0") km bort</small>
+            @*@foreach (var item in Model.SearchResult)
+                {
+                    <div class="col-6 col-lg-4">
+                        <div class="card">
+                            <img class="card-img-top" src="/@item.ImgUrl">
+                            <div class="card-body">
+                                <h5 class="card-title">@item.Rating</h5>
+                                <strong>@item.Price.ToString("c")</strong>
+                                <h6>@item.YearModel</h6>
+                                <p class="card-text">@item.Model</p>
+                                <a class="btn btn-primary" asp-controller="car" asp-action="details" asp-route-id="@item.Id">Detaljer</a>
+                            </div>
+                            <div class="card-footer">
+                                <small class="text-muted">@item.Distance.ToString("0.0") km bort</small>
+                            </div>
                         </div>
                     </div>
-                </div>
-            }
+                }*@
         </div>
     </div>
 
 </div>
+
+<script>
+    $(function () {
+    var results = JSON.parse('@Html.Raw(Model.SearchResultJson)');
+        console.log(results);
+
+    renderSearchResult();
+
+    function renderSearchResult(value, id) {
+        for (var i = 0; i < results.length; i++) {
+            console.log(value, id);
+            console.log(results[i]);
+            //if ( == value) {
+
+            //}
+
+            var outerDiv = $('<div class="card mb-2">');
+            var cardDiv = $('<div class="row">');
+            var imgdiv = $('<div class="col-md-4">');
+            var img = $(`<img class="w-100" src="/Logo.png">`);
+            var cardBody = $('<div class="col-md-8 px-3" style="padding: 15px;">');
+            var row = $('<div class="row h-100">');
+            var div = $('<div class="col-md-8">');
+            var div2 = $('<div class="h-100">');
+            var cardTitle = $(`<h3 class="card-title">${results[i].Model}</h3>`);
+            var rating = $(`<h6>${results[i].Rating}</h6>`);
+            var distance = $(`<small style="Height: 10%; Position: Absolute; Bottom: 15px;">${results[i].Distance} km bort</small>`);
+            var carFooter = $('<div class="col-md-4">');
+            var price = $(`<strong style="float: right; margin: 10px;">${results[i].Price} kr/dag</strong>`);
+
+            carFooter.append(price);
+            div2.append(cardTitle);
+            div2.append(rating);
+            div2.append(distance);
+            div.append(div2);
+            row.append(div);
+            row.append(carFooter);
+            cardBody.append(row);
+            imgdiv.append(img);
+            cardDiv.append(imgdiv);
+            cardDiv.append(cardBody);
+            outerDiv.append(cardDiv);
+            $("#hej").append(outerDiv);
+        }
+    }
+
+
+        $("#Search").change(function (tmp) {
+            var value = $("#" + tmp.target.id).val();
+            var id = tmp.target.id;
+            console.log(value, id)
+
+            renderSearchResult(value, id);
+
+        });
+    });
+</script>
