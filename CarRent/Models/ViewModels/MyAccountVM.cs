@@ -18,7 +18,7 @@ namespace CarRent.Models.ViewModels
 
         [Display(Name = "Förnamn")]
         public string FirstName { get; set; }
-        [Display(Name = "Telefonnummer +46")]
+        [Display(Name = "Telefonnummer")]
         public string PhoneNumber { get; set; }
         [Display(Name = "Efternamn")]
         public string LastName { get; set; }
