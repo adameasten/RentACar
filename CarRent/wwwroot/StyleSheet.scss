@@ -3,6 +3,8 @@ $color2: #B6C7CC;
 $color3: #C5D4DB;
 $color4: #D4DFE1;
 $color5: #E0ECE0;
+$white: #FFF;
+$black: #000;
 
 body {
 
@@ -13,7 +15,7 @@ body {
     }
 
     header {
-        background-color: #fff !important;
+        background-color: $white !important;
     }
 
     footer {
@@ -50,7 +52,7 @@ body {
 }
 
 .booking-form {
-    background: #fff;
+    background: $white;
     border-radius: 2px;
 }
 
@@ -131,10 +133,10 @@ body {
         border: solid #009966;
     }
 
-.row {
-    display: flex;
-    flex-wrap: wrap;
-}
+    .row {
+        display: flex;
+        flex-wrap: wrap;
+    }
 
     .header-body {
         display: flex;

@@ -1,9 +1,9 @@
-body {
+﻿body {
   background-color: #E0ECE0; }
   body main {
     background-color: #E0ECE0 !important; }
   body header {
-    background-color: #fff !important; }
+    background-color: #FFF !important; }
   body footer {
     background-color: #88959D !important; }
 
@@ -30,7 +30,7 @@ body {
   justify-content: center; }
 
 .booking-form {
-  background: #fff;
+  background: #FFF;
   border-radius: 2px; }
 
 .booking-form > form .row.no-margin {
@@ -147,7 +147,7 @@ body {
     color: #666;
     line-height: 1.2em; }
   #invoice-POS #top, #invoice-POS #mid, #invoice-POS #bot {
-    /*Targets all id with 'col-'*/
+    /* Targets all id with 'col-' */
     border-bottom: 1px solid #EEE; }
   #invoice-POS #top {
     min-height: 100px; }
