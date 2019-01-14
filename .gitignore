@@ -13,6 +13,7 @@
 # Styling
 StyleSheet.css
 StyleSheet.min.css
+*.orig
 
 # Build results
 [Dd]ebug/
