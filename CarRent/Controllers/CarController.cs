@@ -64,7 +64,6 @@ namespace CarRent.Controllers
             homeService.AddTimeToDates(vM);
             Response.Cookies.Append("startDate", vM.StartDate.ToString());
             Response.Cookies.Append("endDate", vM.EndDate.ToString());
-
             var result = homeService.CompareCoords(cor, vM);
 
             return View(result);
@@ -73,6 +72,10 @@ namespace CarRent.Controllers
         [HttpGet]
         public IActionResult RentCar()
         {
+            if (string.IsNullOrEmpty(Request.Cookies["DetailsId"]))
+            {
+                return Redirect("/");
+            }
             return Redirect($"/car/details/{Request.Cookies["DetailsId"]}");
         }
 
