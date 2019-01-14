@@ -1,0 +1,22 @@
+﻿@model ReviewCarDetailsVM
+
+<div class="render-comments">
+    <div class="col">
+        <div class="row mt-3">
+            <div class="col">
+                    <div class="card m-1 shadow bg-white rounded" style="width: 680px;">
+                        <div class="card-body">
+                            <h5 class="card-title">@Model.UserName @Model.Car</h5>
+                            @for (int i = 0; i < Model.Rating; i++)
+                            {
+                                <i class=" fa fa-star"> </i>
+                            }
+                            <h6 class="card-subtitle mb-2 text-muted">@Model.DateCreated.ToShortDateString()</h6>
+                            <p class="card-text">@Model.Review </p>
+                        </div>
+                    </div>
+            </div>
+        </div>
+    </div>
+
+</div>

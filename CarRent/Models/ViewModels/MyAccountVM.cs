@@ -34,6 +34,7 @@ namespace CarRent.Models.ViewModels
 
         public List<MyCarCard> CarCards { get; set; }
         public List<MyBookingsVM> MyBookings { get; set; }
+        public List<ReviewCarDetailsVM> MyReviews { get; set; }
 
 
     }

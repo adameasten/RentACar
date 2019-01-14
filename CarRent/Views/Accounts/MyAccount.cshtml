@@ -133,7 +133,14 @@
                 <partial name="_MyBookings" model="booking" />
             }
         </div>
+    <div class="render-comments">
+        @foreach (var review in Model.MyReviews)
+        {
+            <partial name="_MyRatedCars" model="review"/>
+        }
     </div>
+    </div>
+
 </div>
     <script>
         $(function () {

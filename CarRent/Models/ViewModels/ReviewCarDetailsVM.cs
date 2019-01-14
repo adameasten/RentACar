@@ -11,5 +11,6 @@ namespace CarRent.Models.ViewModels
         public int Rating { get; set; }
         public DateTime DateCreated { get; set; }
         public string UserName { get; set; }
+        public string Car { get; set; }
     }
 }
