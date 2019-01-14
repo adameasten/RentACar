@@ -1,9 +1,13 @@
 ﻿@model CarDetailsVM
+<span class="glyphicon glyphicon-tags"></span>
 
 <div class="container">
     <div class="row">
         <div class="col-12">
-            <h2>@Model.car.Model</h2>
+            <h2 class="mb-3">@Model.car.Model</h2>
+
+
+
         </div>
         <div class="col">
 
@@ -46,6 +50,7 @@
                                 <h5 class="card-title">Info</h5>
                                 <p class="card-text">
                                     <ul>
+
                                         <li>Bränsletyp: @Model.car.Fuel</li>
                                         <li>Antal säten: @Model.car.Seats</li>
                                         <li>Antal dörrar: @Model.car.Doors</li>
@@ -63,15 +68,51 @@
                     <div class="col">
                         <div class="card mt-3 mb-3 shadow bg-white rounded" style="width: 324px; min-height: 245px">
                             <div class="card-body">
-                                <h5 class="card-title">Tillbehör</h5>
+                                @*<h5 class="card-title">Tillbehör</h5>*@
                                 <p class="card-text">
-                                    <ul>
-                                        <li>Husdjur: @Model.car.Pets</li>
-                                        <li>Takräcke: @Model.car.RoofRack</li>
-                                        <li>Dragkrok: @Model.car.TowBar</li>
-                                        <li>Barnstol: @Model.car.ChildSeat</li>
-                                        <li>Ac: @Model.car.Ac</li>
-                                    </ul>
+                                    <table class="table">
+                                        <tbody>
+                                            <tr>
+                                                <th scope="row">Husdjur</th>
+                                                @{ if (@Model.car.Pets != null && Model.car.Pets == true)
+                                                    {
+                                                        <td>
+
+                                                            <i class="fas fa-check-circle pl-5" style="color:green"></i>
+                                                        </td>
+                                                    }
+                                                    else
+                                                    {
+                                                        <td>
+                                                            <i class="fas fa-times-circle pl-5" style="color:red"></i>
+                                                        </td>
+                                                    }
+                                                }
+                                            </tr>
+                                            <tr>
+                                                <th scope="row">Tackräcke</th>
+                                                @{ if (@Model.car.RoofRack != null && Model.car.RoofRack == true)
+                                                    {
+                                                <td>
+
+                                                    <i class="fas fa-check-circle pl-5" style="color:green"></i>
+                                                </td>
+                                                    }
+                                                    else
+                                                    {
+                                                <td>
+                                                    <i class="fas fa-times-circle pl-5" style="color:red"></i>
+                                                </td>
+                                                    }
+                                                }
+                                            </tr>
+
+                                            @*<li>Takräcke: @Model.car.RoofRack</li>
+        <li>Dragkrok: @Model.car.TowBar</li>
+        <li>Barnstol: @Model.car.ChildSeat</li>
+        <li>Ac: @Model.car.Ac</li>*@
+                                        </tbody>
+                                    </table>
                                 </p>
                             </div>
                         </div>
