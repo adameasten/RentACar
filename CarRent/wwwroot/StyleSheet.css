@@ -1,4 +1,4 @@
-body {
+﻿body {
   background-color: #E0ECE0; }
   body main {
     background-color: #E0ECE0 !important; }
@@ -147,7 +147,7 @@ body {
     color: #666;
     line-height: 1.2em; }
   #invoice-POS #top, #invoice-POS #mid, #invoice-POS #bot {
-    /*Targets all id with 'col-'*/
+    /* Targets all id with 'col-' */
     border-bottom: 1px solid #EEE; }
   #invoice-POS #top {
     min-height: 100px; }
@@ -200,13 +200,13 @@ body {
   -ms-border-radius: 5px;
   -khtml-border-radius: 5px;
   border-radius: 5px;
-  background-color: #8ccdae;
-  background: -webkit-gradient(linear, 50% 0%, 50% 100%, color-stop(0%, #8ccdae), color-stop(100%, #6fa88d));
-  background: -webkit-linear-gradient(#8ccdae, #6fa88d);
-  background: -moz-linear-gradient(#8ccdae, #6fa88d);
-  background: -o-linear-gradient(#8ccdae, #6fa88d);
-  background: -ms-linear-gradient(#8ccdae, #6fa88d);
-  background: linear-gradient(#8ccdae, #6fa88d);
+  background-color: RGB(61, 168, 134);
+  background: -webkit-gradient(linear, 50% 0%, 50% 100%, color-stop(0%, RGB(61, 168, 134)), color-stop(100%, #6fa88d));
+  background: -webkit-linear-gradient(RGB(61, 168, 134), #6fa88d);
+  background: -moz-linear-gradient(RGB(61, 168, 134), #6fa88d);
+  background: -o-linear-gradient(RGB(61, 168, 134), #6fa88d);
+  background: -ms-linear-gradient(RGB(61, 168, 134), #6fa88d);
+  background: linear-gradient(RGB(61, 168, 134), #6fa88d);
   -moz-box-shadow: #c1e4d4 0 1px 0 inset;
   -webkit-box-shadow: #c1e4d4 0 1px 0 inset;
   -o-box-shadow: #c1e4d4 0 1px 0 inset;
@@ -258,8 +258,8 @@ body {
 
 .membership-div {
   margin: 1em auto;
-  width: 320px;
   text-align: center;
+  width: 100%;
   border: solid black;
   border-width: thin; }
 
