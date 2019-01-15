@@ -7,6 +7,24 @@
   body footer {
     background-color: #88959D !important; }
 
+.zoom {
+  transition: transform .2s;
+  /* Animation */ }
+
+.zoom:hover {
+  cursor: pointer;
+  transform: scale(1.05);
+  /* (150% zoom - Note: if the zoom is too large, it will go outside of the viewport) */ }
+
+.zoomMin {
+  transition: transform .2s;
+  /* Animation */ }
+
+.zoomMin:hover {
+  cursor: pointer;
+  transform: scale(1.01);
+  /* (150% zoom - Note: if the zoom is too large, it will go outside of the viewport) */ }
+
 .section {
   position: relative;
   height: 70vh; }
@@ -30,7 +48,7 @@
   justify-content: center; }
 
 .booking-form {
-  background: #fff;
+  background: white;
   border-radius: 2px; }
 
 .booking-form > form .row.no-margin {
@@ -72,7 +90,7 @@
   padding: 25px; }
 
 .booking-form .submit-btn {
-  background: #009966;
+  background: RGB(61, 168, 134);
   border: none;
   text-transform: capitalize;
   display: block;
@@ -188,8 +206,8 @@
   padding: 2em 1em; }
 
 .button-default {
-  font-size: 0.9em;
-  padding: 0.25em 0.5em;
+  font-size: 1em;
+  padding: 0.5em 0.75em;
   display: inline-block;
   width: auto;
   height: auto;
@@ -260,7 +278,7 @@
   margin: 1em auto;
   text-align: center;
   width: 100%;
-  border: solid black;
+  /*border: solid black;*/
   border-width: thin; }
 
 .my-cars {

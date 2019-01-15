@@ -16,20 +16,19 @@
                         <label asp-for="EndTime"></label>
                         <input class="form-control" asp-for="EndTime" id="EndTime" />
                     </div>
-                        <h5 class="card-title" id="TotalPrice"></h5>
-
-                        <input type="hidden" asp-for="CarId" />
-                        <input type="hidden" asp-for="Price" />
-                        <input class="button-default mt-3" type="submit" value="Hyr bil" style="width:100%" />
+                    <h5 class="card-title" id="TotalPrice"></h5>
+                    <input type="hidden" asp-for="CarId" />
+                    <input type="hidden" asp-for="Price" />
+                    <input class="button-default mt-3" type="submit" value="Hyr bil" style="width:100%" />
                 </form>
             </p>
         </div>
     </div>
 </div>
 
-    <script>
+<script>
 
-    $("#TotalPrice").text("Total " + @Model.Price);
+    $("#TotalPrice").text("Total " + @(Model.Price*2));
     $("#TotalPrice").append(" kr");
 
     if (Cookies.get("startDate") && Cookies.get("endDate")) {
@@ -38,25 +37,24 @@
     }
 
     $("#StartTime").change(function () {
-
-
         var x = document.getElementById("StartTime").value;
         var today = new Date(document.getElementById("EndTime").value);
         if (x > document.getElementById("EndTime").value) {
             document.getElementById("StartTime").value = document.getElementById("EndTime").value;
-            $("#TotalPrice").text("Total " + 0 + " kr");
+            $("#TotalPrice").text("Total " + @Model.Price);
+            $("#TotalPrice").append(" kr");
 
         }
         else {
-        var pdate = new Date(x);
-        var one_day = 1000 * 60 * 60 * 24;    // Convert both dates to milliseconds
-        var date1_ms = pdate.getTime();
-        var date2_ms = today.getTime();    // Calculate the difference in milliseconds
-        var difference_ms = date2_ms - date1_ms;        // Convert back to days and return
-        var daysSinceP = (Math.round(difference_ms / one_day));
-            $("#TotalPrice").text("Total " + daysSinceP *@Model.Price );
+            var pdate = new Date(x);
+            var one_day = 1000 * 60 * 60 * 24;    // Convert both dates to milliseconds
+            var date1_ms = pdate.getTime();
+            var date2_ms = today.getTime();    // Calculate the difference in milliseconds
+            var difference_ms = date2_ms - date1_ms;        // Convert back to days and return
+            var daysSinceP = (Math.round(difference_ms / one_day));
+            daysSinceP = daysSinceP + 1;
+            $("#TotalPrice").text("Total " + daysSinceP*@Model.Price );
             $("#TotalPrice").append(" kr");
-
         }
 
     })
@@ -66,7 +64,8 @@
 
         if (s < document.getElementById("StartTime").value) {
             document.getElementById("EndTime").value = document.getElementById("StartTime").value;
-            $("#TotalPrice").text("Total " + 0+" kr");
+            $("#TotalPrice").text("Total " + @Model.Price);
+            $("#TotalPrice").append(" kr");
 
         }
         else {
@@ -78,6 +77,7 @@
         var date2_ms = today.getTime();    // Calculate the difference in milliseconds
         var difference_ms = date1_ms - date2_ms;        // Convert back to days and return
         var daysSinceP = (Math.round(difference_ms / one_day));
+            daysSinceP = daysSinceP + 1;
 
             $("#TotalPrice").text("Total " + daysSinceP * @Model.Price );
             $("#TotalPrice").append(" kr");
@@ -89,17 +89,17 @@
         date.setDate(date.getDate() + days);
         return date;
     }
-    </script>
+</script>
 
-    @*@section scripts {
-            <script>
-                $(document).ready(function () {
+@*@section scripts {
+        <script>
+            $(document).ready(function () {
 
 
-                    var x = document.getElementById("StartTime").dateTime;
-                    console.log(x);
-                    console.log("hello");
+                var x = document.getElementById("StartTime").dateTime;
+                console.log(x);
+                console.log("hello");
 
-                });
-            </script>
-        }*@
+            });
+        </script>
+    }*@

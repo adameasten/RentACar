@@ -34,6 +34,7 @@ namespace CarRent.Controllers
 
         }
 
+        [Authorize]
         [HttpGet]
         public IActionResult CarRegistration()
         {
@@ -42,6 +43,7 @@ namespace CarRent.Controllers
 
         }
 
+        [Authorize]
         [HttpPost]
         public async Task<IActionResult> CarRegistration(CarRegistrationPostVM vm)
         {
@@ -52,9 +54,9 @@ namespace CarRent.Controllers
             string userId = userManager.GetUserId(HttpContext.User);
             await services.AddCarToDatabase(vm, userId);
 
-            return Content("Lyckad");
-
+            return RedirectToAction("myaccount","accounts");
         }
+
         [HttpPost]
         public async Task<IActionResult> Search(StartPageVM vM)
         {
@@ -62,7 +64,6 @@ namespace CarRent.Controllers
             homeService.AddTimeToDates(vM);
             Response.Cookies.Append("startDate", vM.StartDate.ToString());
             Response.Cookies.Append("endDate", vM.EndDate.ToString());
-
             var result = homeService.CompareCoords(cor, vM);
 
             return View(result);
@@ -71,6 +72,10 @@ namespace CarRent.Controllers
         [HttpGet]
         public IActionResult RentCar()
         {
+            if (string.IsNullOrEmpty(Request.Cookies["DetailsId"]))
+            {
+                return Redirect("/");
+            }
             return Redirect($"/car/details/{Request.Cookies["DetailsId"]}");
         }
 
