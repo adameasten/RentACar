@@ -16,12 +16,13 @@ namespace CarRent.Models
         SignInManager<MyIdentityUser> signInManager;
         MyIdentityContext context;
         CarRentContext carContext;
+        CarServices service;
 
-        public AccountsService(CarRentContext carContext, MyIdentityContext context, UserManager<MyIdentityUser> userManager, SignInManager<MyIdentityUser> signInManager)
+        public AccountsService(CarRentContext carContext, MyIdentityContext context, UserManager<MyIdentityUser> userManager, SignInManager<MyIdentityUser> signInManager, CarServices service)
         {
             this.context = context;
             this.carContext = carContext;
-
+            this.service = service;
             this.userManager = userManager;
             this.signInManager = signInManager;
         }
@@ -77,8 +78,7 @@ namespace CarRent.Models
                     Review = r.Review1,
                     Rating = r.Rating,
                     DateCreated = r.DateCreated,
-                    UserName = CarServices.GetContactByID(r.Rent.CustomerId),
-                    //UserName = context.Users.SingleOrDefault(u => u.Id == r.Rent.CustomerId).UserName,
+                    UserName = service.GetContactByID(r.Rent.CustomerId),
                     Car = r.Rent.Car.Model,
 
                 })

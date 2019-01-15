@@ -14,6 +14,7 @@ using GeoAPI.Geometries;
 using System.Net.Http;
 using Newtonsoft.Json;
 using NetTopologySuite.Geometries;
+using Microsoft.Extensions.Configuration;
 
 namespace CarRent.Models
 {
@@ -22,12 +23,15 @@ namespace CarRent.Models
         CarRentContext context;
         IHostingEnvironment he;
         UserManager<MyIdentityUser> userManager;
+        private readonly IConfiguration configuration;
 
-        public CarServices(CarRentContext context, IHostingEnvironment he, UserManager<MyIdentityUser> userManager)
+
+        public CarServices(CarRentContext context, IHostingEnvironment he, UserManager<MyIdentityUser> userManager, IConfiguration config)
         {
             this.context = context;
             this.he = he;
             this.userManager = userManager;
+            this.configuration = config;
         }
 
         public CarDetailsVM FindCarByID(int ID)
@@ -87,7 +91,7 @@ namespace CarRent.Models
         public async Task AddCarToDatabase(CarRegistrationPostVM vm, string userId)
         {
             string imgUrl = null;
-            if (vm.Image.Count > 0)
+            if (vm.Image?.Count > 0)
             {
                 UploadImages(vm);
                 imgUrl = vm.Image[0].FileName;
@@ -95,7 +99,7 @@ namespace CarRent.Models
             else
                 imgUrl = "Logo.png";
 
-            var coordinate = await GetCoordinates(vm.City);
+            var coordinate = await GetCoordinates($"{vm.Street},{vm.City}");
             var point = new Point(coordinate);
             point.SRID = 4326;
 
@@ -124,18 +128,17 @@ namespace CarRent.Models
 
             context.Car.Add(car);
 
-            context.SaveChanges();
-
-            foreach (var item in vm.Image)
+            if (vm.Image != null)
             {
-                context.CarImage.Add(new CarImage
+                foreach (var item in vm.Image)
                 {
-                    CarId = car.Id,
-                    ImgUrl = item.FileName,
-                    
-                });
+                    context.CarImage.Add(new CarImage
+                    {
+                        CarId = car.Id,
+                        ImgUrl = item.FileName,
+                    });
+                }
             }
-
             context.SaveChanges();
         }
 
@@ -149,9 +152,10 @@ namespace CarRent.Models
 
         }
 
-        public static string GetContactByID(string ID)
+        public string GetContactByID(string ID)
         {
-            string constring = "Data Source=carrentacademy.database.windows.net;Initial Catalog=CarRentDb;User ID=adameasten;Password=Pennskrin1;Connect Timeout=30;Encrypt=True;TrustServerCertificate=False;ApplicationIntent=ReadWrite;MultiSubnetFailover=False";
+
+            string constring = configuration["DefaultConnection"];
             string queryString =
             "SELECT * from dbo.aspnetusers "
                 + "WHERE ID = @ID ";
