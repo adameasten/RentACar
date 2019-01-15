@@ -12,7 +12,13 @@
             <h5 class="card-title">@item.Model</h5>
 
             @*<p class="card-text">Årsmodell: @item.YearModel</p>*@
-            <p class="card-text">Betyg: @item.Rating</p>
+            @for (int i = 0; i < item.Rating; i++)
+            {
+
+                <i class=" fa fa-star"> </i>
+            }
+           @*// <p class="card-text">Betyg: @item.Rating</p>*@
+            <br />
             <strong class="card-text">@item.Price.ToString("c")/dag</strong>
 
         </div>
