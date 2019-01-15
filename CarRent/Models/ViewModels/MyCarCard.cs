@@ -9,7 +9,7 @@ namespace CarRent.Models.ViewModels
     {
         public string Model { get; set; }
         public string ImgUrl { get; set; }
-
+        public int Id { get; set; }
 
     }
 }

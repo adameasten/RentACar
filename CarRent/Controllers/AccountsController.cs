@@ -97,5 +97,25 @@ namespace CarRent.Controllers
             await service.LogOutUser();
             return Redirect("/");
         }
+
+        [Authorize]
+        [HttpGet]
+        public IActionResult EditCar(int id)
+        {
+            var vm = service.FindCarById(id);
+            return View(vm);
+        }
+
+        [Authorize]
+        [HttpPost]
+        public IActionResult EditCar(EditCarVM vm)
+        {
+            if(!ModelState.IsValid)
+                return View(vm);
+
+            service.EditCar(vm);
+
+            return RedirectToAction(nameof(MyAccount));
+        }
     }
 }
