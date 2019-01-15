@@ -12,7 +12,6 @@
             </div>
 
             <div class="card-body">
-              
 
                 <form id="Search">
                     <div class="form-group">
@@ -89,20 +88,27 @@
         </div>
     </div>
     <div class="col-12 col-md-9">
-        <div class="container py-3" id="hej">           
+        <div class="container py-3" id="filterResults">
+
         </div>
     </div>
+
 </div>
+
 <script>
     $(function () {
         var results = JSON.parse('@Html.Raw(Model.SearchResultJson)');
         var filterResults = results;
-        console.log(results);
+
+
         renderSearchResult();
 
         function renderSearchResult() {
-            for (var i = 0; i < filterResults.length; i++) {               
-                if (($("#Price").val() >= filterResults[i].Price || $("#Price").val() == "0,00") &&
+            for (var i = 0; i < filterResults.length; i++) {
+
+                if (
+
+                    ($("#Price").val() >= filterResults[i].Price || $("#Price").val() == "0,00" || $("#Price").val() == "" ) &&
                     ($("#Type").val() == filterResults[i].Type || $("#Type").val() == "Alla") &&
                     ($("#Gear").val() == filterResults[i].Gear || $("#Gear").val() == "Alla") &&
                     ($("#Fuel").val() == filterResults[i].Fuel || $("#Fuel").val() == "Alla") &&
@@ -115,10 +121,9 @@
                     ($("#Pets").is(":checked") == filterResults[i].Pets || $("#Pets").is(":checked") == false))
                 {
 
-                    console.log(filterResults[i].Id);
-                    var outerDiv = $(`<div class="card mb-2 list zoomMin shadow bg-white rounded" onclick="window.location='http://google.com';">`);
-                    var cardDiv = $(`<div class="row list" id="#Card-${filterResults[i].Id}">`);
-                    var imgdiv = $('<div class="col-md-4 list">');
+                    var outerDiv = $(`<div onclick="window.location='/car/details/${filterResults[i].Id}'" class="card mb-2 list zoomMin shadow bg-white rounded">`);
+                var cardDiv = $('<div class="row list">');
+                var imgdiv = $('<div class="col-md-4 list">');
                     var img = $(`<img class="w-100 list" src="/${filterResults[i].ImgUrl}">`);
                     var cardBody = $('<div class="col-md-8 px-3 list" style="padding: 15px;">');
                     var row = $('<div class="row h-100 list">');
@@ -128,8 +133,8 @@
                     var rating = $(`<h6 class="h6 list">${filterResults[i].Rating}</h6>`);
                     var dis = Math.floor(filterResults[i].Distance);
 
-                    var distance = $(`<small class="small list" style="Height: 10%; Position: Absolute; Bottom: 15px;">${dis} km bort</small>`);
-                    var carFooter = $('<div class="col-md-4 list">');
+                var distance = $(`<small class="small list" style="Height: 10%; Position: Absolute; Bottom: 15px;">${dis} km bort</small>`);
+                var carFooter = $('<div class="col-md-4 list">');
 
                     var price = $(`<strong class="strong list" style="float: right; margin: 10px;"> ${filterResults[i].Price} kr/dag</strong>`);
                     
@@ -145,16 +150,17 @@
                 cardDiv.append(imgdiv);
                 cardDiv.append(cardBody);
                 outerDiv.append(cardDiv);
-                $("#hej").append(outerDiv);
+                $("#filterResults").append(outerDiv);
 
                 }
 
+               
             }
         }
 
         $("#Search").change(function () {
 
-            $("#hej").empty();
+            $("#filterResults").empty();
             renderSearchResult();
         });
 

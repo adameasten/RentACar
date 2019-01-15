@@ -10,6 +10,8 @@
             </a>
             <a href="#" id="SecoundLink" class="list-group-item list-group-item-action">Mina Bilar</a>
             <a href="#" id="ThirdLink" class="list-group-item list-group-item-action">Mina Bokningar</a>
+            <a href="#" id="FourthLink" class="list-group-item list-group-item-action">Mina Omdömmen</a>
+
             <div class="membership-div">
                 <h5>Medlem sedan</h5>
                 <p>@Model.DateJoined</p>
@@ -108,7 +110,7 @@
     
   
 
-    <h2 id="MinaBilar" class="col-12 mt-5 pl-0">Mina bilar</h2>
+    <h2 id="MinaBilar" class="col-12 mt-5 ml-0 float-left pl-0">Mina bilar</h2>
 
     <div class="container mt-1 row" style="max-width:960px">
 
@@ -125,23 +127,26 @@
 
     <h2 class="mb-3 mt-5"id="MinaBokningar">Mina Bokningar</h2>
 
-    <div class="container mt-1 row mb-5" style="max-width:960px">
+    <div class="container row" style="max-width:960px">
 
-        <div class="card-deck">
+        <div class="card-deck mb-2 mt-1">
             @foreach (var booking in Model.MyBookings)
             {
                 <partial name="_MyBookings" model="booking" />
             }
         </div>
-    <div class="render-comments">
-        @foreach (var review in Model.MyReviews)
-        {
-            <partial name="_MyRatedCars" model="review"/>
-        }
-    </div>
-    </div>
+        <h2 class="mb-3 mt-5" id="MinaOmdommen">Mina omdömmen</h2>
 
-</div>
+        <div class="card-deck mb-5">
+
+            @foreach (var review in Model.MyReviews)
+            {
+                <partial name="_MyRatedCars" model="review" />
+            }
+
+        </div>
+
+    </div>
     <script>
         $(function () {
 
@@ -170,6 +175,11 @@
             $("#ThirdLink").click(function (e) {
                 e.preventDefault();
                 var elmnt = document.getElementById("MinaBokningar");
+                elmnt.scrollIntoView(true);
+            })
+            $("#FourthLink").click(function (e) {
+                e.preventDefault();
+                var elmnt = document.getElementById("MinaOmdommen");
                 elmnt.scrollIntoView(true);
             })
 
