@@ -11,8 +11,8 @@
                 <h2>Filtrera</h2>
             </div>
 
-            <div class="card-body" >
-                
+            <div class="card-body">
+
                 <form id="Search">
                     <div class="form-group">
                         <label asp-for="Price"></label>
@@ -77,12 +77,12 @@
                             </div>
                         </div>
                     </div>
-                        <div class="form-group">
-                            <div class="form-check">
-                                <input class="form-check-input" asp-for="Pets" type="checkbox" />
-                                <label asp-for="Pets"></label>
-                            </div>
+                    <div class="form-group">
+                        <div class="form-check">
+                            <input class="form-check-input" asp-for="Pets" type="checkbox" />
+                            <label asp-for="Pets"></label>
                         </div>
+                    </div>
                 </form>
             </div>
 
@@ -90,27 +90,8 @@
         </div>
     </div>
     <div class="col-12 col-md-9">
+        <div class="container py-3" id="filterResults">
 
-        <div class="container py-3" id="hej">
-
-            @*@foreach (var item in Model.SearchResult)
-                {
-                    <div class="col-6 col-lg-4">
-                        <div class="card">
-                            <img class="card-img-top" src="/@item.ImgUrl">
-                            <div class="card-body">
-                                <h5 class="card-title">@item.Rating</h5>
-                                <strong>@item.Price.ToString("c")</strong>
-                                <h6>@item.YearModel</h6>
-                                <p class="card-text">@item.Model</p>
-                                <a class="btn btn-primary" asp-controller="car" asp-action="details" asp-route-id="@item.Id">Detaljer</a>
-                            </div>
-                            <div class="card-footer">
-                                <small class="text-muted">@item.Distance.ToString("0.0") km bort</small>
-                            </div>
-                        </div>
-                    </div>
-                }*@
         </div>
     </div>
 
@@ -120,17 +101,16 @@
     $(function () {
         var results = JSON.parse('@Html.Raw(Model.SearchResultJson)');
         var filterResults = results;
-     
+
 
         renderSearchResult();
 
         function renderSearchResult() {
             for (var i = 0; i < filterResults.length; i++) {
-               
 
                 if (
 
-                    ($("#Price").val() >= filterResults[i].Price || $("#Price").val() == "0,00") &&
+                    ($("#Price").val() >= filterResults[i].Price || $("#Price").val() == "0,00" || $("#Price").val() == "" ) &&
                     ($("#Type").val() == filterResults[i].Type || $("#Type").val() == "Alla") &&
                     ($("#Gear").val() == filterResults[i].Gear || $("#Gear").val() == "Alla") &&
                     ($("#Fuel").val() == filterResults[i].Fuel || $("#Fuel").val() == "Alla") &&
@@ -143,9 +123,8 @@
                     ($("#Pets").is(":checked") == filterResults[i].Pets || $("#Pets").is(":checked") == false)
                 )
                 {
-                   
 
-                    var outerDiv = $('<div class="card mb-2 list zoomMin shadow bg-white rounded">');
+                    var outerDiv = $(`<div onclick="window.location='/car/details/${filterResults[i].Id}'" class="card mb-2 list zoomMin shadow bg-white rounded">`);
                 var cardDiv = $('<div class="row list">');
                 var imgdiv = $('<div class="col-md-4 list">');
                     var img = $(`<img class="w-100 list" src="/${filterResults[i].ImgUrl}">`);
@@ -156,7 +135,7 @@
                 var cardTitle = $(`<h3 class="card-title list">${filterResults[i].Model}</h3>`);
                     var rating = $(`<h6 class="h6 list">${filterResults[i].Rating}</h6>`);
                     var dis = Math.floor(filterResults[i].Distance);
-                 
+
                 var distance = $(`<small class="small list" style="Height: 10%; Position: Absolute; Bottom: 15px;">${dis} km bort</small>`);
                 var carFooter = $('<div class="col-md-4 list">');
 
@@ -174,55 +153,24 @@
                 cardDiv.append(imgdiv);
                 cardDiv.append(cardBody);
                 outerDiv.append(cardDiv);
-                $("#hej").append(outerDiv);
+                $("#filterResults").append(outerDiv);
 
                 }
+
+               
             }
         }
 
-        $("#Search").change(function (tmp) {
+        $("#Search").change(function () {
 
-            $("#hej").empty();
+            $("#filterResults").empty();
             renderSearchResult();
         });
 
-        //function filterValues(value, id) {
+        $("#Search").submit(function (e) {
 
-        //    switch (id) {
-        //        case "Doors":
-        //            filterResults = results.filter(result => result.Doors >= value);
-        //            break;
-        //        case "Seats":
-        //            filterResults = results.filter(result => result.Seats >= value);
-        //            break;
-        //        case "Gear":
-        //            filterResults = results.filter(result => result.Gear == value);
-        //            break;
-        //        case "Type":
-        //            filterResults = results.filter(result => result.Type == value);
-        //            break;
-        //        case "Fuel":
-        //            filterResults = results.filter(result => result.Fuel == value);
-        //            break;
-        //        case "Ac":
-        //            filterResults = results.filter(result => result.Ac == value);
-        //            break;
-        //        case "ChildSeat":
-        //            filterResults = results.filter(result => result.ChildSeat == value);
-        //            break;
-        //        case "TowBar":
-        //            filterResults = results.filter(result => result.TowBar == value);
-        //            break;
-        //        case "RoofRack":
-        //            filterResults = results.filter(result => result.RoofRack == value);
-        //            break;
-        //        case "Pets":
-        //            filterResults = results.filter(result => result.Pets == value);
-        //            break;
-        //    }
-
-        //    console.log(filterResults);
-        //}
+            e.preventDefault();
+        });
 
     });
 </script>

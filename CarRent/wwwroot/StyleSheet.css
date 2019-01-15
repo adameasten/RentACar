@@ -25,6 +25,13 @@
   transform: scale(1.01);
   /* (150% zoom - Note: if the zoom is too large, it will go outside of the viewport) */ }
 
+#removeLinkStyle a {
+  text-decoration: none;
+  color: #000; }
+
+#removeLinkStyle a:hover {
+  text-decoration: none; }
+
 .section {
   position: relative;
   height: 70vh; }
@@ -300,3 +307,14 @@
   margin: 0 auto;
   padding: 2em 1em; }
 
+.register-form-control {
+  background-color: transparent;
+  border-radius: 0px;
+  border: none;
+  height: 40px;
+  -webkit-box-shadow: none;
+  box-shadow: none;
+  font-size: 15px;
+  color: #222;
+  font-weight: 400;
+  padding: 0; }

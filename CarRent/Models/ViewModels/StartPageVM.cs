@@ -21,10 +21,10 @@ namespace CarRent.Models.ViewModels
         public DateTime EndDate { get; set; } = DateTime.Today.AddDays(1);
 
         [Required]
-        [Display(Name = "Timme")]
+        [Display(Name = "Tid")]
         public string StartingHour { get; set; }
         [Required]
-        [Display(Name = "Timme")]
+        [Display(Name = "Tid")]
         public string EndingHour { get; set; }
 
         public SelectListItem[] TimeStamps { get; set; } =

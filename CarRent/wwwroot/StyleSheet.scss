@@ -37,6 +37,14 @@ body {
     transform: scale(1.01); /* (150% zoom - Note: if the zoom is too large, it will go outside of the viewport) */
 }
 
+#removeLinkStyle a{
+    text-decoration:none; 
+    color:#000;
+}
+
+#removeLinkStyle a:hover{
+    text-decoration: none;
+}
 
 .section {
     position: relative;
