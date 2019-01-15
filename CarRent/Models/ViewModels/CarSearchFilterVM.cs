@@ -16,6 +16,7 @@ namespace CarRent.Models.ViewModels
         [Display(Name = "Pris per dag")]
         public decimal Price { get; set; }
 
+
         public bool Ac { get; set; }
         [Display(Name = "Barnsäte")]
         public bool ChildSeat { get; set; }
