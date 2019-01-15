@@ -2,6 +2,18 @@
 @{
     ViewData["Title"] = "Search";
 }
+
+<div class="row mt-3">
+    <div class="col-8 text-sm-right px-2">
+        <h4 class="my-0 pt-1">Sortera på</h4>
+    </div>
+    <div class="col-3 ml-2">
+        <div class="row justify-content-start">
+            <button class="button-default mr-1" id="sortPrice">Lägsta Pris</button>
+            <button class="button-default ml-1" id="sortDistance">Kortast Avstånd</button>
+        </div>
+    </div>
+</div>
 <div class="row row-offcanvas row-offcanvas-right">
     <div class="col-6 col-md-3 sidebar-offcanvas" id="filter">
 
@@ -105,7 +117,29 @@
 
         renderSearchResult();
 
-        function renderSearchResult() {
+        $("#sortPrice").on("click", function () {
+            $("#filterResults").empty();
+            renderSearchResult("Price");
+        })
+
+        $("#sortDistance").on("click", function () {
+            $("#filterResults").empty();
+            renderSearchResult("Dist");
+        })
+
+        function renderSearchResult(s) {
+
+            if (s == "Price") {
+                filterResults.sort(function (a, b) {
+                    return a.Price - b.Price;
+                })
+            }
+            else if (s == "Dist") {
+                filterResults.sort(function (a, b) {
+                    return a.Distance - b.Distance;
+                })
+            }
+
             for (var i = 0; i < filterResults.length; i++) {
 
                 if (
@@ -157,7 +191,7 @@
 
                 }
 
-               
+
             }
         }
 

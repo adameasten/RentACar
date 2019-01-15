@@ -77,7 +77,7 @@ namespace CarRent.Models
                 Seats = c.Seats,
                 TowBar = c.TowBar,
                 Type = c.Type
-            }).ToArray();
+            }).Where(x => x.Distance < 80).ToArray();
 
             return cars;
         }
