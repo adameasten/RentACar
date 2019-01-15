@@ -3,7 +3,7 @@
   body main {
     background-color: #E0ECE0 !important; }
   body header {
-    background-color: #FFF !important; }
+    background-color: #fff !important; }
   body footer {
     background-color: #88959D !important; }
 
@@ -48,7 +48,7 @@
   justify-content: center; }
 
 .booking-form {
-  background: #FFF;
+  background: white;
   border-radius: 2px; }
 
 .booking-form > form .row.no-margin {
@@ -90,7 +90,7 @@
   padding: 25px; }
 
 .booking-form .submit-btn {
-  background: #009966;
+  background: RGB(61, 168, 134);
   border: none;
   text-transform: capitalize;
   display: block;
@@ -206,8 +206,8 @@
   padding: 2em 1em; }
 
 .button-default {
-  font-size: 0.9em;
-  padding: 0.25em 0.5em;
+  font-size: 1em;
+  padding: 0.5em 0.75em;
   display: inline-block;
   width: auto;
   height: auto;
@@ -278,7 +278,7 @@
   margin: 1em auto;
   text-align: center;
   width: 100%;
-  border: solid black;
+  /*border: solid black;*/
   border-width: thin; }
 
 .my-cars {

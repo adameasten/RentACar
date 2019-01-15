@@ -66,7 +66,7 @@ body {
 }
 
 .booking-form {
-    background: $white;
+    background: white;
     border-radius: 2px;
 }
 
@@ -115,7 +115,7 @@ body {
 }
 
 .booking-form .submit-btn {
-    background: #009966;
+    background: $greenlogocolor;
     border: none;
     text-transform: capitalize;
     display: block;
@@ -295,8 +295,8 @@ body {
     }
 
 .button-default {
-    font-size: 0.9em;
-    padding: 0.25em 0.5em;
+    font-size: 1em;
+    padding: 0.5em 0.75em;
     display: inline-block;
     width: auto;
     height: auto;
@@ -383,7 +383,7 @@ body {
     margin:1em auto;   
     text-align: center;
     width:100%;
-    border: solid black;
+    /*border: solid black;*/
     border-width: thin;
 }
 
