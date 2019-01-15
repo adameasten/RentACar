@@ -32,7 +32,7 @@ namespace CarRent
         public void ConfigureServices(IServiceCollection services)
         {
 
-            connString = configuration["DeafaultConnection"];
+            connString = configuration["DefaultConnection"];
             
             services.AddTransient<CarServices>();
 
