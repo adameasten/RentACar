@@ -1,53 +1,228 @@
-﻿@model CarSearchVM[]
+﻿@model CarSearchFilterVM
 @{
     ViewData["Title"] = "Search";
 }
-
-
 <div class="row row-offcanvas row-offcanvas-right">
-    <div class="col-6 col-md-4 sidebar-offcanvas py-3" id="filter">
-        <div class="list-group">
-            <a href="#" class="list-group-item">FiltreringsA</a>
-            <a href="#" class="list-group-item">FiltreringsA</a>
-            <a href="#" class="list-group-item">FiltreringsA</a>
-            <a href="#" class="list-group-item">FiltreringsA</a>
-        </div>
-    </div>
-    <div class="col-12 col-md-8">
-        <div class="container py-3">
-            @foreach (var item in Model)
-            {
-                <div class="card mb-2 zoomMin shadow bg-white rounded" id="Card-@item.Id">
+    <div class="col-6 col-md-3 sidebar-offcanvas" id="filter">
+
+        <div class="card m-1 shadow bg-white rounded mt-3" style="min-width: 245px;">
+            @*<img class="card-img-top" src="/@Model.ImgUrl" alt="Card image cap">*@
+            <div class="card-header text-center">
+                <h2>Filtrera</h2>
+            </div>
+
+            <div class="card-body" >
+                
+                <form id="Search">
+                    <div class="form-group">
+                        <label asp-for="Price"></label>
+                        <input class="form-control" asp-for="Price" />
+                    </div>
+                    <div class="form-group">
+                        <label asp-for="Type"></label>
+                        <select class="form-control" asp-for="Type"
+                                asp-items="Model.TypeItems"></select>
+                        <span asp-validation-for="Type"></span>
+                    </div>
+
+                    <div class="form-group">
+                        <label asp-for="GearItems"></label>
+                        <select class="form-control" asp-for="Gear"
+                                asp-items="Model.GearItems"></select>
+                        <span asp-validation-for="Gear"></span>
+                    </div>
+                    <div class="form-group">
+                        <label asp-for="FuelItems"></label>
+                        <select class="form-control" asp-for="Fuel"
+                                asp-items="Model.FuelItems"></select>
+                        <span asp-validation-for="Fuel"></span>
+                    </div>
+                    <div class="form-group">
+                        <label asp-for="SeatsItem"></label>
+                        <select class="form-control" asp-for="Seats"
+                                asp-items="Model.SeatsItem"></select>
+                        <span asp-validation-for="Seats"></span>
+                    </div>
+                    <div class="form-group">
+                        <label asp-for="DoorsItem"></label>
+                        <select class="form-control" asp-for="Doors"
+                                asp-items="Model.DoorsItem"></select>
+                        <span asp-validation-for="Doors"></span>
+                    </div>
                     <div class="row">
-                        <div class="col-md-4">
-                            <img src="/@item.ImgUrl" class="w-100">
+                        <div class="form-group pl-3 pr-3">
+                            <div class="form-check">
+                                <input class="form-check-input" asp-for="Ac" type="checkbox" />
+                                <label class="form-check-label" asp-for="Ac"></label>
+                            </div>
                         </div>
-                        <div class="col-md-8 px-3" style="padding:15px;">
-                            <div class="row h-100">
-                                <div class="col-md-8">
-                                    <div class="h-100">
-                                        <h3 class="card-title">@item.Model</h3>
-                                        <h6>@item.Rating</h6>
-                                        <small style="height:10%; position:absolute; bottom:15px;">@item.Distance.ToString("0.0") km bort</small>
-                                    </div>
-                                </div>
-                                <div class="col-md-4">
-                                    <strong style="float:right; margin:10px;">@item.Price.ToString("0")kr/dag</strong>
-                                </div>
+                        <div class="form-group pl-5">
+                            <div class="form-check">
+                                <input class="form-check-input" asp-for="ChildSeat" type="checkbox" />
+                                <label class="form-check-label" asp-for="ChildSeat"></label>
                             </div>
                         </div>
                     </div>
-                </div>
-                <script>
-                $(function() {
+                    <div class="row">
+                        <div class="form-group pl-3">
+                            <div class="form-check">
+                                <input class="form-check-input" asp-for="TowBar" type="checkbox" />
+                                <label asp-for="TowBar"></label>
+                            </div>
+                        </div>
+                        <div class="form-group pl-3">
+                            <div class="form-check">
+                                <input class="form-check-input" asp-for="RoofRack" type="checkbox" />
+                                <label asp-for="RoofRack"></label>
+                            </div>
+                        </div>
+                    </div>
+                        <div class="form-group">
+                            <div class="form-check">
+                                <input class="form-check-input" asp-for="Pets" type="checkbox" />
+                                <label asp-for="Pets"></label>
+                            </div>
+                        </div>
+                </form>
+            </div>
 
-                    $('body').on('click', '#Card-@item.Id', function() {
-                        console.log(@item.Id);
-                        window.location = "/Car/Details/@item.Id";
-                    });
-                     });
-                </script>
-            }
+
         </div>
     </div>
+    <div class="col-12 col-md-9">
+
+        <div class="container py-3" id="hej">
+
+            @*@foreach (var item in Model.SearchResult)
+                {
+                    <div class="col-6 col-lg-4">
+                        <div class="card">
+                            <img class="card-img-top" src="/@item.ImgUrl">
+                            <div class="card-body">
+                                <h5 class="card-title">@item.Rating</h5>
+                                <strong>@item.Price.ToString("c")</strong>
+                                <h6>@item.YearModel</h6>
+                                <p class="card-text">@item.Model</p>
+                                <a class="btn btn-primary" asp-controller="car" asp-action="details" asp-route-id="@item.Id">Detaljer</a>
+                            </div>
+                            <div class="card-footer">
+                                <small class="text-muted">@item.Distance.ToString("0.0") km bort</small>
+                            </div>
+                        </div>
+                    </div>
+                }*@
+        </div>
+    </div>
+
 </div>
+
+<script>
+    $(function () {
+        var results = JSON.parse('@Html.Raw(Model.SearchResultJson)');
+        var filterResults = results;
+     
+
+        renderSearchResult();
+
+        function renderSearchResult() {
+            for (var i = 0; i < filterResults.length; i++) {
+               
+
+                if (
+
+                    ($("#Price").val() >= filterResults[i].Price || $("#Price").val() == "0,00") &&
+                    ($("#Type").val() == filterResults[i].Type || $("#Type").val() == "Alla") &&
+                    ($("#Gear").val() == filterResults[i].Gear || $("#Gear").val() == "Alla") &&
+                    ($("#Fuel").val() == filterResults[i].Fuel || $("#Fuel").val() == "Alla") &&
+                    ($("#Seats").val() >= filterResults[i].Seats || $("#Seats").val() == null) &&
+                    ($("#Doors").val() >= filterResults[i].Doors || $("#Doors").val() == null) &&
+                    ($("#Ac").is(":checked") == filterResults[i].Ac || $("#Ac").is(":checked") == false) &&
+                    ($("#ChildSeat").is(":checked") == filterResults[i].ChildSeat || $("#ChildSeat").is(":checked") == false) &&
+                    ($("#TowBar").is(":checked") == filterResults[i].TowBar || $("#TowBar").is(":checked") == false) &&
+                    ($("#RoofRack").is(":checked") == filterResults[i].RoofRack || $("#RoofRack").is(":checked") == false) &&
+                    ($("#Pets").is(":checked") == filterResults[i].Pets || $("#Pets").is(":checked") == false)
+                )
+                {
+                   
+
+                    var outerDiv = $('<div class="card mb-2 list zoomMin shadow bg-white rounded">');
+                var cardDiv = $('<div class="row list">');
+                var imgdiv = $('<div class="col-md-4 list">');
+                    var img = $(`<img class="w-100 list" src="/${filterResults[i].ImgUrl}">`);
+                var cardBody = $('<div class="col-md-8 px-3 list" style="padding: 15px;">');
+                var row = $('<div class="row h-100 list">');
+                var div = $('<div class="col-md-8 list">');
+                var div2 = $('<div class="h-100 list">');
+                var cardTitle = $(`<h3 class="card-title list">${filterResults[i].Model}</h3>`);
+                    var rating = $(`<h6 class="h6 list">${filterResults[i].Rating}</h6>`);
+                    var dis = Math.floor(filterResults[i].Distance);
+                 
+                var distance = $(`<small class="small list" style="Height: 10%; Position: Absolute; Bottom: 15px;">${dis} km bort</small>`);
+                var carFooter = $('<div class="col-md-4 list">');
+
+                var price = $(`<strong class="strong list" style="float: right; margin: 10px;"> ${filterResults[i].Price} kr/dag</strong>`);
+
+                carFooter.append(price);
+                div2.append(cardTitle);
+                div2.append(rating);
+                div2.append(distance);
+                div.append(div2);
+                row.append(div);
+                row.append(carFooter);
+                cardBody.append(row);
+                imgdiv.append(img);
+                cardDiv.append(imgdiv);
+                cardDiv.append(cardBody);
+                outerDiv.append(cardDiv);
+                $("#hej").append(outerDiv);
+
+                }
+            }
+        }
+
+        $("#Search").change(function (tmp) {
+
+            $("#hej").empty();
+            renderSearchResult();
+        });
+
+        //function filterValues(value, id) {
+
+        //    switch (id) {
+        //        case "Doors":
+        //            filterResults = results.filter(result => result.Doors >= value);
+        //            break;
+        //        case "Seats":
+        //            filterResults = results.filter(result => result.Seats >= value);
+        //            break;
+        //        case "Gear":
+        //            filterResults = results.filter(result => result.Gear == value);
+        //            break;
+        //        case "Type":
+        //            filterResults = results.filter(result => result.Type == value);
+        //            break;
+        //        case "Fuel":
+        //            filterResults = results.filter(result => result.Fuel == value);
+        //            break;
+        //        case "Ac":
+        //            filterResults = results.filter(result => result.Ac == value);
+        //            break;
+        //        case "ChildSeat":
+        //            filterResults = results.filter(result => result.ChildSeat == value);
+        //            break;
+        //        case "TowBar":
+        //            filterResults = results.filter(result => result.TowBar == value);
+        //            break;
+        //        case "RoofRack":
+        //            filterResults = results.filter(result => result.RoofRack == value);
+        //            break;
+        //        case "Pets":
+        //            filterResults = results.filter(result => result.Pets == value);
+        //            break;
+        //    }
+
+        //    console.log(filterResults);
+        //}
+
+    });
+</script>
