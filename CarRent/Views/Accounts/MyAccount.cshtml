@@ -108,44 +108,45 @@
 
     </div>
 
+    <div class="offset-1">
+
+        <h2 id="MinaBilar" class="col-12 mt-5 ml-0 float-left pl-0">Mina bilar</h2>
+
+        <div class="container mt-1 row" style="max-width:1035px">
 
 
-    <h2 id="MinaBilar" class="col-12 mt-5 ml-0 float-left pl-0">Mina bilar</h2>
 
-    <div class="container mt-1 row" style="max-width:1035px">
+            <div class="card-deck">
 
-
-
-        <div class="card-deck">
-
-            @foreach (var carCard in Model.CarCards)
-            {
-                <partial name="_MyCars" model="carCard" />
-            }
-        </div>
-    </div>
-
-    <h2 class="mb-3 mt-5" id="MinaBokningar">Mina Bokningar</h2>
-
-    <div class="container row" style="max-width:1035px">
-
-        <div class="card-deck mb-2 mt-1">
-            @foreach (var booking in Model.MyBookings)
-            {
-                <partial name="_MyBookings" model="booking" />
-            }
-        </div>
-        <h2 class="mb-3 mt-5" id="MinaOmdommen">Mina omdömmen</h2>
-
-        <div class="card-deck mb-5">
-
-            @foreach (var review in Model.MyReviews)
-            {
-                <partial name="_MyRatedCars" model="review" />
-            }
-
+                @foreach (var carCard in Model.CarCards)
+                {
+                    <partial name="_MyCars" model="carCard" />
+                }
+            </div>
         </div>
 
+        <h2 class="mb-3 mt-5" id="MinaBokningar">Mina Bokningar</h2>
+
+        <div class="container row" style="max-width:1035px">
+
+            <div class="card-deck mb-2 mt-1">
+                @foreach (var booking in Model.MyBookings)
+                {
+                    <partial name="_MyBookings" model="booking" />
+                }
+            </div>
+            <h2 class="mb-3 mt-5" id="MinaOmdommen">Mina omdömmen</h2>
+
+            <div class="card-deck mb-5">
+
+                @foreach (var review in Model.MyReviews)
+                {
+                    <partial name="_MyRatedCars" model="review" />
+                }
+
+            </div>
+
+        </div>
     </div>
 </div>
 <script>
