@@ -37,5 +37,11 @@ namespace CarRent.Controllers
 
             return PartialView("_NearbyCar", result);
         }
+
+        [HttpGet]
+        public IActionResult Generalterms()
+        {
+            return View();
+        }
     }
 }

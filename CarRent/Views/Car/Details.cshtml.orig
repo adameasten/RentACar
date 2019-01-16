@@ -149,7 +149,20 @@
                                                     {
                                                         <td>
 
->>>>>>> axelss
+
+
+                    <div class="col">
+                        <div class="card mt-3 mb-3 shadow bg-white rounded" style="width: 324px; min-height: 245px">
+                            <div class="card-body">
+                                @*<h5 class="card-title">Tillbehör</h5>*@
+                                <p class="card-text">
+                                    <table class="table">
+                                        <tbody>
+                                            <tr>
+                                                <th scope="row">Husdjur</th>
+                                                @{ if (@Model.car.Pets != null && Model.car.Pets == true)
+                                                    {
+                                                        <td>
                                                             <i class="fas fa-check-circle pl-5" style="color:green"></i>
                                                         </td>
                                                     }
@@ -162,18 +175,28 @@
                                                 }
                                             </tr>
                                             <tr>
-<<<<<<< HEAD
-                                                <th scope="row">AC</th>
-                                                @{ if (@Model.car.Ac != null && Model.car.Ac == true)
-                                                    {
-                                                        <td>
-=======
-                                                <th scope="row">Ac</th>
-                                                @{ if (@Model.car.Ac != null && @Model.car.Ac == true)
+                                                <th scope="row">Tackräcke</th>
+                                                @{ if (@Model.car.RoofRack != null && Model.car.RoofRack == true)
                                                     {
                                                         <td>
 
->>>>>>> axelss
+                                                            <i class="fas fa-check-circle pl-5" style="color:green"></i>
+                                                        </td>
+                                                    }
+                                                    else
+                                                    {
+                                                        <td>
+                                                            <i class="fas fa-times-circle pl-5" style="color:red"></i>
+                                                        </td>
+<<<<<<< HEAD
+                                                    }
+                                                }
+                                            </tr>
+                                            <tr>
+                                                <th scope="row">Dragkrok</th>
+                                                @{ if (@Model.car.TowBar != null && Model.car.TowBar == true)
+                                                    {
+                                                        <td>
                                                             <i class="fas fa-check-circle pl-5" style="color:green"></i>
                                                         </td>
                                                     }
@@ -185,14 +208,44 @@
                                                     }
                                                 }
                                             </tr>
-<<<<<<< HEAD
+                                            <tr>
+                                                <th scope="row">Barnstol</th>
+                                                @{ if (@Model.car.ChildSeat != null && Model.car.ChildSeat == true)
+                                                    {
+                                                        <td>
+                                                            <i class="fas fa-check-circle pl-5" style="color:green"></i>
+                                                        </td>
+                                                    }
+                                                    else
+                                                    {
+                                                        <td>
+                                                            <i class="fas fa-times-circle pl-5" style="color:red"></i>
+                                                        </td>
+                                                    }
+                                                }
+                                            </tr>
+                                            <tr>
+                                                <th scope="row">AC</th>
+                                                @{ if (@Model.car.Ac != null && Model.car.Ac == true)
+                                                    {
+                                                        <td>
+                                                            <i class="fas fa-check-circle pl-5" style="color:green"></i>
+                                                        </td>
+                                                    }
+                                                    else
+                                                    {
+                                                        <td>
+                                                            <i class="fas fa-times-circle pl-5" style="color:red"></i>
+                                                        </td>
+=======
+>>>>>>> master
+                                                    }
+                                                }
+                                            </tr>
                                             @*<li>Takräcke: @Model.car.RoofRack</li>
                                                 <li>Dragkrok: @Model.car.TowBar</li>
                                                 <li>Barnstol: @Model.car.ChildSeat</li>
                                                 <li>Ac: @Model.car.Ac</li>*@
-=======
-
->>>>>>> axelss
                                         </tbody>
                                     </table>
                                 </p>

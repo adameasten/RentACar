@@ -16,14 +16,11 @@
 </div>
 <div class="row row-offcanvas row-offcanvas-right">
     <div class="col-6 col-md-3 sidebar-offcanvas" id="filter">
-
         <div class="card m-1 shadow bg-white rounded mt-3" style="min-width: 245px;">
             <div class="card-header text-center">
                 <h2>Filtrera</h2>
             </div>
-
             <div class="card-body">
-
                 <form id="Search">
                     <div class="form-group">
                         <label asp-for="Price"></label>
@@ -96,8 +93,6 @@
                     </div>
                 </form>
             </div>
-
-
         </div>
     </div>
     <div class="col-12 col-md-9">
@@ -153,8 +148,7 @@
                     ($("#ChildSeat").is(":checked") == filterResults[i].ChildSeat || $("#ChildSeat").is(":checked") == false) &&
                     ($("#TowBar").is(":checked") == filterResults[i].TowBar || $("#TowBar").is(":checked") == false) &&
                     ($("#RoofRack").is(":checked") == filterResults[i].RoofRack || $("#RoofRack").is(":checked") == false) &&
-                    ($("#Pets").is(":checked") == filterResults[i].Pets || $("#Pets").is(":checked") == false)
-                )
+                    ($("#Pets").is(":checked") == filterResults[i].Pets || $("#Pets").is(":checked") == false))
                 {
 
                     var outerDiv = $(`<div onclick="window.location='/car/details/${filterResults[i].Id}'" class="card mb-2 list zoomMin shadow bg-white rounded">`);
@@ -172,7 +166,11 @@
                 var distance = $(`<small class="small list" style="Height: 10%; Position: Absolute; Bottom: 15px;">${dis} km bort</small>`);
                 var carFooter = $('<div class="col-md-4 list">');
 
-                var price = $(`<strong class="strong list" style="float: right; margin: 10px;"> ${filterResults[i].Price} kr/dag</strong>`);
+                    var price = $(`<strong class="strong list" style="float: right; margin: 10px;"> ${filterResults[i].Price} kr/dag</strong>`);
+
+                    for (var j = 0; j < filterResults[i].Rating; j++) {
+                        rating.prepend('<i class=" fa fa-star"> </i>');
+                    }
 
                 carFooter.append(price);
                 div2.append(cardTitle);
@@ -205,5 +203,5 @@
             e.preventDefault();
         });
 
-    });
+ });
 </script>

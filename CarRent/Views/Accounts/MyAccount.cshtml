@@ -1,5 +1,5 @@
 ﻿@model MyAccountVM
-<div class="container pt-3" >
+<div class="container pt-3">
 </div>
 <div class="container row">
 
@@ -10,6 +10,8 @@
             </a>
             <a href="#" id="SecoundLink" class="list-group-item list-group-item-action">Mina Bilar</a>
             <a href="#" id="ThirdLink" class="list-group-item list-group-item-action">Mina Bokningar</a>
+            <a href="#" id="FourthLink" class="list-group-item list-group-item-action">Mina Omdömmen</a>
+
             <div class="membership-div">
                 <h5>Medlem sedan</h5>
                 <p>@Model.DateJoined</p>
@@ -20,7 +22,7 @@
                 <div class="card-header">
                     <h2>Personuppgifter</h2>
                 </div>
-               
+
                 <form asp-controller="Accounts" asp-action="MyAccount">
 
                     <div class="row m-3 " style="max-width:560px">
@@ -105,12 +107,12 @@
         </div>
 
     </div>
-    
-  
 
-    <h2 id="MinaBilar" class="col-12 mt-5 pl-0">Mina bilar</h2>
 
-    <div class="container mt-1 row" style="max-width:960px">
+
+    <h2 id="MinaBilar" class="col-12 mt-5 ml-0 float-left pl-0">Mina bilar</h2>
+
+    <div class="container mt-1 row" style="max-width:1035px">
 
 
 
@@ -123,55 +125,64 @@
         </div>
     </div>
 
-    <h2 class="mb-3 mt-5"id="MinaBokningar">Mina Bokningar</h2>
+    <h2 class="mb-3 mt-5" id="MinaBokningar">Mina Bokningar</h2>
 
-    <div class="container mt-1 row mb-5" style="max-width:960px">
+    <div class="container row" style="max-width:1035px">
 
-        <div class="card-deck">
+        <div class="card-deck mb-2 mt-1">
             @foreach (var booking in Model.MyBookings)
             {
                 <partial name="_MyBookings" model="booking" />
             }
         </div>
-    <div class="render-comments">
-        @foreach (var review in Model.MyReviews)
-        {
-            <partial name="_MyRatedCars" model="review"/>
-        }
-    </div>
-    </div>
+        <h2 class="mb-3 mt-5" id="MinaOmdommen">Mina omdömmen</h2>
 
+        <div class="card-deck mb-5">
+
+            @foreach (var review in Model.MyReviews)
+            {
+                <partial name="_MyRatedCars" model="review" />
+            }
+
+        </div>
+
+    </div>
 </div>
-    <script>
-        $(function () {
+<script>
+    $(function () {
 
 
 
-            $("#PassWordField").hide();
+        $("#PassWordField").hide();
 
-            $("#ChangePassword").click(function (e) {
-                e.preventDefault();
+        $("#ChangePassword").click(function (e) {
+            e.preventDefault();
 
-                $("#PassWordField").show();
-                $(this).hide();
-
-            })
-
-            $("#FirstLink").click(function (e) {
-                e.preventDefault();
-                var elmnt = document.getElementById("MinaPersonuppgifter");
-                elmnt.scrollIntoView(true);
-            })
-            $("#SecoundLink").click(function (e) {
-                e.preventDefault();
-                var elmnt = document.getElementById("MinaBilar");
-                elmnt.scrollIntoView(true);
-            })
-            $("#ThirdLink").click(function (e) {
-                e.preventDefault();
-                var elmnt = document.getElementById("MinaBokningar");
-                elmnt.scrollIntoView(true);
-            })
+            $("#PassWordField").show();
+            $(this).hide();
 
         })
-    </script>
+
+        $("#FirstLink").click(function (e) {
+            e.preventDefault();
+            var elmnt = document.getElementById("MinaPersonuppgifter");
+            elmnt.scrollIntoView(true);
+        })
+        $("#SecoundLink").click(function (e) {
+            e.preventDefault();
+            var elmnt = document.getElementById("MinaBilar");
+            elmnt.scrollIntoView(true);
+        })
+        $("#ThirdLink").click(function (e) {
+            e.preventDefault();
+            var elmnt = document.getElementById("MinaBokningar");
+            elmnt.scrollIntoView(true);
+        })
+        $("#FourthLink").click(function (e) {
+            e.preventDefault();
+            var elmnt = document.getElementById("MinaOmdommen");
+            elmnt.scrollIntoView(true);
+        })
+
+    })
+</script>
