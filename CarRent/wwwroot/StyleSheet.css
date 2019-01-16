@@ -318,3 +318,23 @@
   color: #222;
   font-weight: 400;
   padding: 0; }
+
+/*.carousel-inner > .item {
+    height: 100vh !important;
+}
+
+.carousel-inner > .item > img {
+    position: absolute !important;
+    top: 50% !important;
+    left: 50% !important;
+    -webkit-transform: translate(-50%, -50%) !important;
+    -ms-transform: translate(-50%, -50%) !important;
+    transform: translate(-50%, -50%) !important;
+    max-height: 800px !important;
+    width: auto !important;
+}
+
+.carousel-control.left,
+.carousel-control.right {
+    background-image: none !important;
+}*/

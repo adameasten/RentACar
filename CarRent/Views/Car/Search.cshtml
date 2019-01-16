@@ -18,7 +18,6 @@
     <div class="col-6 col-md-3 sidebar-offcanvas" id="filter">
 
         <div class="card m-1 shadow bg-white rounded mt-3" style="min-width: 245px;">
-            @*<img class="card-img-top" src="/@Model.ImgUrl" alt="Card image cap">*@
             <div class="card-header text-center">
                 <h2>Filtrera</h2>
             </div>
@@ -161,7 +160,7 @@
                     var outerDiv = $(`<div onclick="window.location='/car/details/${filterResults[i].Id}'" class="card mb-2 list zoomMin shadow bg-white rounded">`);
                 var cardDiv = $('<div class="row list">');
                 var imgdiv = $('<div class="col-md-4 list">');
-                    var img = $(`<img class="w-100 list" src="/${filterResults[i].ImgUrl}">`);
+                    var img = $(`<img class="w-100 list" src="${filterResults[i].ImgUrl}">`);
                 var cardBody = $('<div class="col-md-8 px-3 list" style="padding: 15px;">');
                 var row = $('<div class="row h-100 list">');
                 var div = $('<div class="col-md-8 list">');

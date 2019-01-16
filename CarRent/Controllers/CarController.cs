@@ -25,10 +25,10 @@ namespace CarRent.Controllers
             this.userManager = userManager;
         }
 
-        public IActionResult Details(int ID)
+        public async Task<IActionResult> Details(int ID)
         {
             Response.Cookies.Append("DetailsId", ID.ToString());
-            var model = services.FindCarByID(ID);
+            var model = await services.FindCarByIDAsync(ID);
 
             return View(model);
 
@@ -38,7 +38,6 @@ namespace CarRent.Controllers
         [HttpGet]
         public IActionResult CarRegistration()
         {
-
             return View(new CarRegistrationPostVM());
 
         }

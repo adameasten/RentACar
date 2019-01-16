@@ -16,6 +16,9 @@ using Newtonsoft.Json;
 using NetTopologySuite.Geometries;
 using Microsoft.Extensions.Configuration;
 using Microsoft.AspNetCore.Mvc.Rendering;
+using Microsoft.WindowsAzure.Storage.Blob;
+using Microsoft.WindowsAzure.Storage.Auth;
+using Microsoft.WindowsAzure.Storage;
 
 namespace CarRent.Models
 {
@@ -35,10 +38,10 @@ namespace CarRent.Models
             this.configuration = config;
         }
 
-        public CarDetailsVM FindCarByID(int ID)
+        public async Task<CarDetailsVM> FindCarByIDAsync(int ID)
         {
             var carr = context.Car
-             .Where(c => c.Id == ID)
+             .Where (c => c.Id == ID)
             .Select(d => new CarDetailsVM()
             {
                 car = new CarVM()
@@ -58,7 +61,7 @@ namespace CarRent.Models
                     Seats = d.Seats,
                     TowBar = d.TowBar,
                     Type = d.Type,
-                    ImgUrlArr = d.CarImage
+                    ImgUrlArr = d.CarImage 
                     .Select(i => i.ImgUrl).ToList()
                 },
                 reviews = context.Rent
@@ -79,7 +82,20 @@ namespace CarRent.Models
                 }
             }).FirstOrDefault();
 
+            //carr.car.ImgUrlArr = await GetImageUrl(carr.car.ImgUrlArr);
+            carr.car.ImgUrl = carr.car.ImgUrlArr[0];
             return carr;
+        }
+
+        private async Task<List<string>> GetImageUrl(List<string> list)
+        {
+            var imageUrls = new List<string>();
+
+            foreach (var item in list)
+            {
+                imageUrls.Add(await GetThumbNailUrls(item));
+            }
+            return imageUrls;
         }
 
         public CarSearchFilterVM CreateFilterVm(CarSearchVM[] result)
@@ -153,19 +169,9 @@ namespace CarRent.Models
 
         public async Task AddCarToDatabase(CarRegistrationPostVM vm, string userId)
         {
-            string imgUrl = null;
-            if (vm.Image?.Count > 0)
-            {
-                UploadImages(vm);
-                imgUrl = vm.Image[0].FileName;
-            }
-            else
-                imgUrl = "Logo.png";
-
             var coordinate = await GetCoordinates($"{vm.Street},{vm.City}");
             var point = new Point(coordinate);
             point.SRID = 4326;
-
 
             var car = new Car
             {
@@ -186,36 +192,116 @@ namespace CarRent.Models
                 TowBar = vm.TowBar,
                 Type = vm.Type,
                 GeoLocation = point,
-                ImgUrl = imgUrl,
             };
 
             context.Car.Add(car);
 
-            if (vm.Image != null)
+            if (vm.Image?.Count > 0)
             {
-                foreach (var item in vm.Image)
-                {
-                    context.CarImage.Add(new CarImage
-                    {
-                        CarId = car.Id,
-                        ImgUrl = item.FileName,
-                    });
-                }
+                var result = await UploadFileToStorage(vm, car.Id);
             }
+            else
+            {
+                context.CarImage.Add(new CarImage { ImgUrl = "https://carrentimages.blob.core.windows.net/thumbnails/Logo.png", CarId = car.Id });
+
+
+            }
+
+
+
+
             context.SaveChanges();
         }
 
-        public void UploadImages(CarRegistrationPostVM viewModel)
+        //public void UploadImages(CarRegistrationPostVM viewModel)
+        //{
+        //    foreach (var item in viewModel.Image)
+        //    {
+        //        var fileName = Path.Combine(he.WebRootPath, Path.GetFileName(item.FileName));
+        //        item.CopyTo(new FileStream(fileName, FileMode.Create));
+        //    }
+        //}
+
+        public async Task<bool> UploadFileToStorage(CarRegistrationPostVM vM, int id)
         {
-            foreach (var item in viewModel.Image)
+            StorageCredentials storageCredentials = new StorageCredentials(configuration["AzureAccountName"], configuration["AzureAccountKey"]);
+            CloudStorageAccount storageAccount = new CloudStorageAccount(storageCredentials, true);
+            CloudBlobClient blobClient = storageAccount.CreateCloudBlobClient();
+            CloudBlobContainer container = blobClient.GetContainerReference("thumbnails");
+
+            foreach (var item in vM.Image)
             {
-                var fileName = Path.Combine(he.WebRootPath, Path.GetFileName(item.FileName));
-                item.CopyTo(new FileStream(fileName, FileMode.Create));
+                if (IsImage(item))
+                {
+                    if(item.Length > 0)
+                    {
+                        using (Stream stream = item.OpenReadStream())
+                        {
+                            var fileName = Guid.NewGuid().ToString() + item.FileName;
+
+                            context.CarImage.Add(new CarImage { ImgUrl = "https://carrentimages.blob.core.windows.net/thumbnails/"+fileName, CarId = id });
+                            CloudBlockBlob blockBlob = container.GetBlockBlobReference(fileName);
+                            await blockBlob.UploadFromStreamAsync(stream);
+                        }
+                    }
+                }
             }
 
+            return await Task.FromResult(true);
         }
 
-        public string GetContactByID(string ID)
+        public bool IsImage(IFormFile file)
+        {
+            if (file.ContentType.Contains("image"))
+            {
+                return true;
+            }
+
+            string[] formats = new string[] { ".jpg", ".png", ".gif", ".jpeg" };
+
+            return formats.Any(item => file.FileName.EndsWith(item, StringComparison.OrdinalIgnoreCase));
+        }
+
+        public async Task<string> GetThumbNailUrls(string url)
+        {
+            string imageUrl = "";
+
+            StorageCredentials storageCredentials = new StorageCredentials(configuration["AzureAccountName"], configuration["AzureAccountKey"]);
+
+            CloudStorageAccount storageAccount = new CloudStorageAccount(storageCredentials, true);
+
+            CloudBlobClient blobClient = storageAccount.CreateCloudBlobClient();
+
+            CloudBlobContainer container = blobClient.GetContainerReference("thumbnails");
+
+            BlobContinuationToken continuationToken = null;
+
+            BlobResultSegment resultSegment = null;
+
+            //Call ListBlobsSegmentedAsync and enumerate the result segment returned, while the continuation token is non-null.
+            //When the continuation token is null, the last page has been returned and execution can exit the loop.
+            do
+            {
+                //This overload allows control of the page size. You can return all remaining results by passing null for the maxResults parameter,
+                //or by calling a different overload.
+                resultSegment = await container.ListBlobsSegmentedAsync(url, true, BlobListingDetails.All, 10, continuationToken, null, null);
+
+                foreach (var blobItem in resultSegment.Results)
+                {
+                    imageUrl = blobItem.StorageUri.PrimaryUri.ToString();
+                }
+
+                //Get the continuation token.
+                continuationToken = resultSegment.ContinuationToken;
+            }
+
+            while (continuationToken != null);
+            return imageUrl;
+            //return await Task.FromResult(imageUrl);
+        }
+
+
+        public string GetContactByID(string ID) 
         {
 
             string constring = configuration["DefaultConnection"];

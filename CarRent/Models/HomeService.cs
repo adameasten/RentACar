@@ -15,10 +15,12 @@ namespace CarRent.Models
     public class HomeService
     {
         CarRentContext context;
+        CarServices carservices;
 
-        public HomeService(CarRentContext context)
+        public HomeService(CarRentContext context, CarServices carservices)
         {
             this.context = context;
+            this.carservices = carservices;
         }
 
         public async Task<Coordinate> GetCoordinates(string city)
@@ -63,7 +65,7 @@ namespace CarRent.Models
                 Id = c.Id,
                 Model = c.Model,
                 Distance = c.GeoLocation.Distance(point) / 1600,
-                ImgUrl = c.ImgUrl,
+                ImgUrl = c.CarImage.Where(p => p.CarId == c.Id).Select(d => d.ImgUrl).FirstOrDefault(),
                 Price = c.Price,
                 YearModel = c.YearModel,
                 Rating = c.Rent.SelectMany(r => r.Review).Count() > 0 ? c.Rent.SelectMany(r => r.Review).Average(s => s.Rating) : 0,
@@ -77,8 +79,13 @@ namespace CarRent.Models
                 Seats = c.Seats,
                 TowBar = c.TowBar,
                 Type = c.Type
-            }).Where(x => x.Distance < 80).ToArray();
+            }).Where(x => x.Distance < 800).ToArray();
 
+            //foreach (var car in cars)
+            //{
+            //    car.ImgUrl = await carservices.GetThumbNailUrls(car.ImgUrl);
+            //}
+             
             return cars;
         }
 
