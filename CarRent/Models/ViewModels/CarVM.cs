@@ -23,6 +23,5 @@ namespace CarRent.Models.ViewModels
         public bool? Pets { get; set; }
         public decimal Price { get; set; }
         public List<string> ImgUrlArr { get; set; }
-
     }
 }
