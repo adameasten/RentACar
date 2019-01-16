@@ -9,7 +9,7 @@
         <div class="col">
             <div class="row">
                 <div class="col">
-                    <div id="carouselExampleControls" class="carousel slide shadow bg-white rounded mb-2" data-ride="carousel" >
+                    <div id="carouselExampleControls" class="carousel slide shadow bg-white rounded mb-2" data-ride="carousel">
                         <div class="carousel-inner" role="listbox" style="max-width:680px;max-height:560px; min-width:650px">
 
 
@@ -17,16 +17,15 @@
                             @{
                                 int counter = 0;
                                 <div class="carousel-item active">
-                                    <img class="d-block w-100" src="@Model.car.ImgUrlArr[counter++]"  *@>
+                                    <img class="d-block w-100" src="@Model.car.ImgUrlArr[counter++]" *@>
                                 </div>
-                                do
+                                while (counter < @Model.car.ImgUrlArr.Count())
                                 {
                                     <div class="carousel-item">
                                         <img class="d-block w-100" src="@Model.car.ImgUrlArr[counter++]" *@>
                                     </div>
-                                    }
-                                    while (counter < @Model.car.ImgUrlArr.Count());
                                 }
+                            }
 
                         </div>
                         <a class="carousel-control-prev" href="#carouselExampleControls" role="button" data-slide="prev">
