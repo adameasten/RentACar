@@ -126,6 +126,32 @@ namespace CarRent.Models
             carContext.SaveChanges();
         }
 
+        internal void DeleteCar(EditCarVM vm)
+        {
+            var car = carContext.Car.SingleOrDefault(c => c.Id == vm.Id);
+            var rents = carContext.Rent.Where(r => r.CarId == car.Id);
+            var reviews = carContext.Review.Where(r => rents.Select(q => q.Id).Contains(r.Id));
+            var carImages = carContext.CarImage.Where(i => i.CarId == car.Id);
+
+            foreach (var review in reviews)
+            {
+                carContext.Review.Remove(review);
+            }
+
+            foreach (var rent in rents)
+            {
+                carContext.Rent.Remove(rent);
+            }
+
+            foreach (var carImage in carImages)
+            {
+                carContext.CarImage.Remove(carImage);
+            }
+
+            carContext.Car.Remove(car);
+            carContext.SaveChanges();
+        }
+
         public EditCarVM FindCarById(int id)
         {
             var car = carContext.Car
