@@ -2,6 +2,7 @@
 using CarRent.Models.ViewModels;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc.Rendering;
+using Microsoft.EntityFrameworkCore;
 using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
@@ -57,14 +58,14 @@ namespace CarRent.Models
                 .Select(p => new MyCarCard()
                 {
                     Id = p.Id,
-                    ImgUrl = p.CarImage.Where(c => c.CarId == p.Id).Select(d => d.ImgUrl).FirstOrDefault(),
+                    ImgUrl = p.CarImage.Select(d => d.ImgUrl).FirstOrDefault(),
                     Model = p.Model
                 }).ToList(),
                 MyBookings = carContext.Rent
-                .Where(c => c.CustomerId == user.Id).
+                .Where(c => c.CustomerId == user.Id).                
                 Select(p => new MyBookingsVM()
                 {
-                    ImgUrl = p.Car.CarImage.Where(c => c.CarId == p.Id).Select(d => d.ImgUrl).FirstOrDefault(),
+                    ImgUrl = p.Car.CarImage.Select(d => d.ImgUrl).FirstOrDefault(),
                     Model = p.Car.Model,
                     StartTime = p.Datestart,
                     EndTime = p.DateEnd,

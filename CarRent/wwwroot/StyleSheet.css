@@ -409,3 +409,8 @@ footer p {
   width: 20px;
   height: 20px;
   text-align: center; }
+
+.caru-sell img {
+  height: 450px;
+  width: auto;
+  max-height: 450px; }
