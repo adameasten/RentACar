@@ -144,7 +144,7 @@ namespace CarRent.Models
             };
         }
 
-        internal async Task AddRent(CarRentFormVM vM, string userId)
+        internal async Task AddRent(CarRentConfirmVM vM, string userId)
         {
             await context.Rent.AddAsync(new Rent { CarId = vM.CarId, Datestart = vM.StartTime, DateEnd = vM.EndTime, CustomerId = userId });
 

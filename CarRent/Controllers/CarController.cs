@@ -86,9 +86,15 @@ namespace CarRent.Controllers
             return Redirect($"/car/details/{Request.Cookies["DetailsId"]}");
         }
 
+        [HttpPost]
+        public IActionResult ConfirmRent(CarRentFormVM vM)
+        {
+            return View(homeService.MakeConfirmation(vM));
+        }
+
         [Authorize]
         [HttpPost]
-        public async Task<IActionResult> RentCar(CarRentFormVM vM)
+        public async Task<IActionResult> RentCar(CarRentConfirmVM vM)
         {
             //if(!ModelState.IsValid)
             //    return View(vM);

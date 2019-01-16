@@ -82,7 +82,19 @@ namespace CarRent.Models
             return cars;
         }
 
-        internal bool CarIsAvailable(CarRentFormVM vM)
+        internal CarRentConfirmVM MakeConfirmation(CarRentFormVM vM)
+        {
+            return new CarRentConfirmVM
+            {
+                CarId = vM.CarId,
+                CarName = context.Car.SingleOrDefault(c => c.Id == vM.CarId).Model,
+                StartTime = vM.StartTime,
+                EndTime = vM.EndTime,
+                Price = vM.Price
+            };
+        }
+
+        internal bool CarIsAvailable(CarRentConfirmVM vM)
         {
             return CheckAvailability(context.Car.Include(x => x.Rent)
                 .SingleOrDefault(c => c.Id == vM.CarId)
