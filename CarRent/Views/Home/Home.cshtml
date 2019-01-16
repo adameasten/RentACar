@@ -73,12 +73,10 @@
     <script type="text/javascript">
         $(function () {
             if (navigator.geolocation) {
-                console.log("Location1")
                 navigator.geolocation.getCurrentPosition(addLocation, useDefaultPosition);
             }
 
             function useDefaultPosition(error) {
-                console.log(error)
                 $.ajax({
                     url: "Home/GetPartialView",
                     type: "GET",
@@ -93,7 +91,6 @@
             }
 
             function addLocation(position) {
-                console.log(position)
                 $.ajax({
                     url: "/Home/GetPartialView",
                     type: "GET",

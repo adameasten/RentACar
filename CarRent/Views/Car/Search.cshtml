@@ -4,15 +4,11 @@
 }
 <div class="row row-offcanvas row-offcanvas-right">
     <div class="col-6 col-md-3 sidebar-offcanvas" id="filter">
-
         <div class="card m-1 shadow bg-white rounded mt-3" style="min-width: 245px;">
-            @*<img class="card-img-top" src="/@Model.ImgUrl" alt="Card image cap">*@
             <div class="card-header text-center">
                 <h2>Filtrera</h2>
             </div>
-
             <div class="card-body">
-
                 <form id="Search">
                     <div class="form-group">
                         <label asp-for="Price"></label>
@@ -130,14 +126,18 @@
                     var div = $('<div class="col-md-8 list">');
                     var div2 = $('<div class="h-100 list">');
                     var cardTitle = $(`<h3 class="card-title list">${filterResults[i].Model}</h3>`);
-                    var rating = $(`<h6 class="h6 list">${filterResults[i].Rating}</h6>`);
+                    var rating = $(`<h6 class="h6 list">(${filterResults[i].Rating})</h6>`);
                     var dis = Math.floor(filterResults[i].Distance);
 
                 var distance = $(`<small class="small list" style="Height: 10%; Position: Absolute; Bottom: 15px;">${dis} km bort</small>`);
                 var carFooter = $('<div class="col-md-4 list">');
 
                     var price = $(`<strong class="strong list" style="float: right; margin: 10px;"> ${filterResults[i].Price} kr/dag</strong>`);
-                    
+
+                    for (var j = 0; j < filterResults[i].Rating; j++) {
+                        rating.prepend('<i class=" fa fa-star"> </i>');
+                    }
+
                 carFooter.append(price);
                 div2.append(cardTitle);
                 div2.append(rating);
@@ -154,7 +154,7 @@
 
                 }
 
-               
+
             }
         }
 

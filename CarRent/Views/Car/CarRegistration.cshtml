@@ -164,14 +164,12 @@
 
         $("#FindCarByLicense").submit(function (e) {
             e.preventDefault();
-            console.log($("#LicenseValue").val());
             var registration = $("#LicenseValue").val();
             $.getJSON("https://api.biluppgifter.se/api/v1/vehicle/regno/" + registration, {
                 api_token: "3BATNwX7AoEExD7XWq5uQKUSlIbCrplD83EjIkKetb1hXSvnHnv1zwNLtYGE"
             })
 
                 .done(function (data) {
-                    console.log(data);
                     $("#Model").val(data.data.basic.data.make + " " + data.data.basic.data.model);
                     $("#YearModel").val(data.data.basic.data.model_year);
                     $("#Seats").val(data.data.technical.data.number_of_passengers + 1);
@@ -217,10 +215,6 @@
                     }
 
                     $("#Gear").val(transmission);
-
-
-
-
                 });
         });
     });
