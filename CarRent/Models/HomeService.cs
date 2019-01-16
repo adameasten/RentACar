@@ -97,7 +97,7 @@ namespace CarRent.Models
                 StartDate = vM.StartTime,
                 EndDate = vM.EndTime,
                 Price = context.Car.SingleOrDefault(c => c.Id == vM.CarId).Price,
-                Total = ((vM.EndTime - vM.StartTime).Ticks / TimeSpan.TicksPerMinute) * (vM.Price / 60),
+                Total = ((vM.EndTime - vM.StartTime).Ticks / TimeSpan.TicksPerMinute) * (vM.Price / (60 * 24)),
             };
         }
 
