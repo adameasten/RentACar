@@ -1,6 +1,10 @@
 ﻿body main {
   background-color: RGB(244, 246, 246) !important; }
 
+/*.btn-primary, .btn-primary:hover, .btn-primary:active, .btn-primary:visited {
+    background-color: #3DA886 !important;
+    border-color: #3DA886 !important;
+}*/
 .zoom {
   transition: transform .2s;
   /* Animation */ }

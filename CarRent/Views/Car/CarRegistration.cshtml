@@ -2,119 +2,121 @@
 
 
 
-
-<div class="card">
-    <div class="card-header">
-        <form id="FindCarByLicense">
-            <div class="row">
-                <div class="col-md-6">
-                    <input class="form-control" type="text" placeholder="ABC123" id="LicenseValue" />
-                </div>
-                <div class="=col-md-1">
-                    <input type="submit" class="button-default" value="Hitta Bil" />
-                </div>
-            </div>
-        </form>
-    </div>
-    <form enctype="multipart/form-data" asp-controller="Car" asp-action="CarRegistration">
-        <div class="card-body">
-
-            <div class="row h-100">
-                <div class="col-md-6">
-
-                    <label class="form-label" asp-for="Model"></label>
-                    <input class="form-control" asp-for="Model" id="Model" />
-                    <span asp-validation-for="Model"></span>
-
-                    <label class="form-label" asp-for="Km"></label>
-                    <input class="form-control" asp-for="Km" />
-                    <span asp-validation-for="Km"></span>
-
-                    <label class="form-label" asp-for="Price"></label>
-                    <input class="form-control" asp-for="Price" />
-                    <span asp-validation-for="Price"></span>
-
-                    <label class="form-label" asp-for="YearModel"></label>
-                    <input class="form-control" asp-for="YearModel" />
-                    <span asp-validation-for="YearModel"></span>
-
-                    <label class="form-label" asp-for="City"></label>
-                    <input class="form-control" asp-for="City" />
-                    <span asp-validation-for="City"></span>
-
-                    <label class="form-label" asp-for="Street"></label>
-                    <input class="form-control" asp-for="Street" />
-                    <span asp-validation-for="Street"></span>
-
-                    <label class="form-label" asp-for="Description"></label>
-                    <input class="form-control" asp-for="Description" />
-                    <span asp-validation-for="Description"></span>
-
-
-                </div>
-                <div class="col-md-6">
-                    <label class="form-label" asp-for="TypeItems"></label>
-                    <select class="form-control" asp-for="Type" asp-items="Model.TypeItems"></select>
-                    <span asp-validation-for="Type"></span>
-
-                    <label class="form-label" asp-for="GearItems"></label>
-                    <select class="form-control" asp-for="Gear"
-                            asp-items="Model.GearItems"></select>
-                    <span asp-validation-for="Gear"></span>
-
-                    <label class="form-label" asp-for="FuelItems"></label>
-                    <select class="form-control" asp-for="Fuel"
-                            asp-items="Model.FuelItems"></select>
-                    <span asp-validation-for="Fuel"></span>
-
-                    <label class="form-label" asp-for="SeatsItem"></label>
-                    <select class="form-control" asp-for="Seats"
-                            asp-items="Model.SeatsItem"></select>
-                    <span asp-validation-for="Seats"></span>
-
-                    <label class="form-label" asp-for="DoorsItem"></label>
-                    <select class="form-control" asp-for="Doors"
-                            asp-items="Model.DoorsItem"></select>
-                    <span asp-validation-for="Doors"></span>
-
-                    <div class="row">
-                        <div class="col-md-5">
-                            <div class="form-check">
-                                <input class="form-check-input" asp-for="Ac" type="checkbox" />
-                                <label class="form-check-label" asp-for="Ac"></label>
-                            </div>
-                            <div class="form-check">
-                                <input class="form-check-input" asp-for="ChildSeat" type="checkbox" />
-                                <label class="form-check-label" asp-for="ChildSeat"></label>
-                            </div>
-                            <div class="form-check">
-                                <input class="form-check-input" asp-for="TowBar" type="checkbox" />
-                                <label class="form-check-label" asp-for="TowBar"></label>
-                            </div>
+<div class="container justify-content-center row ">
+    <div class="card shadow bg-white rounded mt-5 mb-5">
+        <div class="card-header">
+            
+                <form id="FindCarByLicense">
+                    <div class="container">
+                        <div class="row justify-content-between">
+                            <input class="form-control col-3" type="text" placeholder="   ABC123" id="LicenseValue" />
+                            <input type="submit" role="button" class="btn btn-primary col-3 float-right" value="Hitta Bil" />
+                            
                         </div>
-                        <div class="col-md-5">
-                            <div class="form-check">
-                                <input class="form-check-input" asp-for="Pets" type="checkbox" />
-                                <label class="form-check-label" asp-for="Pets"></label>
+                    </div>
+                </form>
+          
+        </div>
+        <form enctype="multipart/form-data" asp-controller="Car" asp-action="CarRegistration">
+            <div class="card-body">
+
+                <div class="row h-100">
+                    <div class="col-md-6">
+
+                        <label class="form-label" asp-for="Model"></label>
+                        <input class="form-control" asp-for="Model" id="Model" />
+                        <span asp-validation-for="Model"></span>
+
+                        <label class="form-label" asp-for="Km"></label>
+                        <input class="form-control" asp-for="Km" />
+                        <span asp-validation-for="Km"></span>
+
+                        <label class="form-label" asp-for="Price"></label>
+                        <input class="form-control" asp-for="Price" />
+                        <span asp-validation-for="Price"></span>
+
+                        <label class="form-label" asp-for="YearModel"></label>
+                        <input class="form-control" asp-for="YearModel" />
+                        <span asp-validation-for="YearModel"></span>
+
+                        <label class="form-label" asp-for="City"></label>
+                        <input class="form-control" asp-for="City" />
+                        <span asp-validation-for="City"></span>
+
+                        <label class="form-label" asp-for="Street"></label>
+                        <input class="form-control" asp-for="Street" />
+                        <span asp-validation-for="Street"></span>
+
+                        <label class="form-label" asp-for="Description"></label>
+                        <input class="form-control" asp-for="Description" />
+                        <span asp-validation-for="Description"></span>
+
+
+                    </div>
+                    <div class="col-md-6">
+                        <label class="form-label" asp-for="TypeItems"></label>
+                        <select class="form-control" asp-for="Type" asp-items="Model.TypeItems"></select>
+                        <span asp-validation-for="Type"></span>
+
+                        <label class="form-label" asp-for="GearItems"></label>
+                        <select class="form-control" asp-for="Gear"
+                                asp-items="Model.GearItems"></select>
+                        <span asp-validation-for="Gear"></span>
+
+                        <label class="form-label" asp-for="FuelItems"></label>
+                        <select class="form-control" asp-for="Fuel"
+                                asp-items="Model.FuelItems"></select>
+                        <span asp-validation-for="Fuel"></span>
+
+                        <label class="form-label" asp-for="SeatsItem"></label>
+                        <select class="form-control" asp-for="Seats"
+                                asp-items="Model.SeatsItem"></select>
+                        <span asp-validation-for="Seats"></span>
+
+                        <label class="form-label" asp-for="DoorsItem"></label>
+                        <select class="form-control" asp-for="Doors"
+                                asp-items="Model.DoorsItem"></select>
+                        <span asp-validation-for="Doors"></span>
+
+                        <div class="row mt-3">
+                            <div class="col-md-5">
+                                <div class="form-check">
+                                    <input class="form-check-input" asp-for="Ac" type="checkbox" />
+                                    <label class="form-check-label" asp-for="Ac"></label>
+                                </div>
+                                <div class="form-check">
+                                    <input class="form-check-input" asp-for="ChildSeat" type="checkbox" />
+                                    <label class="form-check-label" asp-for="ChildSeat"></label>
+                                </div>
+                                <div class="form-check">
+                                    <input class="form-check-input" asp-for="TowBar" type="checkbox" />
+                                    <label class="form-check-label" asp-for="TowBar"></label>
+                                </div>
                             </div>
-                            <div class="form-check">
-                                <input class="form-check-input" asp-for="RoofRack" type="checkbox" />
-                                <label class="form-check-label" asp-for="RoofRack"></label>
+                            <div class="col-md-5">
+                                <div class="form-check">
+                                    <input class="form-check-input" asp-for="Pets" type="checkbox" />
+                                    <label class="form-check-label" asp-for="Pets"></label>
+                                </div>
+                                <div class="form-check">
+                                    <input class="form-check-input" asp-for="RoofRack" type="checkbox" />
+                                    <label class="form-check-label" asp-for="RoofRack"></label>
+                                </div>
                             </div>
                         </div>
                     </div>
                 </div>
+                <div id="imageForm" class="mt-3">
+                    
+                    <input asp-for="Image" onchange="readURL(this);" class="Files" id="knappid1" />
+                    <div id="images" class="border rounded m-1 p-2 row justify-content-center"></div>
+                </div>
             </div>
-            <div id="imageForm">
-                <label asp-for="Image"></label>
-                <input asp-for="Image" onchange="readURL(this);" class="Files" id="knappid1" />
-                <div id="images"></div>
+            <div class="card-footer">
+                <input style="float:right;" type="submit" class="button-default mb-2" value="Registrera" />
             </div>
-        </div>
-        <div class="card-footer">
-            <input style="float:right;" type="submit" class="button-default" value="Registrera" />
-        </div>
-    </form>
+        </form>
+    </div>
 </div>
 
 <script>
@@ -125,7 +127,7 @@
             reader.onload = function (e) {
                 var id = "id" + count;
                 $(".Files").hide();
-                $("#images").append('<img id="' + id + '" src="#" style="width: 200px; height: 150px;" class="bild"/>');
+                $("#images").append('<img id="' + id + '" src="#" style="width: 220px; height: 160px;" class="bild m-1 rounded shadow bg-white"/>');
                 $('#' + id).attr('src', e.target.result);
                 count = count + 1;
             };

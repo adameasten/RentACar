@@ -3,7 +3,8 @@ $color2: #B6C7CC;
 $color3: #C5D4DB;
 $color4: #D4DFE1;
 $color5: #E0ECE0;
-$greenlogocolor: RGB(61, 168,134) ;
+$color6: #3DA886;
+$greenlogocolor: RGB(61, 168,134);
 $greybackgroundcolor: RGB(244, 246,246);
 
 body {
@@ -20,6 +21,10 @@ body {
         //background-color: $color1 !important;
     }
 }
+/*.btn-primary, .btn-primary:hover, .btn-primary:active, .btn-primary:visited {
+    background-color: #3DA886 !important;
+    border-color: #3DA886 !important;
+}*/
 .zoom {
     transition: transform .2s; /* Animation */
 }
