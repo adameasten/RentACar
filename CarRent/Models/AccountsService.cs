@@ -1,6 +1,7 @@
 ﻿using CarRent.Models.Entities;
 using CarRent.Models.ViewModels;
 using Microsoft.AspNetCore.Identity;
+using Microsoft.AspNetCore.Mvc.Rendering;
 using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
@@ -56,7 +57,8 @@ namespace CarRent.Models
                 .Select(p => new MyCarCard()
                 {
                     ImgUrl = p.ImgUrl,
-                    Model = p.Model
+                    Model = p.Model,
+                    Id = p.Id
                 }).ToList(),
                 MyBookings = carContext.Rent
                 .Where(c => c.CustomerId == user.Id).
@@ -98,6 +100,106 @@ namespace CarRent.Models
 
                 });
             carContext.SaveChanges();
+        }
+
+        public void EditCar(EditCarVM vm)
+        {
+
+            var car = carContext.Car.SingleOrDefault(c => c.Id == vm.Id);
+            
+            car.Ac = vm.Ac;
+            car.ChildSeat = vm.ChildSeat;
+            car.Description = vm.Description;
+            car.Doors = vm.Doors;
+            car.Fuel = vm.Fuel;
+            car.Gear = vm.Gear;
+            car.Km = vm.Km;
+            car.Model = vm.Model;
+            car.Pets = vm.Pets;
+            car.Price = vm.Price;
+            car.RoofRack = vm.RoofRack;
+            car.Seats = vm.Seats;
+            car.TowBar = vm.TowBar;
+            car.Type = vm.Type;
+            car.YearModel = vm.YearModel;
+
+            carContext.SaveChanges();
+        }
+
+        public EditCarVM FindCarById(int id)
+        {
+            var car = carContext.Car
+                .SingleOrDefault(c => c.Id == id);
+
+            return new EditCarVM
+            {
+                Id = car.Id,
+                Model = car.Model,
+                Description = car.Description,
+                Doors = car.Doors,
+                Fuel = car.Fuel,
+                Gear = car.Gear,
+                Km = car.Km,
+                Price = car.Price,
+                Seats = car.Seats,
+                Type = car.Type,
+                Pets = (bool)car.Pets,
+                Ac = (bool)car.Ac,
+                ChildSeat = (bool)car.ChildSeat,
+                RoofRack = (bool)car.RoofRack,
+                TowBar = (bool)car.TowBar,
+                YearModel = car.YearModel,
+                
+                TypeItems = new SelectListItem[]
+            {
+                   new SelectListItem{Value = "Sedan", Text = "Sedan"},
+                   new SelectListItem{Value = "Kombi", Text = "Kombi"},
+                   new SelectListItem{Value = "SUV", Text = "SUV"},
+                   new SelectListItem{Value = "Halvkombi", Text = "Halvkombi"},
+                   new SelectListItem{Value = "Sportkupé", Text = "Sportkupé"},
+                   new SelectListItem{Value = "Cab", Text = "Cab"},
+                   new SelectListItem{Value = "Pickup", Text = "Pickup"},
+                   new SelectListItem{Value = "Minibuss", Text = "Minibuss"},
+                   new SelectListItem{Value = "Husbil", Text = "Husbil"}
+            },
+
+            GearItems = new SelectListItem[]
+            {
+                new SelectListItem{Value = "Automat", Text = "Automat"},
+                new SelectListItem{Value = "Manuell", Text = "Manuell"},
+            },
+
+            FuelItems = new SelectListItem[]
+            {
+                new SelectListItem{Value = "Bensin", Text = "Bensin"},
+                new SelectListItem{Value = "Diesel", Text = "Diesel"},
+                new SelectListItem{Value = "Etanol", Text = "Etanol"},
+                new SelectListItem{Value = "El", Text = "El"},
+            },
+
+            SeatsItem = new SelectListItem[]
+            {
+                new SelectListItem{Value = "1", Text = "1"},
+                new SelectListItem{Value = "2", Text = "2"},
+                new SelectListItem{Value = "3", Text = "3"},
+                new SelectListItem{Value = "4", Text = "4"},
+                new SelectListItem{Value = "5", Text = "5"},
+                new SelectListItem{Value = "6", Text = "6"},
+                new SelectListItem{Value = "7", Text = "7+"},
+            },
+
+            DoorsItem = new SelectListItem[]
+            {
+                new SelectListItem{Value = "1", Text = "1"},
+                new SelectListItem{Value = "2", Text = "2"},
+                new SelectListItem{Value = "3", Text = "3"},
+                new SelectListItem{Value = "4", Text = "4"},
+                new SelectListItem{Value = "5", Text = "5"},
+                new SelectListItem{Value = "6", Text = "6"}
+            },
+
+        };
+                
         }
 
         public async Task UpdateUser(MyIdentityUser user, MyAccountVM vm)

@@ -1,0 +1,121 @@
+﻿@model EditCarVM
+
+<div class="col-md-8 offset-md-2" style="margin-bottom: 50px; margin-top: 50px;">
+    <div class="card shadow bg-white rounded">
+        <div class="card-header" style="margin: 0px;">
+            <h2>Ändra bilinfo</h2>
+        </div>
+        <form enctype="multipart/form-data" asp-controller="Accounts" asp-action="EditCar">
+            <div class="card-body">
+
+                <div class="row h-100">
+                    <div class="col-md-6">
+                        <div class="form-group">
+                            <label class="form-label" asp-for="Model"></label>
+                            <input class="form-control" asp-for="Model" id="Model" />
+                            <span asp-validation-for="Model"></span>
+                        </div>
+                        <div class="form-group">
+                            <label class="form-label" asp-for="Km"></label>
+                            <input class="form-control" asp-for="Km" />
+                            <span asp-validation-for="Km"></span>
+                        </div>
+                        <div class="form-group">
+                            <label class="form-label" asp-for="Price"></label>
+                            <input class="form-control" asp-for="Price" />
+                            <span asp-validation-for="Price"></span>
+                        </div>
+                        <div class="form-group">
+                            <label class="form-label" asp-for="YearModel"></label>
+                            <input class="form-control" asp-for="YearModel" />
+                            <span asp-validation-for="YearModel"></span>
+                        </div>
+                        <div class="form-group">
+                            <label class="form-label" asp-for="Description"></label>
+                            <textarea class="form-control" asp-for="Description" maxlength="200" id="text"></textarea>
+                            <small class="pull-right" id="count_message"></small>
+                        </div>
+
+                    </div>
+                    <div class="col-md-6">
+                        <div class="form-group">
+                            <label class="form-label" asp-for="TypeItems"></label>
+                            <select class="form-control" asp-for="Type" asp-items="Model.TypeItems"></select>
+                            <span asp-validation-for="Type"></span>
+                        </div>
+                        <div class="form-group">
+                            <label class="form-label" asp-for="GearItems"></label>
+                            <select class="form-control" asp-for="Gear"
+                                    asp-items="Model.GearItems"></select>
+                            <span asp-validation-for="Gear"></span>
+                        </div>
+                        <div class="form-group">
+                            <label class="form-label" asp-for="FuelItems"></label>
+                            <select class="form-control" asp-for="Fuel"
+                                    asp-items="Model.FuelItems"></select>
+                            <span asp-validation-for="Fuel"></span>
+                        </div>
+                        <div class="form-group">
+                            <label class="form-label" asp-for="SeatsItem"></label>
+                            <select class="form-control" asp-for="Seats"
+                                    asp-items="Model.SeatsItem"></select>
+                            <span asp-validation-for="Seats"></span>
+                        </div>
+                        <div class="form-group">
+                            <label class="form-label" asp-for="DoorsItem"></label>
+                            <select class="form-control" asp-for="Doors"
+                                    asp-items="Model.DoorsItem"></select>
+                            <span asp-validation-for="Doors"></span>
+                        </div>
+                            <div class="row">
+                                <div class="col-md-5">
+                                    <div class="form-check">
+                                        <input class="form-check-input" asp-for="Ac" type="checkbox" />
+                                        <label class="form-check-label" asp-for="Ac"></label>
+                                    </div>
+                                    <div class="form-check">
+                                        <input class="form-check-input" asp-for="ChildSeat" type="checkbox" />
+                                        <label class="form-check-label" asp-for="ChildSeat"></label>
+                                    </div>
+                                    <div class="form-check">
+                                        <input class="form-check-input" asp-for="TowBar" type="checkbox" />
+                                        <label class="form-check-label" asp-for="TowBar"></label>
+                                    </div>
+                                </div>
+                                <div class="col-md-5">
+                                    <div class="form-check">
+                                        <input class="form-check-input" asp-for="RoofRack" type="checkbox" />
+                                        <label class="form-check-label" asp-for="RoofRack"></label>
+                                    </div>
+                                    <div class="form-check">
+                                        <input class="form-check-input" asp-for="Pets" type="checkbox" />
+                                        <label class="form-check-label" asp-for="Pets"></label>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+            </div>
+            <div class="card-footer d-flex justify-content-end">
+                <input class="button-default" type="submit" value="Spara" />
+            </div>
+        </form>
+    </div>
+</div>
+
+<script>
+    $(function () {
+        var text_max = 200;
+        $('#count_message').html(text_max + ' remaining');
+
+        $('#text').keyup(function () {
+            var text_length = $('#text').val().length;
+            var text_remaining = text_max - text_length;
+
+        });
+        var price = $('#Price').val();
+        price = price.replace(/,/g, ".");
+        $('#Price').val(parseFloat(price));
+        
+    })
+</script>
