@@ -2,6 +2,18 @@
 @{
     ViewData["Title"] = "Search";
 }
+
+<div class="row mt-3">
+    <div class="col-8 text-sm-right px-2">
+        <h4 class="my-0 pt-1">Sortera på</h4>
+    </div>
+    <div class="col-3 ml-2">
+        <div class="row justify-content-start">
+            <button class="button-default mr-1" id="sortPrice">Lägsta Pris</button>
+            <button class="button-default ml-1" id="sortDistance">Kortast Avstånd</button>
+        </div>
+    </div>
+</div>
 <div class="row row-offcanvas row-offcanvas-right">
     <div class="col-6 col-md-3 sidebar-offcanvas" id="filter">
         <div class="card m-1 shadow bg-white rounded mt-3" style="min-width: 245px;">
@@ -99,7 +111,29 @@
 
         renderSearchResult();
 
-        function renderSearchResult() {
+        $("#sortPrice").on("click", function () {
+            $("#filterResults").empty();
+            renderSearchResult("Price");
+        })
+
+        $("#sortDistance").on("click", function () {
+            $("#filterResults").empty();
+            renderSearchResult("Dist");
+        })
+
+        function renderSearchResult(s) {
+
+            if (s == "Price") {
+                filterResults.sort(function (a, b) {
+                    return a.Price - b.Price;
+                })
+            }
+            else if (s == "Dist") {
+                filterResults.sort(function (a, b) {
+                    return a.Distance - b.Distance;
+                })
+            }
+
             for (var i = 0; i < filterResults.length; i++) {
 
                 if (
@@ -120,13 +154,13 @@
                     var outerDiv = $(`<div onclick="window.location='/car/details/${filterResults[i].Id}'" class="card mb-2 list zoomMin shadow bg-white rounded">`);
                 var cardDiv = $('<div class="row list">');
                 var imgdiv = $('<div class="col-md-4 list">');
-                    var img = $(`<img class="w-100 list" src="/${filterResults[i].ImgUrl}">`);
-                    var cardBody = $('<div class="col-md-8 px-3 list" style="padding: 15px;">');
-                    var row = $('<div class="row h-100 list">');
-                    var div = $('<div class="col-md-8 list">');
-                    var div2 = $('<div class="h-100 list">');
-                    var cardTitle = $(`<h3 class="card-title list">${filterResults[i].Model}</h3>`);
-                    var rating = $(`<h6 class="h6 list">(${filterResults[i].Rating})</h6>`);
+                    var img = $(`<img class="w-100 list" src="${filterResults[i].ImgUrl}">`);
+                var cardBody = $('<div class="col-md-8 px-3 list" style="padding: 15px;">');
+                var row = $('<div class="row h-100 list">');
+                var div = $('<div class="col-md-8 list">');
+                var div2 = $('<div class="h-100 list">');
+                var cardTitle = $(`<h3 class="card-title list">${filterResults[i].Model}</h3>`);
+                    var rating = $(`<h6 class="h6 list">${filterResults[i].Rating}</h6>`);
                     var dis = Math.floor(filterResults[i].Distance);
 
                 var distance = $(`<small class="small list" style="Height: 10%; Position: Absolute; Bottom: 15px;">${dis} km bort</small>`);

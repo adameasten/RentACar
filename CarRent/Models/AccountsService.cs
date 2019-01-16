@@ -56,15 +56,15 @@ namespace CarRent.Models
                 .Where(c => c.OwnerId == user.Id)
                 .Select(p => new MyCarCard()
                 {
-                    ImgUrl = p.ImgUrl,
-                    Model = p.Model,
-                    Id = p.Id
+                    Id = p.Id,
+                    ImgUrl = p.CarImage.Where(c => c.CarId == p.Id).Select(d => d.ImgUrl).FirstOrDefault(),
+                    Model = p.Model
                 }).ToList(),
                 MyBookings = carContext.Rent
                 .Where(c => c.CustomerId == user.Id).
                 Select(p => new MyBookingsVM()
                 {
-                    ImgUrl = p.Car.ImgUrl,
+                    ImgUrl = p.Car.CarImage.Where(c => c.CarId == p.Id).Select(d => d.ImgUrl).FirstOrDefault(),
                     Model = p.Car.Model,
                     StartTime = p.Datestart,
                     EndTime = p.DateEnd,
