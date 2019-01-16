@@ -6,7 +6,7 @@
             <div class="col">
                     <div class="card m-1 shadow bg-white rounded" style="width: 680px;">
                         <div class="card-body">
-                            <h5 class="card-title">@Model.UserName @Model.Car</h5>
+                            <h5 class="card-title">@(Model.UserName+" om "+ Model.Car)</h5>
                             @for (int i = 0; i < Model.Rating; i++)
                             {
                                 <i class=" fa fa-star"> </i>

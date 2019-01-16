@@ -6,7 +6,7 @@
     <div class="card shadow bg-white rounded" style="width: 324px; min-height: 245px">
         <div class="card-body">
             <h5 class="card-title">@decimal.Round(Model.Price, 0, MidpointRounding.AwayFromZero) kr /dag</h5>
-            <p class="card-text">
+            <div class="card-text">
                 <form asp-action="rentcar" asp-controller="car">
                     <div class="form-group">
                         <label asp-for="StartTime"></label>
@@ -21,7 +21,7 @@
                     <input type="hidden" asp-for="Price" />
                     <input class="button-default mt-3" type="submit" value="Hyr bil" style="width:100%" />
                 </form>
-            </p>
+            </div>
         </div>
     </div>
 </div>
