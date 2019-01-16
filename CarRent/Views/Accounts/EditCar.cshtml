@@ -2,12 +2,17 @@
 
 <div class="col-md-8 offset-md-2" style="margin-bottom: 50px; padding-top: 50px;">
     <div class="card shadow bg-white rounded">
-        <div class="card-header" style="margin: 0px;">
-            <h2>Uppdatera specifikationer</h2>
+        <div class="row card-header" style="margin: 0px;">
+            <h2 class="col-md-10">Uppdatera specifikationer</h2>
+            <div class="col-md-2">
+            <form asp-controller="accounts" asp-action="deletecar">
+                <input asp-for="Id" type="hidden" />
+                <input class="button-default"  type="submit" value="Ta bort bil" />
+            </form>
+            </div>
         </div>
         <form enctype="multipart/form-data" asp-controller="Accounts" asp-action="EditCar">
             <div class="card-body">
-
                 <div class="row h-100">
                     <div class="col-md-6">
                         <div class="form-group">
@@ -99,10 +104,6 @@
             <div class="card-footer d-flex justify-content-end">
                 <input class="button-default" type="submit" value="Spara" />
             </div>
-        </form>
-        <form asp-controller="accounts" asp-action="deletecar">
-            <input asp-for="Id" type="hidden" />
-            <input class=" button-default" type="submit" value="Ta bort bil" />
         </form>
     </div>
 </div>
