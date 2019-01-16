@@ -19,14 +19,13 @@
                                 <div class="carousel-item active caru-sell">
                                     <img class="d-block w-100" src="@Model.car.ImgUrlArr[counter++]" style="object-fit:cover" >
                                 </div>
-                                do
+                                while (counter < @Model.car.ImgUrlArr.Count())
                                 {
                                     <div class="carousel-item caru-sell">
                                         <img class="d-block w-100" src="@Model.car.ImgUrlArr[counter++]" style="object-fit:cover">
                                     </div>
-                                    }
-                                    while (counter < @Model.car.ImgUrlArr.Count());
                                 }
+                            }
 
                         </div>
                         <a class="carousel-control-prev" href="#carouselExampleControls" role="button" data-slide="prev">
