@@ -14,6 +14,8 @@ using GeoAPI.Geometries;
 using System.Net.Http;
 using Newtonsoft.Json;
 using NetTopologySuite.Geometries;
+using Microsoft.Extensions.Configuration;
+using Microsoft.AspNetCore.Mvc.Rendering;
 
 namespace CarRent.Models
 {
@@ -22,12 +24,15 @@ namespace CarRent.Models
         CarRentContext context;
         IHostingEnvironment he;
         UserManager<MyIdentityUser> userManager;
+        private readonly IConfiguration configuration;
 
-        public CarServices(CarRentContext context, IHostingEnvironment he, UserManager<MyIdentityUser> userManager)
+
+        public CarServices(CarRentContext context, IHostingEnvironment he, UserManager<MyIdentityUser> userManager, IConfiguration config)
         {
             this.context = context;
             this.he = he;
             this.userManager = userManager;
+            this.configuration = config;
         }
 
         public CarDetailsVM FindCarByID(int ID)
@@ -77,9 +82,71 @@ namespace CarRent.Models
             return carr;
         }
 
+        public CarSearchFilterVM CreateFilterVm(CarSearchVM[] result)
+        {
+            return new CarSearchFilterVM
+            {
+                SearchResult = result,
+                SearchResultJson = JsonConvert.SerializeObject(result),
+                TypeItems = new SelectListItem[]
+                {
+                       new SelectListItem{Value = "Alla", Text = "Alla"},
+                       new SelectListItem{Value = "Sedan", Text = "Sedan"},
+                       new SelectListItem{Value = "Kombi", Text = "Kombi"},
+                       new SelectListItem{Value = "SUV", Text = "SUV"},
+                       new SelectListItem{Value = "Halvkombi", Text = "Halvkombi"},
+                       new SelectListItem{Value = "Sportkupé", Text = "Sportkupé"},
+                       new SelectListItem{Value = "Cab", Text = "Cab"},
+                       new SelectListItem{Value = "Pickup", Text = "Pickup"},
+                       new SelectListItem{Value = "Minibuss", Text = "Minibuss"},
+                       new SelectListItem{Value = "Husbil", Text = "Husbil"}
+                },
+
+                GearItems = new SelectListItem[]
+                {
+                       new SelectListItem{Value = "Alla", Text = "Alla"},
+
+                    new SelectListItem{Value = "Automat", Text = "Automat"},
+                    new SelectListItem{Value = "Manuell", Text = "Manuell"},
+                },
+
+                FuelItems = new SelectListItem[]
+                {
+                       new SelectListItem{Value = "Alla", Text = "Alla"},
+
+                    new SelectListItem{Value = "Bensin", Text = "Bensin"},
+                    new SelectListItem{Value = "Diesel", Text = "Diesel"},
+                    new SelectListItem{Value = "Etanol", Text = "Etanol"},
+                    new SelectListItem{Value = "El", Text = "El"},
+                },
+
+                SeatsItem = new SelectListItem[]
+                {
+
+                    new SelectListItem{Value = "7", Text = "7+"},
+                    new SelectListItem{Value = "6", Text = "6"},
+                    new SelectListItem{Value = "5", Text = "5"},
+                    new SelectListItem{Value = "4", Text = "4"},
+                    new SelectListItem{Value = "3", Text = "3"},
+                    new SelectListItem{Value = "2", Text = "2"},
+                    new SelectListItem{Value = "1", Text = "1"}
+                },
+
+                DoorsItem = new SelectListItem[]
+                {
+                    new SelectListItem{Value = "6", Text = "6"},
+                    new SelectListItem{Value = "5", Text = "5"},
+                    new SelectListItem{Value = "4", Text = "4"},
+                    new SelectListItem{Value = "3", Text = "3"},
+                    new SelectListItem{Value = "2", Text = "2"},
+                    new SelectListItem{Value = "1", Text = "1"}
+                },
+            };
+        }
+
         internal async Task AddRent(CarRentFormVM vM, string userId)
         {
-            await context.Rent.AddAsync(new Rent { CarId = vM.CarId, Datestart = vM.StartTime, DateEnd = vM.EndTime, CustomerId = userId});
+            await context.Rent.AddAsync(new Rent { CarId = vM.CarId, Datestart = vM.StartTime, DateEnd = vM.EndTime, CustomerId = userId });
 
             await context.SaveChangesAsync();
         }
@@ -87,7 +154,7 @@ namespace CarRent.Models
         public async Task AddCarToDatabase(CarRegistrationPostVM vm, string userId)
         {
             string imgUrl = null;
-            if (vm.Image.Count > 0)
+            if (vm.Image?.Count > 0)
             {
                 UploadImages(vm);
                 imgUrl = vm.Image[0].FileName;
@@ -95,7 +162,7 @@ namespace CarRent.Models
             else
                 imgUrl = "Logo.png";
 
-            var coordinate = await GetCoordinates(vm.City);
+            var coordinate = await GetCoordinates($"{vm.Street},{vm.City}");
             var point = new Point(coordinate);
             point.SRID = 4326;
 
@@ -124,18 +191,17 @@ namespace CarRent.Models
 
             context.Car.Add(car);
 
-            context.SaveChanges();
-
-            foreach (var item in vm.Image)
+            if (vm.Image != null)
             {
-                context.CarImage.Add(new CarImage
+                foreach (var item in vm.Image)
                 {
-                    CarId = car.Id,
-                    ImgUrl = item.FileName,
-                    
-                });
+                    context.CarImage.Add(new CarImage
+                    {
+                        CarId = car.Id,
+                        ImgUrl = item.FileName,
+                    });
+                }
             }
-
             context.SaveChanges();
         }
 
@@ -149,9 +215,10 @@ namespace CarRent.Models
 
         }
 
-        public static string GetContactByID(string ID)
+        public string GetContactByID(string ID)
         {
-            string constring = "Data Source=carrentacademy.database.windows.net;Initial Catalog=CarRentDb;User ID=adameasten;Password=Pennskrin1;Connect Timeout=30;Encrypt=True;TrustServerCertificate=False;ApplicationIntent=ReadWrite;MultiSubnetFailover=False";
+
+            string constring = configuration["DefaultConnection"];
             string queryString =
             "SELECT * from dbo.aspnetusers "
                 + "WHERE ID = @ID ";

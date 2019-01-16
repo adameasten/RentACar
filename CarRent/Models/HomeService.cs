@@ -66,7 +66,17 @@ namespace CarRent.Models
                 ImgUrl = c.ImgUrl,
                 Price = c.Price,
                 YearModel = c.YearModel,
-                Rating = c.Rent.SelectMany(r => r.Review).Count() > 0 ? c.Rent.SelectMany(r => r.Review).Average(s => s.Rating) : 0
+                Rating = c.Rent.SelectMany(r => r.Review).Count() > 0 ? c.Rent.SelectMany(r => r.Review).Average(s => s.Rating) : 0,
+                Ac = c.Ac,
+                ChildSeat = c.ChildSeat,
+                Doors = c.Doors,
+                Fuel = c.Fuel,
+                Gear = c.Gear,
+                Pets = c.Pets,
+                RoofRack = c.RoofRack,
+                Seats = c.Seats,
+                TowBar = c.TowBar,
+                Type = c.Type
             }).ToArray();
 
             return cars;

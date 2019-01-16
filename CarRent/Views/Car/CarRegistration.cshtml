@@ -1,99 +1,117 @@
 ﻿@model CarRegistrationPostVM
 
-<form id="FindCarByLicense">
-    <input type="text" id="LicenseValue" />
-    <input type="submit" value="hitta" />
-</form>
-
-
-<form enctype="multipart/form-data" asp-controller="Car" asp-action="CarRegistration">
-    <label asp-for="Model"></label>
-    <input asp-for="Model" id="Model" />
-    <span asp-validation-for="Model"></span>
-
-
-    <label asp-for="Km"></label>
-    <input asp-for="Km" />
-    <span asp-validation-for="Km"></span>
-
-    <label asp-for="Description"></label>
-    <input asp-for="Description" />
-    <span asp-validation-for="Description"></span>
-
-
-    <label asp-for="Price"></label>
-    <input asp-for="Price" />
-    <span asp-validation-for="Price"></span>
-
-
-    <label asp-for="YearModel"></label>
-    <input asp-for="YearModel" />
-    <span asp-validation-for="YearModel"></span>
-
-
-    <label asp-for="City"></label>
-    <input asp-for="City" />
-    <span asp-validation-for="City"></span>
-
-
-    <label asp-for="Street"></label>
-    <input asp-for="Street" />
-    <span asp-validation-for="Street"></span>
-
-
-    <label asp-for="Type"></label>
-    <select asp-for="Type"
-            asp-items="Model.TypeItems"></select>
-    <span asp-validation-for="Type"></span>
-
-    <label asp-for="GearItems"></label>
-    <select asp-for="Gear"
-            asp-items="Model.GearItems"></select>
-    <span asp-validation-for="Gear"></span>
-
-    <label asp-for="FuelItems"></label>
-    <select asp-for="Fuel"
-            asp-items="Model.FuelItems"></select>
-    <span asp-validation-for="Fuel"></span>
-
-    <label asp-for="SeatsItem"></label>
-    <select asp-for="Seats"
-            asp-items="Model.SeatsItem"></select>
-    <span asp-validation-for="Seats"></span>
-
-    <label asp-for="DoorsItem"></label>
-    <select asp-for="Doors"
-            asp-items="Model.DoorsItem"></select>
-    <span asp-validation-for="Doors"></span>
-
-
-    <label asp-for="Ac"></label>
-    <input asp-for="Ac" type="checkbox" />
-
-
-    <label asp-for="ChildSeat"></label>
-    <input asp-for="ChildSeat" type="checkbox" />
-
-
-    <label asp-for="TowBar"></label>
-    <input asp-for="TowBar" type="checkbox" />
-
-    <label asp-for="RoofRack"></label>
-    <input asp-for="RoofRack" type="checkbox" />
 
 
 
-    <label asp-for="Pets"></label>
-    <input asp-for="Pets" type="checkbox" />
-
-    <div id="imageForm">
-        <label asp-for="Image"></label>
-        <input asp-for="Image" onchange="readURL(this);" class="Files" id="knappid1" />
-        <div id="images"></div>
+<div class="card">
+    <div class="card-header">
+        <div class="col-md-6">
+        <form id="FindCarByLicense">
+            <input class="form-control" type="text" placeholder="ABC123" id="LicenseValue" />
+            <input type="submit" class="button-default" value="Hitta Bil" />
+        </form>
+        </div>
     </div>
-    <input type="submit" value="Registrera" />
+    <form enctype="multipart/form-data" asp-controller="Car" asp-action="CarRegistration">
+        <div class="card-body">
 
-</form>
+            <div class="row h-100">
+                <div class="col-md-6">
+
+                    <label class="form-label" asp-for="Model"></label>
+                    <input class="form-control" asp-for="Model" id="Model" />
+                    <span asp-validation-for="Model"></span>
+
+                    <label class="form-label" asp-for="Km"></label>
+                    <input class="form-control" asp-for="Km" />
+                    <span asp-validation-for="Km"></span>
+
+                    <label class="form-label" asp-for="Price"></label>
+                    <input class="form-control" asp-for="Price" />
+                    <span asp-validation-for="Price"></span>
+
+                    <label class="form-label" asp-for="YearModel"></label>
+                    <input class="form-control" asp-for="YearModel" />
+                    <span asp-validation-for="YearModel"></span>
+
+                    <label class="form-label" asp-for="City"></label>
+                    <input class="form-control" asp-for="City" />
+                    <span asp-validation-for="City"></span>
+
+                    <label class="form-label" asp-for="Street"></label>
+                    <input class="form-control" asp-for="Street" />
+                    <span asp-validation-for="Street"></span>
+
+                    <label class="form-label" asp-for="Description"></label>
+                    <input class="form-control" asp-for="Description" />
+                    <span asp-validation-for="Description"></span>
+
+
+                </div>
+                <div class="col-md-6">
+                    <label class="form-label" asp-for="TypeItems"></label>
+                    <select class="form-control" asp-for="Type" asp-items="Model.TypeItems"></select>
+                    <span asp-validation-for="Type"></span>
+
+                    <label class="form-label" asp-for="GearItems"></label>
+                    <select class="form-control" asp-for="Gear"
+                            asp-items="Model.GearItems"></select>
+                    <span asp-validation-for="Gear"></span>
+
+                    <label class="form-label" asp-for="FuelItems"></label>
+                    <select class="form-control" asp-for="Fuel"
+                            asp-items="Model.FuelItems"></select>
+                    <span asp-validation-for="Fuel"></span>
+
+                    <label class="form-label" asp-for="SeatsItem"></label>
+                    <select class="form-control" asp-for="Seats"
+                            asp-items="Model.SeatsItem"></select>
+                    <span asp-validation-for="Seats"></span>
+
+                    <label class="form-label" asp-for="DoorsItem"></label>
+                    <select class="form-control" asp-for="Doors"
+                            asp-items="Model.DoorsItem"></select>
+                    <span asp-validation-for="Doors"></span>
+
+                    <div class="row">
+                        <div class="col-md-5">
+                            <div class="form-check">
+                                <input class="form-check-input" asp-for="Ac" type="checkbox" />
+                                <label class="form-check-label" asp-for="Ac"></label>
+                            </div>
+                            <div class="form-check">
+                                <input class="form-check-input" asp-for="ChildSeat" type="checkbox" />
+                                <label class="form-check-label" asp-for="ChildSeat"></label>
+                            </div>
+                            <div class="form-check">
+                                <input class="form-check-input" asp-for="TowBar" type="checkbox" />
+                                <label class="form-check-label" asp-for="TowBar"></label>
+                            </div>
+                        </div>
+                        <div class="col-md-5">
+                            <div class="form-check">
+                                <input class="form-check-input" asp-for="Pets" type="checkbox" />
+                                <label class="form-check-label" asp-for="Pets"></label>
+                            </div>
+                            <div class="form-check">
+                                <input class="form-check-input" asp-for="RoofRack" type="checkbox" />
+                                <label class="form-check-label" asp-for="RoofRack"></label>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div id="imageForm">
+                <label asp-for="Image"></label>
+                <input asp-for="Image" onchange="readURL(this);" class="Files" id="knappid1" />
+                <div id="images"></div>
+            </div>
+        </div>
+        <div class="card-footer">
+            <input style="float:right;" type="submit" class="button-default" value="Registrera" />
+        </div>
+    </form>
+</div>
 
 <script>
     var count = 1;

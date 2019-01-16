@@ -16,7 +16,7 @@ namespace CarRent.Models.ViewModels
         }
 
         [Required(ErrorMessage = "Ange modell")]
-        [Display(Name = "Model")]
+        [Display(Name = "Modell")]
         public string Model { get; set; }
         [Required(ErrorMessage = "Ange kilometerantal")]
         [Display(Name = "Km")]
@@ -50,9 +50,9 @@ namespace CarRent.Models.ViewModels
         public bool ChildSeat { get; set; }
         [Display(Name = "Dragkrok")]
         public bool TowBar { get; set; }
-        [Display(Name = "Tackräcke")]
+        [Display(Name = "Takräcke")]
         public bool RoofRack { get; set; }
-        [Display(Name = "Husdjur")]
+        [Display(Name = "Husdjur tillåts")]
         public bool Pets { get; set; }
         [Required(ErrorMessage = "Ange pris per/h")]
         [Display(Name = "Pris per/dag")]

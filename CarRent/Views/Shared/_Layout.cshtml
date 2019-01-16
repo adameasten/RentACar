@@ -5,7 +5,7 @@
     <title>@ViewBag.Title</title>
 
     <meta name="viewport" content="width=device-width" />
-    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.6.3/css/all.css" integrity="sha384-UHRtZLI+pbxtHCWp1t77Bi1L4ZtiqrqD80Kn4Z8NTSRyMA2Fd33n5dQ8lWUE00s/" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.2.0/css/all.css" integrity="sha384-hWVjflwFxL6sNzntih27bfxkr27PmbbK/iSvJ+a4+0owXq79v+lsFkW54bOGbiDQ" crossorigin="anonymous">
     <script src="https://ajax.aspnetcdn.com/ajax/jQuery/jquery-3.3.1.min.js"></script>
     <script src="https://ajax.aspnetcdn.com/ajax/jquery.validate/1.17.0/jquery.validate.min.js"></script>
     <script src="https://ajax.aspnetcdn.com/ajax/mvc/5.2.3/jquery.validate.unobtrusive.min.js"></script>
@@ -23,12 +23,14 @@
     <header>
         <partial name="_Header" />
     </header>
-    <main class="container">
-        @RenderBody()
+    <main>
+        <div class="container">
+            @RenderBody()
+        </div>
     </main>
-    <footer>
-        <partial name="_Footer" />
-    </footer>
- @RenderSection("scripts", required: false)
+
+    <partial name="_Footer" />
+
+    @RenderSection("scripts", required: false)
 </body>
 </html>
