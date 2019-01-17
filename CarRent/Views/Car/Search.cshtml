@@ -1,6 +1,6 @@
 ﻿@model CarSearchFilterVM
 @{
-    ViewData["Title"] = "Search";
+    ViewData["Title"] = "Sök Resultat";
 }
 
 <div class="row pt-3">
@@ -137,7 +137,6 @@
             for (var i = 0; i < filterResults.length; i++) {
 
                 if (
-
                     ($("#Price").val() >= filterResults[i].Price || $("#Price").val() == "0,00" || $("#Price").val() == "" ) &&
                     ($("#Type").val() == filterResults[i].Type || $("#Type").val() == "Alla") &&
                     ($("#Gear").val() == filterResults[i].Gear || $("#Gear").val() == "Alla") &&
@@ -152,19 +151,19 @@
                 {
 
                     var outerDiv = $(`<div onclick="window.location='/car/details/${filterResults[i].Id}'" class="card mb-2 list zoomMin shadow bg-white rounded" style=min-height:124px;>`);
-                var cardDiv = $('<div class="row list">');
-                var imgdiv = $('<div class="col-md-4 list">');
+                    var cardDiv = $('<div class="row list">');
+                    var imgdiv = $('<div class="col-md-4 list">');
                     var img = $(`<img class="w-100 list" src="${filterResults[i].ImgUrl}">`);
-                var cardBody = $('<div class="col-md-8 px-3 list" style="padding: 15px;">');
-                var row = $('<div class="row h-100 list">');
-                var div = $('<div class="col-md-8 list">');
-                var div2 = $('<div class="h-100 list">');
-                var cardTitle = $(`<h3 class="card-title list">${filterResults[i].Model}</h3>`);
+                    var cardBody = $('<div class="col-md-8 px-3 list" style="padding: 15px;">');
+                    var row = $('<div class="row h-100 list">');
+                    var div = $('<div class="col-md-8 list">');
+                    var div2 = $('<div class="h-100 list">');
+                    var cardTitle = $(`<h3 class="card-title list">${filterResults[i].Model}</h3>`);
                     var rating = $(`<h6 class="h6 list">(${Math.round(filterResults[i].Rating)})</h6>`);
                     var dis = Math.floor(filterResults[i].Distance);
 
-                var distance = $(`<small class="small list" style="Height: 10%; Position: Absolute; Bottom: 15px;">${dis} km bort</small>`);
-                var carFooter = $('<div class="col-md-4 list">');
+                    var distance = $(`<small class="small list" style="Height: 10%; Position: Absolute; Bottom: 15px;">${dis} km bort</small>`);
+                    var carFooter = $('<div class="col-md-4 list">');
 
                     var price = $(`<strong class="strong list" style="float: right; margin: 10px;"> ${filterResults[i].Price} kr/dag</strong>`);
 
