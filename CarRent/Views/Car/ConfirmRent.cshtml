@@ -12,7 +12,6 @@
                 <div class="container col" style="max-width:none">
                     <div class="form-group">
                         <img src="~/Logo.png" class="img-fluid rounded float-right" style="max-width:80px" />
-                        <h5> Generella villkor</h5>
                         <br />
                         <h6> Du hyr bilen @Model.CarName</br> mellan @Model.StartTime och @Model.EndTime</h6>
                     </div>
@@ -25,6 +24,7 @@
                             <input asp-for="StartTime" type="hidden" />
                             <input asp-for="EndTime" type="hidden" />
                             <input class="button-default" type="submit" value="Godkänn" />
+                            <img src="~/bankid.png" style="max-width:80px; " />
                         </form>
                     </div>
                     <div class="col-md-6 mb-2 pr-0">
