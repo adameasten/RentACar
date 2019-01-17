@@ -65,7 +65,7 @@ namespace CarRent.Models
                 Id = c.Id,
                 Model = c.Model,
                 Distance = c.GeoLocation.Distance(point) / 1600,
-                ImgUrl = c.CarImage.Where(p => p.CarId == c.Id).Select(d => d.ImgUrl).FirstOrDefault(),
+                ImgUrl = c.CarImage.Select(d => d.ImgUrl).FirstOrDefault(),
                 Price = c.Price,
                 YearModel = c.YearModel,
                 Rating = c.Rent.SelectMany(r => r.Review).Count() > 0 ? c.Rent.SelectMany(r => r.Review).Average(s => s.Rating) : 0,
