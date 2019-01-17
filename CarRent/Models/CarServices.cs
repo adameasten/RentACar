@@ -55,6 +55,7 @@ namespace CarRent.Models
                     ImgUrl = d.ImgUrl,
                     Km = d.Km,
                     Model = d.Model,
+                    YearModel = d.YearModel,
                     Pets = d.Pets,
                     Price = d.Price,
                     RoofRack = d.RoofRack,
