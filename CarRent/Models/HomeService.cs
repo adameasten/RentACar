@@ -2,6 +2,7 @@
 using CarRent.Models.ViewModels;
 using GeoAPI.Geometries;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.Configuration;
 using NetTopologySuite.Geometries;
 using Newtonsoft.Json;
 using System;
@@ -16,16 +17,19 @@ namespace CarRent.Models
     {
         CarRentContext context;
         CarServices carservices;
+        IConfiguration config;
 
-        public HomeService(CarRentContext context, CarServices carservices)
+        public HomeService(CarRentContext context, CarServices carservices, IConfiguration config)
         {
             this.context = context;
             this.carservices = carservices;
+            this.config = config;
         }
 
         public async Task<Coordinate> GetCoordinates(string city)
         {
-            var apiString = $"https://maps.googleapis.com/maps/api/geocode/json?address={city}&key=AIzaSyDqQCALQLs6NM9tMpHUWlC2uLNh5Eniz3I";
+            var key = config["GetLocationKey"];
+            var apiString = $"https://maps.googleapis.com/maps/api/geocode/json?address={city}&key={key}";
             var Coordinates = new Coordinate();
             using (var httpClient = new HttpClient())
             {

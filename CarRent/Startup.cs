@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Globalization;
 using System.Linq;
 using System.Threading.Tasks;
 using CarRent.Models;
@@ -31,6 +32,7 @@ namespace CarRent
         {
 
             connString = configuration["DefaultConnection"];
+
             
             services.AddTransient<CarServices>();
 
@@ -56,6 +58,10 @@ namespace CarRent
             {
                 app.UseDeveloperExceptionPage();
             }
+
+            var cultureInfo = new CultureInfo("sv-SE");
+            CultureInfo.DefaultThreadCurrentCulture = cultureInfo;
+            CultureInfo.DefaultThreadCurrentUICulture = cultureInfo;
 
             app.UseSession();
             app.UseStaticFiles();
