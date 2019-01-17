@@ -62,7 +62,7 @@ namespace CarRent.Models
             var point = new Point(coordinate);
             point.SRID = 4326;
 
-            var cars = context.Car.Include(x => x.Rent).Where(a => CheckAvailability(a.Rent.ToArray(), vM.StartDate, vM.EndDate))
+            return context.Car.Include(x => x.Rent).Where(a => CheckAvailability(a.Rent.ToArray(), vM.StartDate, vM.EndDate))
             .OrderBy(o => o.GeoLocation.Distance(point))
             .Select(c => new CarSearchVM
             {
@@ -84,13 +84,6 @@ namespace CarRent.Models
                 TowBar = c.TowBar,
                 Type = c.Type
             }).Where(x => x.Distance < 80).ToArray();
-
-            //foreach (var car in cars)
-            //{
-            //    car.ImgUrl = await carservices.GetThumbNailUrls(car.ImgUrl);
-            //}
-             
-            return cars;
         }
 
         internal CarRentConfirmVM MakeConfirmation(CarRentFormVM vM)

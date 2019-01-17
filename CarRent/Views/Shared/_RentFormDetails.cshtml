@@ -27,14 +27,22 @@
 </div>
 
 <script>
-
-    $("#TotalPrice").text("Total " + @(Model.Price));
-    $("#TotalPrice").append(" kr");
-
     if (Cookies.get("startDate") && Cookies.get("endDate")) {
         $("#StartTime").val(Cookies.get("startDate").replace(" ", "T"));
         $("#EndTime").val(Cookies.get("endDate").replace(" ", "T"));
     }
+
+    var s = document.getElementById("EndTime").value;
+    var today = new Date(document.getElementById("StartTime").value);
+    var pdate = new Date(x);
+            var one_day = 1000 * 60 * 60 * 24;    // Convert both dates to milliseconds
+            var date1_ms = pdate.getTime();
+            var date2_ms = today.getTime();    // Calculate the difference in milliseconds
+            var difference_ms = date2_ms - date1_ms;        // Convert back to days and return
+            var daysSinceP = (/*Math.round*/(difference_ms / one_day));
+            $("#TotalPrice").text("Total " + Math.round(daysSinceP*@Model.Price) );
+            $("#TotalPrice").append(" kr");
+
 
     $("#StartTime").change(function () {
         var x = document.getElementById("StartTime").value;
