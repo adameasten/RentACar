@@ -19,6 +19,7 @@ namespace CarRent.Models.ViewModels
         public bool? Ac { get; set; }
         public bool? ChildSeat { get; set; }
         public bool? TowBar { get; set; }
+        public int? YearModel { get; set; }
         public bool? RoofRack { get; set; }
         public bool? Pets { get; set; }
         public decimal Price { get; set; }

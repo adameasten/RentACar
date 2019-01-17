@@ -8,19 +8,20 @@
 
         @*<p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>*@
 
-        <div class="card-body">
+        <div class="card-body d-flex flex-column">
             <h5 class="card-title">@item.Model</h5>
+            <div class="mt-auto">
 
-            @*<p class="card-text">Årsmodell: @item.YearModel</p>*@
-            @for (int i = 0; i < item.Rating; i++)
-            {
+                @*<p class="card-text">Årsmodell: @item.YearModel</p>*@
+                @for (int i = 0; i < item.Rating; i++)
+                {
 
-                <i class=" fa fa-star"> </i>
-            }
-           @*// <p class="card-text">Betyg: @item.Rating</p>*@
-            <br />
-            <strong class="card-text">@item.Price.ToString("c")/dag</strong>
-
+                    <i class=" fa fa-star"> </i>
+                }
+                @*// <p class="card-text">Betyg: @item.Rating</p>*@
+                <br />
+                <strong class="card-text">@item.Price.ToString("c")/dag</strong>
+            </div>
         </div>
         <div class="card-footer">
             <small class="text-muted">@item.Distance.ToString("0.0") km bort</small>
