@@ -117,10 +117,16 @@
             var text_length = $('#text').val().length;
             var text_remaining = text_max - text_length;
 
+            $('#count_message').html(text_remaining + ' remaining');
         });
+
+        var text_length = $('#text').val().length;
+        var text_remaining = text_max - text_length;
+
+        $('#count_message').html(text_remaining + ' remaining');
+
         var price = $('#Price').val();
         price = price.replace(/,/g, ".");
         $('#Price').val(parseFloat(price));
-
     })
 </script>

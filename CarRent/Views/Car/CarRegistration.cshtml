@@ -47,10 +47,6 @@
                         <input class="form-control" asp-for="Street" />
                         <span asp-validation-for="Street"></span>
 
-                        <label class="form-label" asp-for="Description"></label>
-                        <input class="form-control" asp-for="Description" />
-                        <span asp-validation-for="Description"></span>
-
 
                     </div>
                     <div class="col-md-6">
@@ -95,17 +91,26 @@
                             </div>
                             <div class="col-md-5">
                                 <div class="form-check">
-                                    <input class="form-check-input" asp-for="Pets" type="checkbox" />
-                                    <label class="form-check-label" asp-for="Pets"></label>
-                                </div>
-                                <div class="form-check">
                                     <input class="form-check-input" asp-for="RoofRack" type="checkbox" />
                                     <label class="form-check-label" asp-for="RoofRack"></label>
+                                </div>
+                                <div class="form-check">
+                                    <input class="form-check-input" asp-for="Pets" type="checkbox" />
+                                    <label class="form-check-label" asp-for="Pets"></label>
                                 </div>
                             </div>
                         </div>
                     </div>
                 </div>
+
+                <div>
+
+                    <label class="form-label" asp-for="Description"></label>
+                    <textarea class="form-control" asp-for="Description" maxlength="200" id="text"></textarea>
+                    <small class="pull-right" id="count_message"></small>
+
+                </div>
+
                 <div id="imageForm" class="mt-3">
                     
                     <input asp-for="Image" onchange="readURL(this);" class="Files" id="knappid1" />
@@ -217,5 +222,21 @@
                     $("#Gear").val(transmission);
                 });
         });
+
+        var text_max = 200;
+        $('#count_message').html(text_max + ' remaining');
+
+        $('#text').keyup(function () {
+            var text_length = $('#text').val().length;
+            var text_remaining = text_max - text_length;
+
+            $('#count_message').html(text_remaining + ' remaining');
+        });
+
+        var text_length = $('#text').val().length;
+        var text_remaining = text_max - text_length;
+
+        $('#count_message').html(text_remaining + ' remaining');
+
     });
 </script>
