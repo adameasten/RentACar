@@ -336,9 +336,9 @@ namespace CarRent.Models
 
         }
 
-        public async Task<Coordinate> GetCoordinates(string city)
+        public async Task<Coordinate> GetCoordinates(string adress)
         {
-            var apiString = $"https://maps.googleapis.com/maps/api/geocode/json?address={city}&key=AIzaSyDqQCALQLs6NM9tMpHUWlC2uLNh5Eniz3I";
+            var apiString = $"https://maps.googleapis.com/maps/api/geocode/json?address={adress}&key=AIzaSyDqQCALQLs6NM9tMpHUWlC2uLNh5Eniz3I";
             var Coordinates = new Coordinate();
             using (var httpClient = new HttpClient())
             {
