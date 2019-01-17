@@ -149,7 +149,7 @@
         });
         $("body").on('click', '#moreImages', function () {
             $(".Files").hide();
-            $("#imageForm").append('<input onchange="readURL(this);" type="file" class="Files" name="Files" id="knappid' + count + '">')
+            $("#imageForm").append('<input onchange="readURL(this);" type="file" class="Files" name="Image" id="knappid' + count + '">')
         });
         $('body').on('click', '.bild', function () {
             $("#" + this.id).remove();
