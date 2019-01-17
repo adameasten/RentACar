@@ -31,6 +31,7 @@ namespace CarRent
         {
 
             connString = configuration["DefaultConnection"];
+
             
             services.AddTransient<CarServices>();
 
