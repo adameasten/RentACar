@@ -1,4 +1,7 @@
 ﻿@model CarDetailsVM
+@{
+    ViewData["Title"] = Model.car;
+}
 <span class="glyphicon glyphicon-tags"></span>
 
 <div class="container">
@@ -9,12 +12,12 @@
         <div class="col">
             <div class="row">
                 <div class="col">
-                    <div id="carouselExampleControls" class="carousel slide shadow bg-white rounded mb-2" data-ride="carousel" >
+                    <div id="carouselExampleControls" class="carousel slide shadow bg-white rounded mb-2" data-ride="carousel">
                         <div class="carousel-inner" role="listbox">
                             @{
                                 int counter = 0;
                                 <div class="carousel-item active caru-sell">
-                                    <img class="d-block w-100" src="@Model.car.ImgUrlArr[counter++]" style="object-fit:cover" >
+                                    <img class="d-block w-100" src="@Model.car.ImgUrlArr[counter++]" style="object-fit:cover">
                                 </div>
                                 while (counter < @Model.car.ImgUrlArr.Count())
                                 {
