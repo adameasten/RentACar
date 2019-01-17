@@ -2,6 +2,7 @@
 using CarRent.Models.ViewModels;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc.Rendering;
+using Microsoft.EntityFrameworkCore;
 using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
@@ -30,7 +31,7 @@ namespace CarRent.Models
 
         public async Task<bool> AddUser(AccountRegisterVM vm)
         {
-            var result = await userManager.CreateAsync(new MyIdentityUser {UserName = vm.UserName, Email = vm.Email },vm.Password);
+            var result = await userManager.CreateAsync(new MyIdentityUser { UserName = vm.UserName, Email = vm.Email }, vm.Password);
             return result.Succeeded;
         }
 
@@ -56,15 +57,15 @@ namespace CarRent.Models
                 .Where(c => c.OwnerId == user.Id)
                 .Select(p => new MyCarCard()
                 {
-                    ImgUrl = p.ImgUrl,
-                    Model = p.Model,
-                    Id = p.Id
+                    Id = p.Id,
+                    ImgUrl = p.CarImage.Select(d => d.ImgUrl).FirstOrDefault(),
+                    Model = p.Model
                 }).ToList(),
                 MyBookings = carContext.Rent
                 .Where(c => c.CustomerId == user.Id).
                 Select(p => new MyBookingsVM()
                 {
-                    ImgUrl = p.Car.ImgUrl,
+                    ImgUrl = p.Car.CarImage.Select(d => d.ImgUrl).FirstOrDefault(),
                     Model = p.Car.Model,
                     StartTime = p.Datestart,
                     EndTime = p.DateEnd,
@@ -106,7 +107,7 @@ namespace CarRent.Models
         {
 
             var car = carContext.Car.SingleOrDefault(c => c.Id == vm.Id);
-            
+
             car.Ac = vm.Ac;
             car.ChildSeat = vm.ChildSeat;
             car.Description = vm.Description;
@@ -123,6 +124,32 @@ namespace CarRent.Models
             car.Type = vm.Type;
             car.YearModel = vm.YearModel;
 
+            carContext.SaveChanges();
+        }
+
+        internal void DeleteCar(EditCarVM vm)
+        {
+            var car = carContext.Car.SingleOrDefault(c => c.Id == vm.Id);
+            var rents = carContext.Rent.Where(r => r.CarId == car.Id);
+            var reviews = carContext.Review.Where(r => rents.Select(q => q.Id).Contains(r.RentId));
+            var carImages = carContext.CarImage.Where(i => i.CarId == car.Id);
+
+            foreach (var review in reviews)
+            {
+                carContext.Review.Remove(review);
+            }
+
+            foreach (var rent in rents)
+            {
+                carContext.Rent.Remove(rent);
+            }
+
+            foreach (var carImage in carImages)
+            {
+                carContext.CarImage.Remove(carImage);
+            }
+
+            carContext.Car.Remove(car);
             carContext.SaveChanges();
         }
 
@@ -149,7 +176,7 @@ namespace CarRent.Models
                 RoofRack = (bool)car.RoofRack,
                 TowBar = (bool)car.TowBar,
                 YearModel = car.YearModel,
-                
+
                 TypeItems = new SelectListItem[]
             {
                    new SelectListItem{Value = "Sedan", Text = "Sedan"},
@@ -163,13 +190,13 @@ namespace CarRent.Models
                    new SelectListItem{Value = "Husbil", Text = "Husbil"}
             },
 
-            GearItems = new SelectListItem[]
+                GearItems = new SelectListItem[]
             {
                 new SelectListItem{Value = "Automat", Text = "Automat"},
                 new SelectListItem{Value = "Manuell", Text = "Manuell"},
             },
 
-            FuelItems = new SelectListItem[]
+                FuelItems = new SelectListItem[]
             {
                 new SelectListItem{Value = "Bensin", Text = "Bensin"},
                 new SelectListItem{Value = "Diesel", Text = "Diesel"},
@@ -177,7 +204,7 @@ namespace CarRent.Models
                 new SelectListItem{Value = "El", Text = "El"},
             },
 
-            SeatsItem = new SelectListItem[]
+                SeatsItem = new SelectListItem[]
             {
                 new SelectListItem{Value = "1", Text = "1"},
                 new SelectListItem{Value = "2", Text = "2"},
@@ -188,7 +215,7 @@ namespace CarRent.Models
                 new SelectListItem{Value = "7", Text = "7+"},
             },
 
-            DoorsItem = new SelectListItem[]
+                DoorsItem = new SelectListItem[]
             {
                 new SelectListItem{Value = "1", Text = "1"},
                 new SelectListItem{Value = "2", Text = "2"},
@@ -198,8 +225,8 @@ namespace CarRent.Models
                 new SelectListItem{Value = "6", Text = "6"}
             },
 
-        };
-                
+            };
+
         }
 
         public async Task UpdateUser(MyIdentityUser user, MyAccountVM vm)
@@ -215,7 +242,7 @@ namespace CarRent.Models
             user.SSN = vm.SSN;
             user.PhoneNumber = vm.PhoneNumber;
 
-            if (vm.OldPassword!=null)
+            if (vm.OldPassword != null)
             {
                 await userManager.ChangePasswordAsync(user, vm.OldPassword, vm.UserInfo.Password);
 
@@ -223,11 +250,11 @@ namespace CarRent.Models
 
             await userManager.UpdateAsync(user);
         }
-    
+
 
         public async Task<bool> LoginUser(AccountLoginVM vm)
         {
-            var result = await signInManager.PasswordSignInAsync(vm.UserName, vm.Password,false,false);
+            var result = await signInManager.PasswordSignInAsync(vm.UserName, vm.Password, false, false);
             return result.Succeeded;
         }
 
@@ -236,6 +263,6 @@ namespace CarRent.Models
             await signInManager.SignOutAsync();
         }
 
-       
+
     }
 }

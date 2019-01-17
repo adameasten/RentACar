@@ -4,7 +4,7 @@
 @foreach (var item in Model)
 {
     <div class="card m-1 mb-5 shadow bg-white rounded zoom" id="Card-@item.Id" style="min-width: 185px; max-width: 185px">
-        <img class="card-img-top" src="/@item.ImgUrl" style="min-height:151px" alt="Card image cap">
+        <img class="card-img-top" src="@item.ImgUrl" style="min-height:151px" alt="Card image cap">
 
         @*<p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>*@
 
@@ -23,7 +23,7 @@
 
         </div>
         <div class="card-footer">
-            <small class="text-muted">@item.Distance.ToString("0.00") km bort</small>
+            <small class="text-muted">@item.Distance.ToString("0.0") km bort</small>
 
         </div>
     </div>

@@ -6,8 +6,8 @@
     <div class="card shadow bg-white rounded" style="width: 324px; min-height: 245px">
         <div class="card-body">
             <h5 class="card-title">@decimal.Round(Model.Price, 0, MidpointRounding.AwayFromZero) kr /dag</h5>
-            <p class="card-text">
-                <form asp-action="rentcar" asp-controller="car">
+            <div class="card-text">
+                <form asp-action="confirmrent" asp-controller="car">
                     <div class="form-group">
                         <label asp-for="StartTime"></label>
                         <input class="form-control" asp-for="StartTime" id="StartTime" />
@@ -21,14 +21,14 @@
                     <input type="hidden" asp-for="Price" />
                     <input class="button-default mt-3" type="submit" value="Hyr bil" style="width:100%" />
                 </form>
-            </p>
+            </div>
         </div>
     </div>
 </div>
 
 <script>
 
-    $("#TotalPrice").text("Total " + @(Model.Price*2));
+    $("#TotalPrice").text("Total " + @(Model.Price));
     $("#TotalPrice").append(" kr");
 
     if (Cookies.get("startDate") && Cookies.get("endDate")) {
@@ -51,9 +51,8 @@
             var date1_ms = pdate.getTime();
             var date2_ms = today.getTime();    // Calculate the difference in milliseconds
             var difference_ms = date2_ms - date1_ms;        // Convert back to days and return
-            var daysSinceP = (Math.round(difference_ms / one_day));
-            daysSinceP = daysSinceP + 1;
-            $("#TotalPrice").text("Total " + daysSinceP*@Model.Price );
+            var daysSinceP = (/*Math.round*/(difference_ms / one_day));
+            $("#TotalPrice").text("Total " + Math.round(daysSinceP*@Model.Price) );
             $("#TotalPrice").append(" kr");
         }
 
@@ -69,17 +68,13 @@
 
         }
         else {
-
-
         var pdate = new Date(s);
         var one_day = 1000 * 60 * 60 * 24;    // Convert both dates to milliseconds
         var date1_ms = pdate.getTime();
         var date2_ms = today.getTime();    // Calculate the difference in milliseconds
         var difference_ms = date1_ms - date2_ms;        // Convert back to days and return
-        var daysSinceP = (Math.round(difference_ms / one_day));
-            daysSinceP = daysSinceP + 1;
-
-            $("#TotalPrice").text("Total " + daysSinceP * @Model.Price );
+        var daysSinceP = (/*Math.round*/(difference_ms / one_day));
+            $("#TotalPrice").text("Total " + Math.round(daysSinceP*@Model.Price) );
             $("#TotalPrice").append(" kr");
         }
     })

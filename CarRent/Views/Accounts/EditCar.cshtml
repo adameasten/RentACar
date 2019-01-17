@@ -1,13 +1,18 @@
 ﻿@model EditCarVM
 
-<div class="col-md-8 offset-md-2" style="margin-bottom: 50px; margin-top: 50px;">
+<div class="col-md-8 offset-md-2" style="margin-bottom: 50px; padding-top: 50px;">
     <div class="card shadow bg-white rounded">
-        <div class="card-header" style="margin: 0px;">
-            <h2>Ändra bilinfo</h2>
+        <div class="row card-header" style="margin: 0px;">
+            <h2 class="col-md-10">Uppdatera specifikationer</h2>
+            <div class="col-md-2">
+            <form asp-controller="accounts" asp-action="deletecar">
+                <input asp-for="Id" type="hidden" />
+                <input class="button-default"  type="submit" value="Ta bort bil" />
+            </form>
+            </div>
         </div>
         <form enctype="multipart/form-data" asp-controller="Accounts" asp-action="EditCar">
             <div class="card-body">
-
                 <div class="row h-100">
                     <div class="col-md-6">
                         <div class="form-group">
@@ -32,7 +37,7 @@
                         </div>
                         <div class="form-group">
                             <label class="form-label" asp-for="Description"></label>
-                            <textarea class="form-control" asp-for="Description" maxlength="200" id="text"></textarea>
+                            <textarea class="form-control" asp-for="Description" maxlength="200" id="text" style="height: 100px;"></textarea>
                             <small class="pull-right" id="count_message"></small>
                         </div>
 
@@ -67,34 +72,34 @@
                                     asp-items="Model.DoorsItem"></select>
                             <span asp-validation-for="Doors"></span>
                         </div>
-                            <div class="row">
-                                <div class="col-md-5">
-                                    <div class="form-check">
-                                        <input class="form-check-input" asp-for="Ac" type="checkbox" />
-                                        <label class="form-check-label" asp-for="Ac"></label>
-                                    </div>
-                                    <div class="form-check">
-                                        <input class="form-check-input" asp-for="ChildSeat" type="checkbox" />
-                                        <label class="form-check-label" asp-for="ChildSeat"></label>
-                                    </div>
-                                    <div class="form-check">
-                                        <input class="form-check-input" asp-for="TowBar" type="checkbox" />
-                                        <label class="form-check-label" asp-for="TowBar"></label>
-                                    </div>
+                        <div class="row">
+                            <div class="col-md-5">
+                                <div class="form-check">
+                                    <input class="form-check-input" asp-for="Ac" type="checkbox" />
+                                    <label class="form-check-label" asp-for="Ac"></label>
                                 </div>
-                                <div class="col-md-5">
-                                    <div class="form-check">
-                                        <input class="form-check-input" asp-for="RoofRack" type="checkbox" />
-                                        <label class="form-check-label" asp-for="RoofRack"></label>
-                                    </div>
-                                    <div class="form-check">
-                                        <input class="form-check-input" asp-for="Pets" type="checkbox" />
-                                        <label class="form-check-label" asp-for="Pets"></label>
-                                    </div>
+                                <div class="form-check">
+                                    <input class="form-check-input" asp-for="ChildSeat" type="checkbox" />
+                                    <label class="form-check-label" asp-for="ChildSeat"></label>
+                                </div>
+                                <div class="form-check">
+                                    <input class="form-check-input" asp-for="TowBar" type="checkbox" />
+                                    <label class="form-check-label" asp-for="TowBar"></label>
+                                </div>
+                            </div>
+                            <div class="col-md-5">
+                                <div class="form-check">
+                                    <input class="form-check-input" asp-for="RoofRack" type="checkbox" />
+                                    <label class="form-check-label" asp-for="RoofRack"></label>
+                                </div>
+                                <div class="form-check">
+                                    <input class="form-check-input" asp-for="Pets" type="checkbox" />
+                                    <label class="form-check-label" asp-for="Pets"></label>
                                 </div>
                             </div>
                         </div>
                     </div>
+                </div>
             </div>
             <div class="card-footer d-flex justify-content-end">
                 <input class="button-default" type="submit" value="Spara" />
@@ -116,6 +121,6 @@
         var price = $('#Price').val();
         price = price.replace(/,/g, ".");
         $('#Price').val(parseFloat(price));
-        
+
     })
 </script>

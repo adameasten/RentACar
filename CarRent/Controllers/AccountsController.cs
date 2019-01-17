@@ -117,5 +117,14 @@ namespace CarRent.Controllers
 
             return RedirectToAction(nameof(MyAccount));
         }
+
+        [Authorize]
+        [HttpPost]
+        public IActionResult DeleteCar(EditCarVM vm)
+        {
+            service.DeleteCar(vm);
+
+            return RedirectToAction(nameof(MyAccount));
+        }
     }
 }

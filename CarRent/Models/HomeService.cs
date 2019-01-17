@@ -15,10 +15,12 @@ namespace CarRent.Models
     public class HomeService
     {
         CarRentContext context;
+        CarServices carservices;
 
-        public HomeService(CarRentContext context)
+        public HomeService(CarRentContext context, CarServices carservices)
         {
             this.context = context;
+            this.carservices = carservices;
         }
 
         public async Task<Coordinate> GetCoordinates(string city)
@@ -63,7 +65,7 @@ namespace CarRent.Models
                 Id = c.Id,
                 Model = c.Model,
                 Distance = c.GeoLocation.Distance(point) / 1600,
-                ImgUrl = c.ImgUrl,
+                ImgUrl = c.CarImage.Select(d => d.ImgUrl).FirstOrDefault(),
                 Price = c.Price,
                 YearModel = c.YearModel,
                 Rating = c.Rent.SelectMany(r => r.Review).Count() > 0 ? c.Rent.SelectMany(r => r.Review).Average(s => s.Rating) : 0,
@@ -77,12 +79,29 @@ namespace CarRent.Models
                 Seats = c.Seats,
                 TowBar = c.TowBar,
                 Type = c.Type
-            }).ToArray();
+            }).Where(x => x.Distance < 800).ToArray();
 
+            //foreach (var car in cars)
+            //{
+            //    car.ImgUrl = await carservices.GetThumbNailUrls(car.ImgUrl);
+            //}
+             
             return cars;
         }
 
-        internal bool CarIsAvailable(CarRentFormVM vM)
+        internal CarRentConfirmVM MakeConfirmation(CarRentFormVM vM)
+        {
+            return new CarRentConfirmVM
+            {
+                CarId = vM.CarId,
+                CarName = context.Car.SingleOrDefault(c => c.Id == vM.CarId).Model,
+                StartTime = vM.StartTime,
+                EndTime = vM.EndTime,
+                Price = vM.Price
+            };
+        }
+
+        internal bool CarIsAvailable(CarRentConfirmVM vM)
         {
             return CheckAvailability(context.Car.Include(x => x.Rent)
                 .SingleOrDefault(c => c.Id == vM.CarId)
@@ -97,7 +116,7 @@ namespace CarRent.Models
                 StartDate = vM.StartTime,
                 EndDate = vM.EndTime,
                 Price = context.Car.SingleOrDefault(c => c.Id == vM.CarId).Price,
-                Total = ((vM.EndTime - vM.StartTime).Ticks / TimeSpan.TicksPerMinute) * (vM.Price / 60),
+                Total = ((vM.EndTime - vM.StartTime).Ticks / TimeSpan.TicksPerMinute) * (vM.Price / (60 * 24)),
             };
         }
 

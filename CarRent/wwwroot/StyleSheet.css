@@ -140,7 +140,7 @@
 #invoice-POS {
   box-shadow: 0 0 1in -0.25in rgba(0, 0, 0, 0.5);
   padding: 2mm;
-  margin: 0 auto;
+  margin: 1em auto;
   width: 100mm;
   background: #FFF; }
   #invoice-POS ::selection {
@@ -409,3 +409,8 @@ footer p {
   width: 20px;
   height: 20px;
   text-align: center; }
+
+.caru-sell img {
+  height: 450px;
+  width: auto;
+  max-height: 450px; }
