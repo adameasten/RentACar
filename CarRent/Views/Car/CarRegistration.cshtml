@@ -40,11 +40,11 @@
                         <span asp-validation-for="YearModel"></span>
 
                         <label class="form-label" asp-for="City"></label>
-                        <input class="form-control" asp-for="City" />
+                        <input class="form-control" asp-for="City" id="pac-input" />
                         <span asp-validation-for="City"></span>
 
                         <label class="form-label" asp-for="Street"></label>
-                        <input class="form-control" asp-for="Street" />
+                        <input class="form-control" asp-for="Street" id="pac-input" />
                         <span asp-validation-for="Street"></span>
 
 
@@ -237,6 +237,18 @@
         var text_remaining = text_max - text_length;
 
         $('#count_message').html(text_remaining + ' remaining');
+
+        var defaultBounds = new google.maps.LatLngBounds(
+            new google.maps.LatLng(55.443622530763776, 13.557255595420315,
+                new google.maps.LatLng(68.36397472828507, 20.813820077627042)
+            ))
+
+        var options = {
+            bounds: defaultBounds,
+        }
+
+        var input = document.getElementById("pac-input");
+        var autocomplete = new google.maps.places.Autocomplete(input, options);
 
     });
 </script>
