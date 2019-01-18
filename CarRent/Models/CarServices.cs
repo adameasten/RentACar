@@ -82,8 +82,6 @@ namespace CarRent.Models
                     Price = d.Price
                 }
             }).FirstOrDefault();
-
-            //carr.car.ImgUrlArr = await GetImageUrl(carr.car.ImgUrlArr);
             carr.car.ImgUrl = carr.car.ImgUrlArr[0];
             return carr;
         }
