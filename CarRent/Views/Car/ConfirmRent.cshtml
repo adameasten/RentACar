@@ -17,17 +17,17 @@
                     </div>
                 </div>
                 <div class="row w-100">
-                    <div class="col-md-6 mb-2 pl-4">
+                    <div class="col-md-7 mb-2 pl-4">
                         <form asp-controller="car" asp-action="rentcar">
                             <input asp-for="CarId" type="hidden" />
                             <input asp-for="Price" type="hidden" />
                             <input asp-for="StartTime" type="hidden" />
                             <input asp-for="EndTime" type="hidden" />
                             <input class="button-default" type="submit" value="Godkänn" />
-                            <img src="~/bankid.png" style="max-width:80px; " />
+                            <img src="~/bankid.png" style="max-width:80px;float:right " />
                         </form>
                     </div>
-                    <div class="col-md-6 mb-2 pr-0">
+                    <div class="col-md-5 mb-2 pr-0">
                         <a class="float-right button-default" asp-controller="car" asp-action="details" asp-route-id="@Model.CarId" class="button-default">Tillbaka</a>
 
                     </div>
